@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "export": "next export",
     "storybook": "start-storybook -s ./public -p 6006",
     "build-storybook": "build-storybook"
   },
@@ -28,6 +29,7 @@
     "@types/react": "^17.0.11",
     "autoprefixer": "^9",
     "babel-loader": "^8.2.2",
+    "firebase-tools": "^9.14.0",
     "postcss": "^7",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat",
     "typescript": "^4.3.2"
