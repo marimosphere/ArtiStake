@@ -125,6 +125,7 @@ packages/contracts/cache
 packages/contracts/node_modules
 packages/contracts/typechain
 packages/contracts/coverage.json
+packages/contracts/deployments
 
 # misc
 .DS_Store

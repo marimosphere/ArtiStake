@@ -8,7 +8,7 @@ import {
 const artistAddress = "0xaad0bb0dFfaEF8C2b0C07Dc9Ba9603083E8bE1f5";
 
 // module.exports = async ({ getNamedAccounts, deployments }) => {
-const func = async function (hre: any) {
+const func = async (hre: any) => {
   const { deployments, getNamedAccounts } = hre;
   const { deploy } = deployments;
   const { deployer } = await getNamedAccounts();

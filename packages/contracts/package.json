@@ -2,6 +2,9 @@
   "name": "contracts",
   "version": "1.0.0",
   "private": true,
+  "scripts": {
+    "run-polygon-chain": "yarn hardhat node --fork https://rpc-mainnet.matic.network"
+  },
   "dependencies": {
     "@openzeppelin/contracts": "^4.1.0"
   },

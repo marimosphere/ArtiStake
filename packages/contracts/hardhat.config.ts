@@ -7,4 +7,22 @@ module.exports = {
   namedAccounts: {
     deployer: 0,
   },
+  networks: {
+    localhost: {
+      timeout: 50000,
+    },
+    hardhat: {
+      forking: {
+        url: network.mainnet.rpc,
+      },
+    },
+    mainnet: {
+      url: network.mainnet.rpc,
+      accounts: [privateKey],
+    },
+    kovan: {
+      url: network.kovan.rpc,
+      accounts: [privateKey],
+    },
+  },
 };
