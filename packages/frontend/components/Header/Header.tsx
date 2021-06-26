@@ -8,8 +8,8 @@ const Header = () => {
   const [isWalletConnected, setWalletConnected] = React.useState(false);
 
   const navs = [
-    { text: "Home", to: "#" },
-    { text: "About", to: "#" },
+    { text: "Home", to: "/" },
+    { text: "About", to: "/about" },
     { text: "Buy Matic", to: "#" },
     { text: "Artist Registration", to: "#" },
   ];
@@ -38,11 +38,11 @@ const Header = () => {
         </div>
       </div>
       {isNavigactionOpen && (
-        <div className="origin-top-right absolute right-4 bg-marimo-1">
+        <div className="origin-top-right absolute right-4 text-right bg-marimo-1">
           {navs.map((nav, index) => {
             return (
               <div key={index}>
-                <a href={nav.to} className="text-white block px-4 py-2 text-xs">
+                <a href={nav.to} className="text-white block px-4 py-2 text-sm">
                   {nav.text}
                 </a>
               </div>

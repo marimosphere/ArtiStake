@@ -11,6 +11,22 @@ const About = () => {
         and funs. This platform is for the artist and funs. This platform is for the artist and funs. This platform is
         for the artist and funs.
       </p>
+      <h3 className="text-white mb-4">This platform is for the artist and funs.</h3>
+      <p className="text-white text-xs mb-4">
+        This platform is for the artist and funs. This platform is for the artist and funs. This platform is for the
+        artist and funs. This platform is for the artist and funs. This platform is for the artist and funs. This
+        platform is for the artist and funs. This platform is for the artist and funs. This platform is for the artist
+        and funs. This platform is for the artist and funs. This platform is for the artist and funs. This platform is
+        for the artist and funs.
+      </p>
+      <h3 className="text-white mb-4">This platform is for the artist and funs.</h3>
+      <p className="text-white text-xs mb-4">
+        This platform is for the artist and funs. This platform is for the artist and funs. This platform is for the
+        artist and funs. This platform is for the artist and funs. This platform is for the artist and funs. This
+        platform is for the artist and funs. This platform is for the artist and funs. This platform is for the artist
+        and funs. This platform is for the artist and funs. This platform is for the artist and funs. This platform is
+        for the artist and funs.
+      </p>
     </div>
   );
 };

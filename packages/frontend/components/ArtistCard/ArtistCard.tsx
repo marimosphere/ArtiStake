@@ -7,16 +7,16 @@ const ArtistCard: React.FC<ArtistCardProps> = ({ index, name, description, avata
   return (
     <div className={`w-full mx-auto p-8 ${bgColor}`}>
       <div className="flex mb-8">
-        <div>
-          <img className="w-10 rounded-full" src={avatar} />
+        <div className="w-40">
+          <img className="rounded-full" src={avatar} />
         </div>
         <div className="ml-4">
-          <p className="text-white text-md">{name}</p>
+          <p className="text-white text-md mb-2">{name}</p>
           <p className="text-white text-xs">{description}</p>
         </div>
       </div>
       <div>
-        <img className="w-full" src={thumbnail} />
+        <img className="w-64 h-64 mx-auto" src={thumbnail} />
       </div>
     </div>
   );
