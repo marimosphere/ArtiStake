@@ -16,7 +16,7 @@ const Header = () => {
 
   return (
     <div className="bg-marimo-1">
-      <div className="flex justify-end px-4 py-2">
+      <div className="flex justify-end px-4 pt-4 py-2">
         <div>
           {isWalletConnected ? (
             <button className="text-white text-sm focus:outline-none">0x0000...0000</button>
@@ -38,7 +38,7 @@ const Header = () => {
         </div>
       </div>
       {isNavigactionOpen && (
-        <div className="origin-top-right absolute right-4 text-right bg-marimo-1">
+        <div className="origin-top-right absolute right-0 text-right bg-marimo-1">
           {navs.map((nav, index) => {
             return (
               <div key={index}>
