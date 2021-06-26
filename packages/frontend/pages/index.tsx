@@ -12,8 +12,6 @@ interface Props {
 }
 
 const IndexPage: React.FC<Props> = ({ artists }) => {
-  console.log(artists);
-
   return (
     <div>
       <Header />

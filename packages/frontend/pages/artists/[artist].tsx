@@ -13,8 +13,6 @@ interface Props {
 }
 
 const ArtistPage: React.FC<Props> = ({ artist }) => {
-  console.log(artist);
-
   return (
     <div>
       <Header />
