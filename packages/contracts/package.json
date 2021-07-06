@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "test": "hardhat test",
     "run-polygon-chain": "yarn hardhat node --fork https://rpc-mainnet.matic.network"
   },
   "dependencies": {
+    "@aave/protocol-v2": "^1.0.1",
     "@openzeppelin/contracts": "^4.1.0"
   },
   "devDependencies": {
