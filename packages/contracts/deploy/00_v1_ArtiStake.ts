@@ -1,4 +1,5 @@
 import {
+  POLYGON_WETH_ADDRESS,
   POLYGON_AAVE_LENDING_POOL_ADDRESS,
   POLYGON_AAVE_WETH_GATEWAY_ADDRESS,
 } from "../lib/constants";
@@ -10,7 +11,7 @@ const func = async (hre: any) => {
   const { deployer } = await getNamedAccounts();
   await deploy("ArtiStake", {
     from: deployer,
-    args: [POLYGON_AAVE_LENDING_POOL_ADDRESS, POLYGON_AAVE_WETH_GATEWAY_ADDRESS],
+    args: [POLYGON_AAVE_LENDING_POOL_ADDRESS, POLYGON_AAVE_WETH_GATEWAY_ADDRESS, POLYGON_WETH_ADDRESS],
     log: true,
   });
 };

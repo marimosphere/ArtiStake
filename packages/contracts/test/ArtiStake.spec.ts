@@ -2,6 +2,7 @@ import hre, { ethers } from "hardhat";
 import * as chai from "chai";
 import { solidity } from "ethereum-waffle";
 import {
+  POLYGON_WETH_ADDRESS,
   POLYGON_AAVE_LENDING_POOL_ADDRESS,
   POLYGON_AAVE_WETH_GATEWAY_ADDRESS,
 } from "../lib/constants";
@@ -15,12 +16,15 @@ describe("ArtiStake", function () {
   this.beforeEach(async function () {
     [signer] = await ethers.getSigners();
     const ArtiStake = await ethers.getContractFactory("ArtiStake");
-    artiStakeContract = await ArtiStake.deploy(POLYGON_AAVE_LENDING_POOL_ADDRESS, POLYGON_AAVE_WETH_GATEWAY_ADDRESS);
+    artiStakeContract = await ArtiStake.deploy(POLYGON_AAVE_LENDING_POOL_ADDRESS, POLYGON_AAVE_WETH_GATEWAY_ADDRESS, POLYGON_WETH_ADDRESS);
   });
 
   it("User can stake to Artist", async function () {  
     // artiStakeContract.deposit()をする
-    await artiStakeContract.deposit(10000, 0)
+    
+    await artiStakeContract.deposit(0, {value: 10000})
+
+    await artiStakeContract.withdraw(1000)
     // artiStakeCOntractのdepositedAmountの変化をみる
   });
 

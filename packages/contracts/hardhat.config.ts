@@ -28,4 +28,7 @@ module.exports = {
     //   accounts: [privateKey],
     // },
   },
+  mocha: {
+    timeout: 50000,
+  },
 };
