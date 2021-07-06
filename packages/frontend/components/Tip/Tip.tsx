@@ -1,4 +1,5 @@
 import * as React from "react";
+import { ArtistWorksProps } from "./types";
 
 const Tip = () => {
   const [tipStatus, setTipStatus] = React.useState<"approve" | "tip" | "confirm">("approve");
@@ -12,23 +13,35 @@ const Tip = () => {
   };
 
   return (
-    <div className="">
-      <div>JPYC logo</div>
+    <div className="w-full mx-auto">
+      <img className=" mx-auto h-40 object-cover mb-8" src="assets/img/artists/takumi/jpyc.png" />
       {tipStatus === "approve" ? (
-        <div>
-          <input type="number" />
-          <button onClick={approve}>Approve</button>
+        <div className="text-center">
+          <input type="number" className="mr-8 h-8 rounded text-right " />
+          <button
+            onClick={approve}
+            className="bg-pink-500 hover:opacity-75 text-white font-bold py-2 px-4 rounded w-24 h-10"
+          >
+            Approve
+          </button>
         </div>
       ) : tipStatus === "tip" ? (
-        <div>
-          <input type="number" />
-          <button onClick={tip}>Tip</button>
+        <div className="text-center">
+          <input type="number" className="mr-8 h-8 rounded text-right" />
+          <button
+            onClick={tip}
+            className="bg-pink-500 hover:opacity-75 text-white font-bold py-2 px-4 rounded w-24 h-10"
+          >
+            Tip
+          </button>
         </div>
       ) : (
-        <div>
-          <p>Thank you!</p>
-          <p>
-            <a href="#">TX HASH</a>
+        <div className="">
+          <p className="text-white  text-base text-center">
+            Thank you!{" "}
+            <a href="#" className="underline">
+              Receipt
+            </a>
           </p>
         </div>
       )}
