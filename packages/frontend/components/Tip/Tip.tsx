@@ -14,13 +14,13 @@ const Tip = () => {
 
   return (
     <div className="w-full mx-auto">
-      <img className=" mx-auto h-40 object-cover mb-8" src="assets/img/artists/takumi/jpyc.png" />
+      <img className="mx-auto h-40 object-cover mb-8" src="assets/img/artists/takumi/jpyc.png" />
       {tipStatus === "approve" ? (
         <div className="text-center">
-          <input type="number" className="mr-8 h-8 rounded text-right " />
+          <input type="number" className="mr-8 h-8 rounded text-right" />
           <button
             onClick={approve}
-            className="bg-pink-500 hover:opacity-75 text-white font-bold py-2 px-4 rounded w-24 h-10"
+            className="w-24 h-10 bg-pink-500 hover:opacity-75 text-white font-bold py-2 px-4 rounded"
           >
             Approve
           </button>
