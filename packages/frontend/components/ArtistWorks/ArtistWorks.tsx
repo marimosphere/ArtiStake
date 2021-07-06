@@ -1,6 +1,7 @@
 import * as React from "react";
 import QRCode from "qrcode.react";
 import { ArtistWorksProps } from "./types";
+import { Tip } from "../Tip";
 
 const ArtistWorks: React.FC<ArtistWorksProps> = ({
   walletAddress,
@@ -30,7 +31,7 @@ const ArtistWorks: React.FC<ArtistWorksProps> = ({
       <div className="bg-marimo-2 p-4">
         <p className="text-center text-white">Donation</p>
         <div className="flex justify-center p-8">
-          <QRCode size="86" value={walletAddress} />,
+          <Tip />
         </div>
       </div>
     </div>
