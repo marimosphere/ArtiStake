@@ -2,10 +2,14 @@ import * as React from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { useWeb3React } from "@web3-react/core";
+import { injectedConnector } from "../../lib/web3";
+import { useWallet } from "../../hooks/useWallet";
 
 const Header = () => {
   const [isNavigactionOpen, setIsNavigationOpen] = React.useState(false);
-  const [isWalletConnected, setWalletConnected] = React.useState(false);
+
+  const [connectWallet, account, library] = useWallet();
 
   const navs = [
     { text: "Home", to: "/" },
@@ -18,13 +22,10 @@ const Header = () => {
     <div className="bg-marimo-1">
       <div className="flex justify-end px-4 pt-4 py-2">
         <div>
-          {isWalletConnected ? (
-            <button className="text-white text-sm focus:outline-none">0x0000...0000</button>
+          {account ? (
+            <button className="text-white text-sm focus:outline-none">{account}</button>
           ) : (
-            <button
-              onClick={() => setWalletConnected(!isWalletConnected)}
-              className="text-white text-sm focus:outline-none"
-            >
+            <button onClick={connectWallet} className="text-white text-sm focus:outline-none">
               Connect Wallet
             </button>
           )}

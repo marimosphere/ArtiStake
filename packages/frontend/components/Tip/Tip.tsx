@@ -1,8 +1,10 @@
 import * as React from "react";
 import { ArtistWorksProps } from "./types";
+import { useWallet } from "../../hooks/useWallet";
 
 const Tip = () => {
   const [tipStatus, setTipStatus] = React.useState<"approve" | "tip" | "confirm">("approve");
+  const [connectWallet, account, library] = useWallet();
 
   const approve = () => {
     setTipStatus("tip");
@@ -14,8 +16,10 @@ const Tip = () => {
 
   return (
     <div className="w-full mx-auto">
-      <img className="mx-auto h-40 object-cover mb-8" src="assets/img/artists/takumi/jpyc.png" />
-      {tipStatus === "approve" ? (
+      <img className="mx-auto h-40 object-cover mb-8" src="/assets/img/jpyc.png" />
+      {!account ? (
+        <button onClick={connectWallet}>connectWallet</button>
+      ) : tipStatus === "approve" ? (
         <div className="text-center">
           <input type="number" className="h-8 rounded-l-lg text-right border-2 border-marimo-5" />
           <button
