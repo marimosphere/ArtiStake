@@ -1,0 +1,28 @@
+{
+  "mainnet": {
+    "chainId": "1",
+    "rpc": "https://mainnet.infura.io/v3/95f65ab099894076814e8526f52c9149",
+    "explore": "https://etherscan.io/"
+  },
+  "rinkeby": {
+    "chainId": "4",
+    "rpc": "https://rinkeby.infura.io/v3/95f65ab099894076814e8526f52c9149",
+    "explore": "https://rinkeby.etherscan.io/"
+  },
+  "matic": {
+    "chainId": "137",
+    "rpc": "https://rpc-mainnet.maticvigil.com/",
+    "explore": "https://explorer-mainnet.maticvigil.com/"
+  },
+  "matic_test": {
+    "chainId": "80001",
+    "rpc": "https://rpc-mumbai.matic.today",
+    "explore": "https://explorer-mumbai.maticvigil.com/"
+  },
+  "localhost": {
+    "chainId": "31337",
+    "rpc": "http://localhost:8545",
+    "explore": "https://rinkeby.etherscan.io/",
+    "tip": "0x4826533B4897376654Bb4d4AD88B7faFD0C98528"
+  }
+}
