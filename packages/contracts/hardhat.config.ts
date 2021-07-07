@@ -2,10 +2,6 @@ import "@nomiclabs/hardhat-waffle";
 import "hardhat-typechain";
 import "hardhat-deploy";
 
-const privateKey = process.env.PRIVATE_KEY || "0x0000000000000000000000000000000000000000000000000000000000000000"; // this is to avoid hardhat error
-
-import network from "./network.json";
-
 module.exports = {
   solidity: "0.8.0",
   namedAccounts: {
@@ -23,6 +19,10 @@ module.exports = {
     mainnet: {
       url: network.mainnet.rpc,
       accounts: [privateKey],
-    }
+    },
+    kovan: {
+      url: network.kovan.rpc,
+      accounts: [privateKey],
+    },
   },
 };
