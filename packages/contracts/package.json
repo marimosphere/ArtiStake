@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "deploy-contract-to-localchain": "hardhat run scripts/99_batchMigration.ts --network localhost",
+    "run-localchain": "yarn hardhat node",
     "run-polygon-chain": "yarn hardhat node --fork https://rpc-mainnet.matic.network"
   },
   "dependencies": {
