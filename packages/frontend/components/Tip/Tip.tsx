@@ -17,21 +17,18 @@ const Tip = () => {
       <img className="mx-auto h-40 object-cover mb-8" src="assets/img/artists/takumi/jpyc.png" />
       {tipStatus === "approve" ? (
         <div className="text-center">
-          <input type="number" className="mr-8 h-8 rounded text-right" />
+          <input type="number" className="h-8 rounded-l-lg text-right border-2 border-marimo-5" />
           <button
             onClick={approve}
-            className="w-24 h-10 bg-pink-500 hover:opacity-75 text-white font-bold py-2 px-4 rounded"
+            className="w-24 h-8 bg-marimo-5  hover:opacity-75 text-white font-bold rounded-r-lg"
           >
             Approve
           </button>
         </div>
       ) : tipStatus === "tip" ? (
         <div className="text-center">
-          <input type="number" className="mr-8 h-8 rounded text-right" />
-          <button
-            onClick={tip}
-            className="bg-pink-500 hover:opacity-75 text-white font-bold py-2 px-4 rounded w-24 h-10"
-          >
+          <input type="number" className="h-8 rounded-l-lg text-right border-2 border-marimo-5" />
+          <button onClick={tip} className="w-24 h-8 bg-marimo-5 hover:opacity-75 text-white font-bold rounded-r-lg">
             Tip
           </button>
         </div>

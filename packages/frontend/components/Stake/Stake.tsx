@@ -5,22 +5,26 @@ const Stake = () => {
   return (
     <div className="w-full mx-auto text-white">
       <div className="h-20 bg-marimo-2 flex text-center">
-        <p className="m-auto flex-1 text-white text-5xl">TVL:3000JPYC</p>
-        <p className="m-auto flex-1 text-white text-5xl">APY 888%</p>
-        <p className="m-auto flex-1 text-white text-5xl">Reward 500JPYC</p>
+        <p className="m-auto flex-1 text-white text-2xl">TVL: 1,234,567,890 JPYC</p>
+        <p className="m-auto flex-1 text-white text-2xl">APY: 888%</p>
+        <p className="m-auto flex-1 text-white text-2xl">Reward: 52,456 JPYC</p>
       </div>
-      <div className="h-20 bg-marimo-3 flex">
-        <div className="m-auto text-center flex-1">
-          <p>Stake</p>
-          <p>Wallet Balance: 100</p>
-          <input type="number" className="w-3/5 border-2 border-blue-200" />
-          <button>Stake</button>
+      <div className="h-28 bg-marimo-3 flex">
+        <div className="m-auto w-2/5 text-center  justify-around">
+          <div className="mb-2 flex justify-between">
+            <p>Stake</p>
+            <p>Wallet Balance: 100</p>
+          </div>
+          <input type="number" className="h-10 w-4/5 border-2 border-marimo-5 rounded-l-lg text-black text-right" />
+          <button className="h-10 w-1/5 bg-marimo-5 rounded-r-lg hover:opacity-75">Stake</button>
         </div>
-        <div className="m-auto text-center flex-1">
-          <p>Withdraw</p>
-          <p>Your Staked: 000</p>
-          <input type="number" className="w-3/5 border-2 border-coolGray-600" />
-          <button>Withdraw</button>
+        <div className="m-auto w-2/5 text-center  justify-around">
+          <div className="mb-2 flex justify-between">
+            <div>Withdraw</div>
+            <div>Your Staked: 000</div>
+          </div>
+          <input type="number" className="w-4/5 h-10 border-2 border-marimo-6 rounded-l-lg text-black text-r" />
+          <button className="h-10 w-1/5 bg-marimo-6 rounded-r-lg hover:opacity-75">Withdraw</button>
         </div>
       </div>
     </div>
