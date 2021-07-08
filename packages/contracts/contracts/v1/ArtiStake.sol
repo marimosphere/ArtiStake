@@ -95,7 +95,7 @@ contract ArtiStake {
     ) public payable {
         // require(artistAddresses[artistAddress], "Artist not Registered");
         // Aaveにdeposit
-        uint256 contractBalanceBefore = IERC20(aTokenAddress).scaledBalanceOf(address(this));
+        uint256 contractBalanceBefore = getAtokenScaledBalance(aTokenAddress);
         IWETHGateway(aaveWETHGateway).depositETH{value: msg.value}(aaveLendingPool, address(this), _referralCode);
         uint256 contractBalanceAfter = IERC20(aTokenAddress).scaledBalanceOf(address(this));
         atokenAmounts[artistAddress][msg.sender] += (contractBalanceAfter - contractBalanceBefore);
@@ -136,6 +136,12 @@ contract ArtiStake {
         depositedAmounts[artistAddress][msg.sender] -= amount;
         // emit Withdrew(msg.sender, artistAddress, amount);
     }
+
+    function getAtokenScaledBalance(address asset) public view returns (uint256) {
+        return IERC20(asset).scaledBalanceOf(address(this));
+    }
+
+    receive() external payable {}
 
     fallback() external payable {}
 }
