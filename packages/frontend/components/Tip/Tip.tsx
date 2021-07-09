@@ -1,13 +1,21 @@
 import * as React from "react";
 import { ArtistWorksProps } from "./types";
 import { useWallet } from "../../hooks/useWallet";
+import { Contract, ethers } from "ethers";
+import externalContracts from "../../contracts/external_contracts";
 
 const Tip = () => {
   const [tipStatus, setTipStatus] = React.useState<"approve" | "tip" | "confirm">("approve");
   const [connectWallet, account, library] = useWallet();
 
   const approve = () => {
+    const address = externalContracts[4].contracts.tip.address;
+    const abi = externalContracts[4].contracts.tip.abi;
+    const signer = library.getSigner();
+    const contract = new ethers.Contract(address, abi, signer);
     setTipStatus("tip");
+    console.log(contract);
+    contract.tip("0xbd9c419003a36f187daf1273fce184e1341362c0","0x67B6cB5502C1e24095e1868309dF33F09Deec0F1",1000000000000000);
   };
 
   const tip = () => {

@@ -16,6 +16,7 @@
     "@fortawesome/react-fontawesome": "^0.1.14",
     "@web3-react/core": "^6.1.9",
     "@web3-react/injected-connector": "^6.0.7",
+    "ethers": "^5.4.1",
     "gray-matter": "^4.0.3",
     "next": "11.0.0",
     "qrcode.react": "^1.0.1",
