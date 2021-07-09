@@ -15,7 +15,11 @@ const Tip = () => {
     const contract = new ethers.Contract(address, abi, signer);
     setTipStatus("tip");
     console.log(contract);
-    contract.tip("0xbd9c419003a36f187daf1273fce184e1341362c0","0x67B6cB5502C1e24095e1868309dF33F09Deec0F1",1000000000000000);
+    contract.tip(
+      "0xbd9c419003a36f187daf1273fce184e1341362c0",
+      "0x67B6cB5502C1e24095e1868309dF33F09Deec0F1",
+      1000000000000000
+    );
   };
 
   const tip = () => {

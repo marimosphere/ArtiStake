@@ -11,20 +11,24 @@ chai.use(solidity);
 const { expect } = chai;
 
 describe("ArtiStake", function () {
-  let artiStakeContract: any
+  let artiStakeContract: any;
   let signer;
   this.beforeEach(async function () {
     [signer] = await ethers.getSigners();
     const ArtiStake = await ethers.getContractFactory("ArtiStake");
-    artiStakeContract = await ArtiStake.deploy(POLYGON_AAVE_LENDING_POOL_ADDRESS, POLYGON_AAVE_WETH_GATEWAY_ADDRESS, POLYGON_WETH_ADDRESS);
+    artiStakeContract = await ArtiStake.deploy(
+      POLYGON_AAVE_LENDING_POOL_ADDRESS,
+      POLYGON_AAVE_WETH_GATEWAY_ADDRESS,
+      POLYGON_WETH_ADDRESS
+    );
   });
 
-  it("User can stake to Artist", async function () {  
+  it("User can stake to Artist", async function () {
     // artiStakeContract.deposit()をする
-    
-    await artiStakeContract.deposit(0, {value: 10000})
 
-    await artiStakeContract.withdraw(1000)
+    await artiStakeContract.deposit(0, { value: 10000 });
+
+    await artiStakeContract.withdraw(1000);
     // artiStakeCOntractのdepositedAmountの変化をみる
   });
 
@@ -34,7 +38,6 @@ describe("ArtiStake", function () {
     // witdrawする
     // matic増えてる
   });
-
 
   // it("Artist can get yield", async function () {
   //   // aaveにステークする
@@ -47,5 +50,4 @@ describe("ArtiStake", function () {
   // it("Add currency", async function () {
   //   // depositできるコインを増やす
   // })
-
 });

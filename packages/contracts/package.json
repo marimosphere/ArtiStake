@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "test": "hardhat test",
+    "coverage": "hardhat coverage",
     "deploy-contract-to-localchain": "hardhat run scripts/99_batchMigration.ts --network localhost",
     "run-localchain": "yarn hardhat node",
     "run-polygon-chain": "yarn hardhat node --fork https://rpc-mainnet.matic.network"
@@ -25,6 +26,7 @@
     "hardhat": "^2.3.3",
     "hardhat-deploy": "^0.8.6",
     "hardhat-typechain": "^0.3.5",
+    "solidity-coverage": "^0.7.16",
     "ts-node": "^10.0.0",
     "typescript": "^4.3.2"
   }
