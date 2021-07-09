@@ -2,11 +2,7 @@ import hre, { ethers } from "hardhat";
 import * as chai from "chai";
 import { solidity } from "ethereum-waffle";
 import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
-import {
-  POLYGON_WETH_ADDRESS,
-  POLYGON_AAVE_LENDING_POOL_ADDRESS,
-  POLYGON_AAVE_WETH_GATEWAY_ADDRESS,
-} from "../lib/constants";
+import { POLYGON_WETH_ADDRESS } from "../lib/constants";
 
 chai.use(solidity);
 const { expect } = chai;
@@ -17,7 +13,6 @@ describe("Tip", function () {
   let signer: SignerWithAddress;
   let user: SignerWithAddress;
   let artist: SignerWithAddress;
-  const MAX_UINT = 0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff;
   this.beforeEach(async function () {
     [signer, user, artist] = await ethers.getSigners();
     const Tip = await ethers.getContractFactory("Tip");
