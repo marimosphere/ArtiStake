@@ -5,7 +5,7 @@
   "scripts": {
     "test": "hardhat test",
     "coverage": "hardhat coverage",
-    "deploy-contract-to-localchain": "hardhat run scripts/99_batchMigration.ts --network localhost",
+    "deploy-contract-to-localchain": "hardhat run scripts/setup.ts --network localhost",
     "run-localchain": "yarn hardhat node",
     "run-polygon-chain": "yarn hardhat node --fork https://rpc-mainnet.matic.network"
   },
