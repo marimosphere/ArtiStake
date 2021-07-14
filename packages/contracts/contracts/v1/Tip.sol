@@ -1,5 +1,5 @@
 //SPDX-License-Identifier: Unlicense
-pragma solidity 0.6.12;
+pragma solidity ^0.6.12;
 
 import "hardhat/console.sol";
 import {IERC20} from "../dependencies/openzeppelin/IERC20.sol";
