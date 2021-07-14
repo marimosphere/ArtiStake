@@ -3,6 +3,7 @@ import * as React from "react";
 import { Header } from "../components/Header";
 import { Hero } from "../components/Hero";
 import { ArtistCard } from "../components/ArtistCard";
+import { About } from "../components/About";
 
 import { getAllArtists } from "../lib/api";
 import { Artist } from "../types/artist";
@@ -16,21 +17,7 @@ const IndexPage: React.FC<Props> = ({ artists }) => {
     <div>
       <Header />
       <Hero />
-      <div className="w-full mx-auto grid md:grid-cols-1 md:grid-cols-3">
-        {artists.map((artist, index) => {
-          return (
-            <a href={`/artists/${artist.id}`} key={index}>
-              <ArtistCard
-                index={index}
-                name={artist.name}
-                description={artist.description}
-                avatar={artist.avatar}
-                thumbnail={artist.thumbnail}
-              ></ArtistCard>
-            </a>
-          );
-        })}
-      </div>
+      <About />
     </div>
   );
 };
