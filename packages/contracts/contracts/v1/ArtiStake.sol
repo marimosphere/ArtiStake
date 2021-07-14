@@ -100,7 +100,7 @@ contract ArtiStake is Ownable {
         require(artistList[artistAddress], "Artist not Registered");
         uint256 contractBalanceBefore = getAtokenScaledBalance(aTokenAddress);
         IWETHGateway(aaveWETHGateway).depositETH{value: msg.value}(aaveLendingPool, address(this), _referralCode);
-        uint256 contractBalanceAfter = IERC20(aTokenAddress).scaledBalanceOf(address(this));
+        uint256 contractBalanceAfter = getAtokenScaledBalance(aTokenAddress);
         atokenAmounts[artistAddress][msg.sender] += (contractBalanceAfter - contractBalanceBefore);
         depositedAmounts[artistAddress][msg.sender] += msg.value;
         emit Deposited(msg.sender, artistAddress, msg.value);
