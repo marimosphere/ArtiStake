@@ -5,13 +5,14 @@
   "scripts": {
     "test": "hardhat test",
     "coverage": "hardhat coverage",
-    "deploy-contract-to-localchain": "hardhat run scripts/99_batchMigration.ts --network localhost",
+    "deploy-contract-to-localchain": "hardhat run scripts/setup.ts --network localhost",
     "run-localchain": "yarn hardhat node",
     "run-polygon-chain": "yarn hardhat node --fork https://rpc-mainnet.matic.network"
   },
   "dependencies": {
     "@aave/protocol-v2": "^1.0.1",
-    "@openzeppelin/contracts": "^4.1.0"
+    "@openzeppelin/contracts": "^3.4.0",
+    "ethers": "^5.4.1"
   },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.2",
