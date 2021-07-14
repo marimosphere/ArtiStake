@@ -19,17 +19,14 @@ describe("ArtiStake", function () {
   let stakerB: SignerWithAddress;
   let artistA: SignerWithAddress;
   let artistB: SignerWithAddress;
-  let notArtist: SignerWithAddress;
   this.beforeEach(async function () {
-    [signer, stakerA, stakerB, artistA, artistB, notArtist] = await ethers.getSigners();
+    [signer, stakerA, stakerB, artistA, artistB] = await ethers.getSigners();
     const ArtiStake = await ethers.getContractFactory("ArtiStake");
     artiStakeContract = await ArtiStake.deploy(
       POLYGON_AAVE_LENDING_POOL_ADDRESS,
       POLYGON_AAVE_WETH_GATEWAY_ADDRESS,
       POLYGON_WETH_ADDRESS
     );
-    await artiStakeContract.registerToArtistlist(artistA.address);
-    await artiStakeContract.registerToArtistlist(artistB.address);
   });
 
   it("User can stake to Artist", async function () {
@@ -121,33 +118,16 @@ describe("ArtiStake", function () {
     expect(artistBBalanceAfter).to.be.above(artistBBalanceBefore);
   });
 
-  it("cannot register already listed artist", async function () {
-    await expect(artiStakeContract.connect(signer).registerToArtistlist(artistA.address)).to.revertedWith(
-      "already registered"
-    );
-  });
-  it("not owner signer cannot update artistlist", async function () {
-    await expect(artiStakeContract.connect(stakerA).registerToArtistlist(notArtist.address)).to.revertedWith(
-      "Ownable: caller is not the owner"
-    );
-  });
-  it("cannot remove not listed artist", async function () {
-    await expect(artiStakeContract.connect(signer).removeFromArtistlist(notArtist.address)).to.revertedWith(
-      "not listed"
-    );
-  });
-  it("add not listed artist", async function () {
-    await artiStakeContract.connect(signer).registerToArtistlist(notArtist.address);
-    expect(await artiStakeContract.artistList(notArtist.address)).to.be.true;
-  });
   it("not owner signer cannot update artistInterestRatio", async function () {
     await expect(artiStakeContract.connect(stakerA).updateArtistInterestRatio(300)).to.revertedWith(
       "Ownable: caller is not the owner"
     );
   });
   it("cannot set artistInterestRatio higher than 10000", async function () {
-    await expect(artiStakeContract.connect(signer).updateArtistInterestRatio(10000)).to.revertedWith(
-      "ratio must be smaller than base"
+    const base = await artiStakeContract.interestRatioBase();
+    const artiStakeFeeRatio = await artiStakeContract.artiStakeFeeRatio();
+    await expect(artiStakeContract.connect(signer).updateArtistInterestRatio(base - artiStakeFeeRatio)).to.revertedWith(
+      "ratio + artiStakeFeeRatio must be smaller than base"
     );
   });
   it("can set artistInterestRatio", async function () {
@@ -161,8 +141,10 @@ describe("ArtiStake", function () {
     );
   });
   it("cannot set artiStakeFeeRatio higher than 10000", async function () {
-    await expect(artiStakeContract.connect(signer).updateArtiStakeFeeRatio(10000)).to.revertedWith(
-      "ratio must be smaller than base"
+    const base = await artiStakeContract.interestRatioBase();
+    const artistInterestRatio = await artiStakeContract.artistInterestRatio();
+    await expect(artiStakeContract.connect(signer).updateArtiStakeFeeRatio(base - artistInterestRatio)).to.revertedWith(
+      "ratio + artistInterestRatio must be smaller than base"
     );
   });
   it("can set artiStakeFeeRatio", async function () {

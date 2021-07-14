@@ -6,6 +6,7 @@ pragma experimental ABIEncoderV2;
 import "hardhat/console.sol";
 import {WadRayMath} from "./libraries/math/WadRayMath.sol";
 import {Ownable} from "./libraries/openzeppelin/Ownable.sol";
+import {SafeMath} from "./libraries/openzeppelin/SafeMath.sol";
 
 interface IWETHGateway {
     function depositETH(
@@ -62,6 +63,7 @@ interface ILendingPool {
  */
 contract ArtiStake is Ownable {
     using WadRayMath for uint256;
+    using SafeMath for uint256;
 
     address payable public aaveLendingPool;
     address payable public aaveWETHGateway;
@@ -69,18 +71,15 @@ contract ArtiStake is Ownable {
     address public underlyingAsset;
 
     uint256 constant MAX_UINT = 0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff;
-    uint256 constant interestRatioBase = 10000;
+    uint256 public constant interestRatioBase = 10000;
     uint256 public artistInterestRatio = 5000;
     uint256 public artiStakeFeeRatio = 500;
 
-    mapping(address => bool) public artistList;
     mapping(address => mapping(address => uint256)) public depositedAmounts;
     mapping(address => mapping(address => uint256)) public atokenAmounts;
 
     event Deposited(address indexed from, address indexed artistAddress, uint256 amount);
     event Withdrew(address indexed withdrawer, address indexed artistAddress, uint256 amount);
-    event AddedToArtistlist(address indexed artistAddress);
-    event RemovedFromArtistlist(address indexed artistAddress);
     event UpdatedArtistInterestRatio(uint256 ratio);
     event UpdatedArtiStakeFeeRatio(uint256 ratio);
 
@@ -97,7 +96,6 @@ contract ArtiStake is Ownable {
     }
 
     function deposit(address artistAddress, uint16 _referralCode) public payable {
-        require(artistList[artistAddress], "Artist not Registered");
         uint256 contractBalanceBefore = getAtokenScaledBalance(aTokenAddress);
         IWETHGateway(aaveWETHGateway).depositETH{value: msg.value}(aaveLendingPool, address(this), _referralCode);
         uint256 contractBalanceAfter = getAtokenScaledBalance(aTokenAddress);
@@ -107,7 +105,6 @@ contract ArtiStake is Ownable {
     }
 
     function withdraw(address payable artistAddress) public {
-        require(artistList[artistAddress], "Artist not Registered");
         uint256 atokenAmount = atokenAmounts[artistAddress][msg.sender];
         require(atokenAmount > 0, "currently not deposited");
         uint256 depositedAmount = depositedAmounts[artistAddress][msg.sender];
@@ -120,8 +117,8 @@ contract ArtiStake is Ownable {
         uint256 artiStakeFee = (totalInterest * artiStakeFeeRatio) / interestRatioBase;
         uint256 stakerReward = userBalanceWithInterest - artistInterest - artiStakeFee;
 
-        atokenAmounts[artistAddress][msg.sender] -= atokenAmount;
-        depositedAmounts[artistAddress][msg.sender] -= userBalanceWithInterest;
+        atokenAmounts[artistAddress][msg.sender] = 0;
+        depositedAmounts[artistAddress][msg.sender] = 0;
 
         artistAddress.transfer(artistInterest);
         payable(owner()).transfer(artiStakeFee);
@@ -141,26 +138,17 @@ contract ArtiStake is Ownable {
         return userBalanceWithInterest;
     }
 
-    function registerToArtistlist(address artistAddress) public onlyOwner {
-        require(artistList[artistAddress] == false, "already registered");
-        artistList[artistAddress] = true;
-        emit AddedToArtistlist(artistAddress);
-    }
-
-    function removeFromArtistlist(address artistAddress) public onlyOwner {
-        require(artistList[artistAddress] == true, "not listed");
-        artistList[artistAddress] = false;
-        emit RemovedFromArtistlist(artistAddress);
-    }
-
     function updateArtistInterestRatio(uint256 ratio) public onlyOwner {
-        require(ratio < interestRatioBase, "ratio must be smaller than base");
+        require(ratio + artiStakeFeeRatio < interestRatioBase, "ratio + artiStakeFeeRatio must be smaller than base");
         artistInterestRatio = ratio;
         emit UpdatedArtistInterestRatio(ratio);
     }
 
     function updateArtiStakeFeeRatio(uint256 ratio) public onlyOwner {
-        require(ratio < interestRatioBase, "ratio must be smaller than base");
+        require(
+            ratio + artistInterestRatio < interestRatioBase,
+            "ratio + artistInterestRatio must be smaller than base"
+        );
         artiStakeFeeRatio = ratio;
         emit UpdatedArtiStakeFeeRatio(ratio);
     }
