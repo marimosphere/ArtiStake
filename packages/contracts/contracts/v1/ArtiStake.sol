@@ -106,42 +106,27 @@ contract ArtiStake is Ownable {
         emit Deposited(msg.sender, artistAddress, msg.value);
     }
 
-    function withdraw(address payable artistAddress, uint256 amount) public {
+    function withdraw(address payable artistAddress) public {
         require(artistList[artistAddress], "Artist not Registered");
         uint256 atokenAmount = atokenAmounts[artistAddress][msg.sender];
+        require(atokenAmount > 0, "currently not deposited");
         uint256 depositedAmount = depositedAmounts[artistAddress][msg.sender];
         uint256 userBalanceWithInterest = atokenAmount.rayMul(
             ILendingPool(aaveLendingPool).getReserveNormalizedIncome(underlyingAsset)
         );
-        require(userBalanceWithInterest > amount, "not enough deposited balance");
-
         uint256 totalInterest = userBalanceWithInterest - depositedAmount;
-
-        console.log(atokenAmount, "atokenAmount");
-        console.log(depositedAmount, "depositedAmount");
-        console.log(userBalanceWithInterest, "userBalanceWithInterest");
-        console.log(totalInterest, "totalInterest");
-
-        getAtokenScaledBalance(aTokenAddress);
-        IWETHGateway(aaveWETHGateway).withdrawETH(aaveLendingPool, amount, address(this));
-        getAtokenScaledBalance(aTokenAddress);
-
-        uint256 artistInterest = (((totalInterest * amount) / depositedAmount) * artistInterestRatio) /
-            interestRatioBase;
-        uint256 artiStakeFee = (((totalInterest * amount) / depositedAmount) * artiStakeFeeRatio) / interestRatioBase;
-        uint256 stakerReward = amount - artistInterest - artiStakeFee;
-        console.log(artistInterest, "artistInterest");
-        console.log(stakerReward, "stakerReward");
+        IWETHGateway(aaveWETHGateway).withdrawETH(aaveLendingPool, userBalanceWithInterest, address(this));
+        uint256 artistInterest = (totalInterest * artistInterestRatio) / interestRatioBase;
+        uint256 artiStakeFee = (totalInterest * artiStakeFeeRatio) / interestRatioBase;
+        uint256 stakerReward = userBalanceWithInterest - artistInterest - artiStakeFee;
 
         artistAddress.transfer(artistInterest);
         payable(owner()).transfer(artiStakeFee);
         payable(msg.sender).transfer(stakerReward);
 
-        atokenAmounts[artistAddress][msg.sender] -= amount.rayDiv(
-            ILendingPool(aaveLendingPool).getReserveNormalizedIncome(underlyingAsset)
-        );
-        depositedAmounts[artistAddress][msg.sender] -= amount;
-        emit Withdrew(msg.sender, artistAddress, amount);
+        atokenAmounts[artistAddress][msg.sender] -= atokenAmount;
+        depositedAmounts[artistAddress][msg.sender] -= userBalanceWithInterest;
+        emit Withdrew(msg.sender, artistAddress, userBalanceWithInterest);
     }
 
     function getAtokenScaledBalance(address asset) public view returns (uint256) {
@@ -150,12 +135,9 @@ contract ArtiStake is Ownable {
 
     function getStakerBalanceWithInterest(address artistAddress) public view returns (uint256) {
         uint256 atokenAmount = atokenAmounts[artistAddress][msg.sender];
-        console.log(atokenAmount, "atokenAmount");
-        console.log(ILendingPool(aaveLendingPool).getReserveNormalizedIncome(underlyingAsset), "something");
         uint256 userBalanceWithInterest = atokenAmount.rayMul(
             ILendingPool(aaveLendingPool).getReserveNormalizedIncome(underlyingAsset)
         );
-        console.log(userBalanceWithInterest, "userBalanceWithInterest");
         return userBalanceWithInterest;
     }
 
