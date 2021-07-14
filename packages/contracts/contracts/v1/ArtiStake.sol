@@ -120,12 +120,12 @@ contract ArtiStake is Ownable {
         uint256 artiStakeFee = (totalInterest * artiStakeFeeRatio) / interestRatioBase;
         uint256 stakerReward = userBalanceWithInterest - artistInterest - artiStakeFee;
 
+        atokenAmounts[artistAddress][msg.sender] -= atokenAmount;
+        depositedAmounts[artistAddress][msg.sender] -= userBalanceWithInterest;
+
         artistAddress.transfer(artistInterest);
         payable(owner()).transfer(artiStakeFee);
         payable(msg.sender).transfer(stakerReward);
-
-        atokenAmounts[artistAddress][msg.sender] -= atokenAmount;
-        depositedAmounts[artistAddress][msg.sender] -= userBalanceWithInterest;
         emit Withdrew(msg.sender, artistAddress, userBalanceWithInterest);
     }
 
