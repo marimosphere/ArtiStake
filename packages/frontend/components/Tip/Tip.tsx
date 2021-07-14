@@ -10,30 +10,34 @@ const Tip: React.FC<TipProps> = ({ artistWalletAddress }) => {
   const [connectWallet, account, library] = useWallet();
   let contract;
   let mockErc20Contract;
-  const tokenAmount = 1000000000000000;
-  const address = externalContracts[4].contracts.tip.address;
-  const abi = externalContracts[4].contracts.tip.abi;
-  const erc20Address = externalContracts[4].contracts.mockErc20.address;
-  const erc20Abi = externalContracts[4].contracts.mockErc20.abi;
+
+  const getAbis = async () => {
+    const networkId = process.env.NODE_ENV == "development" ? 4 : 137;
+    const address = externalContracts[networkId].contracts.tip.address;
+    const abi = externalContracts[networkId].contracts.tip.abi;
+    const erc20Address = externalContracts[networkId].contracts.mockErc20.address;
+    const erc20Abi = externalContracts[networkId].contracts.mockErc20.abi;
+    return { address, abi, erc20Address, erc20Abi };
+  };
 
   const approve = async () => {
-    console.log(tipAmount, "tipAmount");
     const signer = library.getSigner();
-    setTipStatus("tip");
+    const signerNetwork = await signer.provider.getNetwork();
+    console.log(signerNetwork, "signerNetwork");
+    const { address, erc20Address, erc20Abi } = await getAbis();
     mockErc20Contract = new ethers.Contract(erc20Address, erc20Abi, signer);
-    console.log(mockErc20Contract, "mockErc20Contract");
     const value = ethers.utils.parseEther(tipAmount).toString();
     await mockErc20Contract.approve(address, value);
+    setTipStatus("tip");
   };
 
   const tip = async () => {
     const signer = library.getSigner();
-    console.log(address, "address");
+    const { address, abi, erc20Address, erc20Abi } = await getAbis();
     contract = new ethers.Contract(address, abi, signer);
     setTipStatus("confirm");
     const value = ethers.utils.parseEther(tipAmount).toString();
     const result = await contract.tip(erc20Address, artistWalletAddress, value);
-    console.log(result);
   };
 
   const handleTipAmount = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -45,7 +49,14 @@ const Tip: React.FC<TipProps> = ({ artistWalletAddress }) => {
     <div className="w-full mx-auto">
       <img className="mx-auto h-40 object-cover mb-8" src="/assets/img/jpyc.png" />
       {!account ? (
-        <button onClick={connectWallet}>connectWallet</button>
+        <div className="text-center">
+          <button
+            onClick={connectWallet}
+            className="w-40 h-8 bg-marimo-5 hover:opacity-75 text-white font-bold rounded-lg "
+          >
+            connectWallet
+          </button>
+        </div>
       ) : tipStatus === "approve" ? (
         <div className="text-center">
           <input
@@ -55,17 +66,14 @@ const Tip: React.FC<TipProps> = ({ artistWalletAddress }) => {
             placeholder="JPYC"
             className="h-8 rounded-l-lg text-right border-2 border-marimo-5 pr-2"
           />
-          <button
-            onClick={approve}
-            className="w-24 h-8 bg-marimo-5  hover:opacity-75 text-white font-bold rounded-r-lg"
-          >
+          <button onClick={approve} className="w-24 h-8 bg-marimo-5 hover:opacity-75 text-white font-bold rounded-r-lg">
             Approve
           </button>
         </div>
       ) : tipStatus === "tip" ? (
         <div className="text-center">
-          <input type="number" disabled className="h-8 rounded-l-lg text-right border-2 border-marimo-5" />
-          <button onClick={tip} className="w-24 h-8 bg-marimo-5 hover:opacity-75 text-white font-bold rounded-r-lg">
+          <p className="text-white  text-base text-center">{tipAmount} JPYC</p>
+          <button onClick={tip} className="w-24 h-8 bg-marimo-5 text-white font-bold rounded-lg">
             Tip
           </button>
         </div>
