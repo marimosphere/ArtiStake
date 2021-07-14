@@ -2,8 +2,8 @@
 pragma solidity ^0.6.12;
 
 import "hardhat/console.sol";
-import {IERC20} from "../dependencies/openzeppelin/IERC20.sol";
-import {Ownable} from "../dependencies/openzeppelin/Ownable.sol";
+import {IERC20} from "./libraries/openzeppelin/IERC20.sol";
+import {Ownable} from "./libraries/openzeppelin/Ownable.sol";
 
 contract Tip is Ownable {
     mapping(address => bool) public whitelisted;

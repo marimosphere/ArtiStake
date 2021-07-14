@@ -3,6 +3,11 @@
 pragma solidity 0.6.12;
 pragma experimental ABIEncoderV2;
 
+import "hardhat/console.sol";
+import {WadRayMath} from "./libraries/math/WadRayMath.sol";
+import {Ownable} from "./libraries/openzeppelin/Ownable.sol";
+import {SafeMath} from "./libraries/openzeppelin/SafeMath.sol";
+
 interface IWETHGateway {
     function depositETH(
         address lendingPool,
@@ -19,6 +24,10 @@ interface IWETHGateway {
 
 interface IERC20 {
     function approve(address spender, uint256 amount) external returns (bool);
+
+    function balanceOf(address account) external view returns (uint256);
+
+    function scaledBalanceOf(address user) external view returns (uint256);
 }
 
 library DataTypes {
@@ -44,23 +53,35 @@ library DataTypes {
 
 interface ILendingPool {
     function getReserveData(address asset) external view returns (DataTypes.ReserveData memory);
+
+    function getReserveNormalizedIncome(address asset) external view returns (uint256);
 }
 
 /**
  * @title Storage
  * @dev Store & retrieve value in a variable
  */
-contract ArtiStake {
+contract ArtiStake is Ownable {
+    using WadRayMath for uint256;
+    using SafeMath for uint256;
+
     address payable public aaveLendingPool;
     address payable public aaveWETHGateway;
+    address public aTokenAddress;
+    address public underlyingAsset;
 
     uint256 constant MAX_UINT = 0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff;
+    uint256 public constant interestRatioBase = 10000;
+    uint256 public artistInterestRatio = 5000;
+    uint256 public artiStakeFeeRatio = 500;
 
-    mapping(address => bool) public artistAddresses;
     mapping(address => mapping(address => uint256)) public depositedAmounts;
+    mapping(address => mapping(address => uint256)) public atokenAmounts;
 
     event Deposited(address indexed from, address indexed artistAddress, uint256 amount);
     event Withdrew(address indexed withdrawer, address indexed artistAddress, uint256 amount);
+    event UpdatedArtistInterestRatio(uint256 ratio);
+    event UpdatedArtiStakeFeeRatio(uint256 ratio);
 
     constructor(
         address payable _aaveLendingPool,
@@ -69,33 +90,70 @@ contract ArtiStake {
     ) public {
         aaveLendingPool = _aaveLendingPool;
         aaveWETHGateway = _aaveWETHGateway;
-        address aTokenAddress = ILendingPool(_aaveLendingPool).getReserveData(_currency).aTokenAddress;
+        underlyingAsset = _currency;
+        aTokenAddress = ILendingPool(_aaveLendingPool).getReserveData(_currency).aTokenAddress;
         IERC20(aTokenAddress).approve(aaveWETHGateway, MAX_UINT);
     }
 
-    function deposit(
-        // address artistAddress,
-        // uint256 amount,
-        uint16 _referralCode
-    ) public payable {
-        // require(artistAddresses[artistAddress], "Artist not Registered");
-        // Aaveにdeposit
+    function deposit(address artistAddress, uint16 _referralCode) public payable {
+        uint256 contractBalanceBefore = getAtokenScaledBalance(aTokenAddress);
         IWETHGateway(aaveWETHGateway).depositETH{value: msg.value}(aaveLendingPool, address(this), _referralCode);
-        // depositedAmounts[artistAddress][msg.sender] += amount;
-        // emit Deposited(msg.sender, artistAddress, amount);
+        uint256 contractBalanceAfter = getAtokenScaledBalance(aTokenAddress);
+        atokenAmounts[artistAddress][msg.sender] += (contractBalanceAfter - contractBalanceBefore);
+        depositedAmounts[artistAddress][msg.sender] += msg.value;
+        emit Deposited(msg.sender, artistAddress, msg.value);
     }
 
-    function withdraw(uint256 amount) public {
-        // require(artistAddresses[artistAddress], "Artist not Registered");
-        // require(depositedAmounts[artistAddress][msg.sender] > amount, "not enough deposited balance");
-        // Aaveからwithdraw
-        IWETHGateway(aaveWETHGateway).withdrawETH(aaveLendingPool, amount, address(this));
-        // address payable sender = payable(msg.sender);
-        // sender.transfer(amount);
-        // transfer
-        // depositedAmounts[artistAddress][msg.sender] -= amount;
-        // emit Withdrew(msg.sender, artistAddress, amount);
+    function withdraw(address payable artistAddress) public {
+        uint256 atokenAmount = atokenAmounts[artistAddress][msg.sender];
+        require(atokenAmount > 0, "currently not deposited");
+        uint256 depositedAmount = depositedAmounts[artistAddress][msg.sender];
+        uint256 userBalanceWithInterest = atokenAmount.rayMul(
+            ILendingPool(aaveLendingPool).getReserveNormalizedIncome(underlyingAsset)
+        );
+        uint256 totalInterest = userBalanceWithInterest - depositedAmount;
+        IWETHGateway(aaveWETHGateway).withdrawETH(aaveLendingPool, userBalanceWithInterest, address(this));
+        uint256 artistInterest = (totalInterest * artistInterestRatio) / interestRatioBase;
+        uint256 artiStakeFee = (totalInterest * artiStakeFeeRatio) / interestRatioBase;
+        uint256 stakerReward = userBalanceWithInterest - artistInterest - artiStakeFee;
+
+        atokenAmounts[artistAddress][msg.sender] = 0;
+        depositedAmounts[artistAddress][msg.sender] = 0;
+
+        artistAddress.transfer(artistInterest);
+        payable(owner()).transfer(artiStakeFee);
+        payable(msg.sender).transfer(stakerReward);
+        emit Withdrew(msg.sender, artistAddress, userBalanceWithInterest);
     }
+
+    function getAtokenScaledBalance(address asset) public view returns (uint256) {
+        return IERC20(asset).scaledBalanceOf(address(this));
+    }
+
+    function getStakerBalanceWithInterest(address artistAddress) public view returns (uint256) {
+        uint256 atokenAmount = atokenAmounts[artistAddress][msg.sender];
+        uint256 userBalanceWithInterest = atokenAmount.rayMul(
+            ILendingPool(aaveLendingPool).getReserveNormalizedIncome(underlyingAsset)
+        );
+        return userBalanceWithInterest;
+    }
+
+    function updateArtistInterestRatio(uint256 ratio) public onlyOwner {
+        require(ratio + artiStakeFeeRatio < interestRatioBase, "ratio + artiStakeFeeRatio must be smaller than base");
+        artistInterestRatio = ratio;
+        emit UpdatedArtistInterestRatio(ratio);
+    }
+
+    function updateArtiStakeFeeRatio(uint256 ratio) public onlyOwner {
+        require(
+            ratio + artistInterestRatio < interestRatioBase,
+            "ratio + artistInterestRatio must be smaller than base"
+        );
+        artiStakeFeeRatio = ratio;
+        emit UpdatedArtiStakeFeeRatio(ratio);
+    }
+
+    receive() external payable {}
 
     fallback() external payable {}
 }
