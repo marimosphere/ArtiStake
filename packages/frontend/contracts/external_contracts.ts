@@ -351,7 +351,7 @@ const tipAbi = [
   },
 ];
 
-const mockErc20Abi = [
+const jpycAbi = [
   {
     inputs: [
       {
@@ -669,7 +669,14 @@ export default {
     contracts: {
       tip: { address: "0x47c05BCCA7d57c87083EB4e586007530eE4539e9", abi: tipAbi },
       stake: { address: "0x67B6cB5502C1e24095e1868309dF33F09Deec0F1", abi: stakeAbi },
-      mockErc20: { address: "0x408F924BAEC71cC3968614Cb2c58E155A35e6890", abi: mockErc20Abi },
+      jpyc: { address: "0x408F924BAEC71cC3968614Cb2c58E155A35e6890", abi: jpycAbi },
+    },
+  },
+  137: {
+    contracts: {
+      tip: { address: "0x47c05BCCA7d57c87083EB4e586007530eE4539e9", abi: tipAbi },
+      stake: { address: "0x67B6cB5502C1e24095e1868309dF33F09Deec0F1", abi: stakeAbi },
+      jpyc: { address: "0x408F924BAEC71cC3968614Cb2c58E155A35e6890", abi: jpycAbi },
     },
   },
 };

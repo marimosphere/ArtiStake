@@ -7,37 +7,40 @@ import { TipProps } from "./types";
 const Tip: React.FC<TipProps> = ({ artistWalletAddress }) => {
   const [tipStatus, setTipStatus] = React.useState<"approve" | "tip" | "confirm">("approve");
   const [tipAmount, setTipAmount] = React.useState("");
+  const [explorer, setExplorer] = React.useState("");
   const [connectWallet, account, library] = useWallet();
-  let contract;
-  let mockErc20Contract;
+  let tipContract;
+  let jpycContract;
 
   const getAbis = async () => {
     const networkId = process.env.NODE_ENV == "development" ? 4 : 137;
-    const address = externalContracts[networkId].contracts.tip.address;
-    const abi = externalContracts[networkId].contracts.tip.abi;
-    const erc20Address = externalContracts[networkId].contracts.mockErc20.address;
-    const erc20Abi = externalContracts[networkId].contracts.mockErc20.abi;
-    return { address, abi, erc20Address, erc20Abi };
+    const tipContractAddress = externalContracts[networkId].contracts.tip.address;
+    const tipContractAbi = externalContracts[networkId].contracts.tip.abi;
+    const jpycAddress = externalContracts[networkId].contracts.jpyc.address;
+    const jpycAbi = externalContracts[networkId].contracts.jpyc.abi;
+    return { tipContractAddress, tipContractAbi, jpycAddress, jpycAbi };
   };
 
   const approve = async () => {
     const signer = library.getSigner();
     const signerNetwork = await signer.provider.getNetwork();
     console.log(signerNetwork, "signerNetwork");
-    const { address, erc20Address, erc20Abi } = await getAbis();
-    mockErc20Contract = new ethers.Contract(erc20Address, erc20Abi, signer);
+    const { tipContractAddress, tipContractAbi, jpycAddress, jpycAbi } = await getAbis();
+    jpycContract = new ethers.Contract(jpycAddress, jpycAbi, signer);
     const value = ethers.utils.parseEther(tipAmount).toString();
-    await mockErc20Contract.approve(address, value);
+    await jpycContract.approve(tipContractAddress, value);
     setTipStatus("tip");
   };
 
   const tip = async () => {
     const signer = library.getSigner();
-    const { address, abi, erc20Address, erc20Abi } = await getAbis();
-    contract = new ethers.Contract(address, abi, signer);
+    const { tipContractAddress, tipContractAbi, jpycAddress, jpycAbi } = await getAbis();
+    tipContract = new ethers.Contract(tipContractAddress, tipContractAbi, signer);
     setTipStatus("confirm");
     const value = ethers.utils.parseEther(tipAmount).toString();
-    const result = await contract.tip(erc20Address, artistWalletAddress, value);
+    const { hash: tx } = await tipContract.tip(jpycAddress, artistWalletAddress, value);
+    setExplorer(`https://polygonscan.com/tx/${tx}`);
+    console.log(tx);
   };
 
   const handleTipAmount = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -81,7 +84,7 @@ const Tip: React.FC<TipProps> = ({ artistWalletAddress }) => {
         <div className="">
           <p className="text-white  text-base text-center">
             Thank you!{" "}
-            <a href="#" className="underline">
+            <a href={explorer} className="underline">
               Receipt
             </a>
           </p>
