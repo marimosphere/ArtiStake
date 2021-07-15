@@ -51,6 +51,51 @@ const stakeAbi = [
       {
         indexed: true,
         internalType: "address",
+        name: "previousOwner",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "newOwner",
+        type: "address",
+      },
+    ],
+    name: "OwnershipTransferred",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "ratio",
+        type: "uint256",
+      },
+    ],
+    name: "UpdatedArtiStakeFeeRatio",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "ratio",
+        type: "uint256",
+      },
+    ],
+    name: "UpdatedArtistInterestRatio",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
         name: "withdrawer",
         type: "address",
       },
@@ -73,6 +118,19 @@ const stakeAbi = [
   {
     stateMutability: "payable",
     type: "fallback",
+  },
+  {
+    inputs: [],
+    name: "aTokenAddress",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [],
@@ -101,19 +159,26 @@ const stakeAbi = [
     type: "function",
   },
   {
-    inputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
-    name: "artistAddresses",
+    inputs: [],
+    name: "artiStakeFeeRatio",
     outputs: [
       {
-        internalType: "bool",
+        internalType: "uint256",
         name: "",
-        type: "bool",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "artistInterestRatio",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
       },
     ],
     stateMutability: "view",
@@ -121,6 +186,35 @@ const stakeAbi = [
   },
   {
     inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    name: "atokenAmounts",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "artistAddress",
+        type: "address",
+      },
       {
         internalType: "uint16",
         name: "_referralCode",
@@ -159,15 +253,142 @@ const stakeAbi = [
   {
     inputs: [
       {
+        internalType: "address",
+        name: "asset",
+        type: "address",
+      },
+    ],
+    name: "getAtokenScaledBalance",
+    outputs: [
+      {
         internalType: "uint256",
-        name: "amount",
+        name: "",
         type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "artistAddress",
+        type: "address",
+      },
+    ],
+    name: "getStakerBalanceWithInterest",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "interestRatioBase",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "owner",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "renounceOwnership",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "newOwner",
+        type: "address",
+      },
+    ],
+    name: "transferOwnership",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "underlyingAsset",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "ratio",
+        type: "uint256",
+      },
+    ],
+    name: "updateArtiStakeFeeRatio",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "ratio",
+        type: "uint256",
+      },
+    ],
+    name: "updateArtistInterestRatio",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address payable",
+        name: "artistAddress",
+        type: "address",
       },
     ],
     name: "withdraw",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
+  },
+  {
+    stateMutability: "payable",
+    type: "receive",
   },
 ];
 
@@ -667,9 +888,9 @@ const jpycAbi = [
 export default {
   4: {
     contracts: {
-      tip: { address: "0x47c05BCCA7d57c87083EB4e586007530eE4539e9", abi: tipAbi },
-      stake: { address: "0x67B6cB5502C1e24095e1868309dF33F09Deec0F1", abi: stakeAbi },
-      jpyc: { address: "0x408F924BAEC71cC3968614Cb2c58E155A35e6890", abi: jpycAbi },
+      tip: { address: "0x6D712CB50297b97b79dE784d10F487C00d7f8c2C", abi: tipAbi },
+      stake: { address: "0xB1c05b498Cb58568B2470369FEB98B00702063dA", abi: stakeAbi },
+      jpyc: { address: "0x04F339eC4D75Cf2833069e6e61b60eF56461CD7C", abi: jpycAbi },
     },
   },
   137: {
