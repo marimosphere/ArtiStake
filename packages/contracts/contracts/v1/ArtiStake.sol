@@ -77,6 +77,7 @@ contract ArtiStake is Ownable {
 
     mapping(address => mapping(address => uint256)) public depositedAmounts;
     mapping(address => mapping(address => uint256)) public atokenAmounts;
+    mapping(address => uint256) public artistStakedAmounts;
 
     event Deposited(address indexed from, address indexed artistAddress, uint256 amount);
     event Withdrew(address indexed withdrawer, address indexed artistAddress, uint256 amount);
@@ -101,6 +102,7 @@ contract ArtiStake is Ownable {
         uint256 contractBalanceAfter = getAtokenScaledBalance(aTokenAddress);
         atokenAmounts[artistAddress][msg.sender] += (contractBalanceAfter - contractBalanceBefore);
         depositedAmounts[artistAddress][msg.sender] += msg.value;
+        artistStakedAmounts[artistAddress] += (contractBalanceAfter - contractBalanceBefore);
         emit Deposited(msg.sender, artistAddress, msg.value);
     }
 
@@ -119,6 +121,7 @@ contract ArtiStake is Ownable {
 
         atokenAmounts[artistAddress][msg.sender] = 0;
         depositedAmounts[artistAddress][msg.sender] = 0;
+        artistStakedAmounts[artistAddress] -= atokenAmount;
 
         artistAddress.transfer(artistInterest);
         payable(owner()).transfer(artiStakeFee);
@@ -136,6 +139,14 @@ contract ArtiStake is Ownable {
             ILendingPool(aaveLendingPool).getReserveNormalizedIncome(underlyingAsset)
         );
         return userBalanceWithInterest;
+    }
+
+    function getArtistTotalStaked(address artistAddress) public view returns (uint256) {
+        uint256 atokenAmount = artistStakedAmounts[artistAddress];
+        uint256 artistTotalStaked = atokenAmount.rayMul(
+            ILendingPool(aaveLendingPool).getReserveNormalizedIncome(underlyingAsset)
+        );
+        return artistTotalStaked;
     }
 
     function updateArtistInterestRatio(uint256 ratio) public onlyOwner {

@@ -118,6 +118,18 @@ describe("ArtiStake", function () {
     expect(artistBBalanceAfter).to.be.above(artistBBalanceBefore);
   });
 
+  it("can get artist staked amount", async function () {
+    await artiStakeContract.connect(stakerA).deposit(artistA.address, 0, { value: 1000000000000000 });
+    // userA deposit to artistB
+    await artiStakeContract.connect(stakerB).deposit(artistA.address, 0, { value: 1000000000000000 });
+    const artistTotalStaked = await artiStakeContract.connect(stakerA).getArtistTotalStaked(artistA.address);
+    expect(artistTotalStaked).to.be.above(2000000000000000);
+    await artiStakeContract.connect(stakerA).withdraw(artistA.address);
+    await artiStakeContract.connect(stakerB).withdraw(artistA.address);
+    const artistTotalStaked2 = await artiStakeContract.connect(stakerA).getArtistTotalStaked(artistA.address);
+    expect(artistTotalStaked2).to.equal(0);
+  });
+
   it("not owner signer cannot update artistInterestRatio", async function () {
     await expect(artiStakeContract.connect(stakerA).updateArtistInterestRatio(300)).to.revertedWith(
       "Ownable: caller is not the owner"
