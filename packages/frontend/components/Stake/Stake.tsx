@@ -55,15 +55,15 @@ const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
   };
   return (
     <div className="w-full mx-auto text-white">
-      <div className="h-20 bg-marimo-2 flex text-center">
-        <p className="m-auto flex-1 text-white text-2xl">
+      <div className="bg-marimo-2 flex text-center grid lg:grid-cols-3">
+        <p className="m-auto p-4 flex-1 text-white text-2xl">
           Toatal Staking Value <br /> 1,234,567,890 MATIC
         </p>
-        <p className="m-auto flex-1 text-white text-2xl">APY: 888%</p>
-        <p className="m-auto flex-1 text-white text-2xl">Reward: 52,456 MATIC</p>
+        <p className="m-auto p-4 flex-1 text-white text-2xl">APY: 888%</p>
+        <p className="m-auto p-4 flex-1 text-white text-2xl">Reward: 52,456 MATIC</p>
       </div>
-      <div className="bg-marimo-3 flex">
-        <div className="m-auto my-16 w-2/5 text-center justify-around">
+      <div className="bg-marimo-3 grid lg:grid-cols-2">
+        <div className="m-auto my-16 text-center justify-around">
           <div className="mb-2 flex justify-between">
             <p>Stake</p>
           </div>
@@ -78,14 +78,14 @@ const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
             Stake
           </button>
         </div>
-        <div className="m-auto my-16 w-2/5 text-center  justify-around">
+        <div className="m-auto my-16 text-center  justify-around">
           <div className="mb-2 flex justify-between">
             <div>Withdraw</div>
           </div>
           <div className="flex justify-between">
             <div className="w-3/5 flex">
               <p className="m-auto text-white text-2xl">Your Staked: {depositedAmount} MATIC</p>
-              <button onClick={refresh} className="rounded-lg hover:opacity-75">
+              <button onClick={refresh}>
                 <p className="text-2xl">🔄</p>
               </button>
             </div>

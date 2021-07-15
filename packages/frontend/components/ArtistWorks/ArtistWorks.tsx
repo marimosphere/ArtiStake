@@ -11,7 +11,7 @@ const ArtistWorks: React.FC<ArtistWorksProps> = ({
   shopUrl,
 }) => {
   return (
-    <div className="w-full mx-auto grid grid-cols-3">
+    <div className="w-full mx-auto grid lg:grid-cols-3">
       <div className="bg-marimo-2 p-4">
         <p className="text-center text-white">Artist Gellery</p>
         <div className="p-8">
