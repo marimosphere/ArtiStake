@@ -11,29 +11,35 @@ const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
 
   React.useEffect(() => {
     if (!library) return;
+    refresh();
+  }, [library]);
+
+  const getStakeContract = () => {
     const signer = library.getSigner();
     const { stakeContractAddress, stakeContractAbi } = getAbis();
     const stakeContract = new ethers.Contract(stakeContractAddress, stakeContractAbi, signer);
-    stakeContract
-      .getStakerBalanceWithInterest(artistWalletAddress)
-      .then((deposited) => setDepositedAmount(ethers.utils.formatEther(deposited.toString()).toString()));
-  }, [library]);
+    return stakeContract;
+  };
 
   const stake = async () => {
     console.log("stake");
-    const signer = library.getSigner();
-    const { stakeContractAddress, stakeContractAbi } = getAbis();
-    const stakeContract = new ethers.Contract(stakeContractAddress, stakeContractAbi, signer);
+    const stakeContract = getStakeContract();
     const value = ethers.utils.parseEther(stakeAmount).toString();
     await stakeContract.deposit(artistWalletAddress, 0, { value: value });
   };
 
   const withdraw = async () => {
     console.log("withdraw");
-    const signer = library.getSigner();
-    const { stakeContractAddress, stakeContractAbi } = getAbis();
-    const stakeContract = new ethers.Contract(stakeContractAddress, stakeContractAbi, signer);
-    await stakeContract.withdraw(artistWalletAddress);
+    const stakeContract = getStakeContract();
+    stakeContract.withdraw(artistWalletAddress);
+  };
+
+  const refresh = () => {
+    console.log("refresh");
+    const stakeContract = getStakeContract();
+    stakeContract.getStakerBalanceWithInterest(artistWalletAddress).then((deposited) => {
+      setDepositedAmount(ethers.utils.formatEther(deposited.toString()).toString());
+    });
   };
 
   const handleStakeAmount = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -60,28 +66,33 @@ const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
         <div className="m-auto my-16 w-2/5 text-center justify-around">
           <div className="mb-2 flex justify-between">
             <p>Stake</p>
-            <p>Wallet Balance: 100</p>
           </div>
           <input
             type="number"
             onChange={handleStakeAmount}
             value={stakeAmount}
             placeholder="MATIC"
-            className="h-10 w-4/5 border-2 pr-2 border-marimo-5 rounded-l-lg text-black text-right"
+            className="h-10 w-3/4 border-2 pr-2 border-marimo-5 rounded-l-lg text-black text-right"
           />
-          <button onClick={stake} className="h-10 w-1/5 bg-marimo-5 rounded-r-lg hover:opacity-75">
+          <button onClick={stake} className="h-10 w-1/4 bg-marimo-5 rounded-r-lg hover:opacity-75">
             Stake
           </button>
         </div>
         <div className="m-auto my-16 w-2/5 text-center  justify-around">
           <div className="mb-2 flex justify-between">
             <div>Withdraw</div>
-            <div>Your Staked: {depositedAmount}</div>
           </div>
-          <input type="number" className="w-4/5 h-10 border-2 border-marimo-6 rounded-l-lg text-black text-right" />
-          <button onClick={withdraw} className="h-10 w-1/5 bg-marimo-6 rounded-r-lg hover:opacity-75">
-            Withdraw
-          </button>
+          <div className="flex justify-between">
+            <div className="w-3/5 flex">
+              <p className="m-auto text-white text-2xl">Your Staked: {depositedAmount} MATIC</p>
+              <button onClick={refresh} className="rounded-lg hover:opacity-75">
+                <p className="text-2xl">🔄</p>
+              </button>
+            </div>
+            <button onClick={withdraw} className="h-10 w-1/4 bg-marimo-5 rounded-lg hover:opacity-75">
+              Withdraw
+            </button>
+          </div>
         </div>
       </div>
     </div>
