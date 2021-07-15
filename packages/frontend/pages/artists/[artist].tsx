@@ -2,6 +2,7 @@ import * as React from "react";
 
 import { Header } from "../../components/Header";
 import { ArtistHeader } from "../../components/ArtistHeader";
+import { Stake } from "../../components/Stake";
 import { ArtistWorks } from "../../components/ArtistWorks";
 
 import { getAllArtists, getArtistByFileName } from "../../lib/api";
@@ -23,6 +24,7 @@ const ArtistPage: React.FC<Props> = ({ artist }) => {
         avatar={artist.avatar}
         bannar={artist.bannar}
       />
+      <Stake artistWalletAddress={artist.walletAddress} />
       <ArtistWorks
         walletAddress={artist.walletAddress}
         galleryTumbnail={artist.galleryTumbnail}

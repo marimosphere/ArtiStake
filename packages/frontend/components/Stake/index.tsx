@@ -1,1 +1,1 @@
-export { default as Tip } from "./Stake";
+export { default as Stake } from "./Stake";
