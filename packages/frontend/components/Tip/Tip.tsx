@@ -22,6 +22,7 @@ const Tip: React.FC<TipProps> = ({ artistWalletAddress }) => {
   };
 
   const approve = async () => {
+    // @ts-ignore:
     const signer = library.getSigner();
     const signerNetwork = await signer.provider.getNetwork();
     console.log(signerNetwork, "signerNetwork");
@@ -33,6 +34,7 @@ const Tip: React.FC<TipProps> = ({ artistWalletAddress }) => {
   };
 
   const tip = async () => {
+    // @ts-ignore:
     const signer = library.getSigner();
     const { tipContractAddress, tipContractAbi, jpycAddress, jpycAbi } = await getAbis();
     tipContract = new ethers.Contract(tipContractAddress, tipContractAbi, signer);
@@ -54,6 +56,7 @@ const Tip: React.FC<TipProps> = ({ artistWalletAddress }) => {
       {!account ? (
         <div className="text-center">
           <button
+            // @ts-ignore:
             onClick={connectWallet}
             className="w-40 h-8 bg-marimo-5 hover:opacity-75 text-white font-bold rounded-lg "
           >

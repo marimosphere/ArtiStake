@@ -25,7 +25,11 @@ const Header = () => {
           {account ? (
             <button className="text-white text-sm focus:outline-none">{account}</button>
           ) : (
-            <button onClick={connectWallet} className="text-white text-sm focus:outline-none">
+            <button
+              // @ts-ignore:
+              onClick={connectWallet}
+              className="text-white text-sm focus:outline-none"
+            >
               Connect Wallet
             </button>
           )}

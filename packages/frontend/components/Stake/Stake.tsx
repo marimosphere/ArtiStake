@@ -7,7 +7,7 @@ import { Contract, ethers } from "ethers";
 const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
   const [connectWallet, account, library] = useWallet();
   const [stakeAmount, setStakeAmount] = React.useState("");
-  const [depositedAmount, setDepositedAmount] = React.useState("");
+  const [depositedAmount, setDepositedAmount] = React.useState("0");
 
   React.useEffect(() => {
     if (!library) return;
@@ -15,6 +15,7 @@ const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
   }, [library]);
 
   const getStakeContract = () => {
+    // @ts-ignore:
     const signer = library.getSigner();
     const { stakeContractAddress, stakeContractAbi } = getAbis();
     const stakeContract = new ethers.Contract(stakeContractAddress, stakeContractAbi, signer);
@@ -59,12 +60,18 @@ const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
         <p className="m-auto p-4 flex-1 text-white text-2xl">
           Toatal Staking Value <br /> 1,234,567,890 MATIC
         </p>
-        <p className="m-auto p-4 flex-1 text-white text-2xl">APY: 888%</p>
-        <p className="m-auto p-4 flex-1 text-white text-2xl">Reward: 52,456 MATIC</p>
+        <p className="m-auto p-4 flex-1 text-white text-2xl">
+          APY
+          <br /> 888%
+        </p>
+        <p className="m-auto p-4 flex-1 text-white text-2xl">
+          Reward
+          <br /> 52,456 MATIC
+        </p>
       </div>
       <div className="bg-marimo-3 grid lg:grid-cols-2">
-        <div className="m-auto my-16 text-center justify-around">
-          <div className="mb-2 flex justify-between">
+        <div className="m-auto w-1/2 my-16 text-center justify-around">
+          <div className="mb-2 text-xl">
             <p>Stake</p>
           </div>
           <input
@@ -72,27 +79,26 @@ const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
             onChange={handleStakeAmount}
             value={stakeAmount}
             placeholder="MATIC"
-            className="h-10 w-3/4 border-2 pr-2 border-marimo-5 rounded-l-lg text-black text-right"
+            className="h-10 w-2/3 border-2 pr-2 border-marimo-5 rounded-l-lg text-black text-right"
           />
-          <button onClick={stake} className="h-10 w-1/4 bg-marimo-5 rounded-r-lg hover:opacity-75">
+          <button onClick={stake} className="h-10 w-1/3 bg-marimo-5 rounded-r-lg hover:opacity-75">
             Stake
           </button>
         </div>
-        <div className="m-auto my-16 text-center  justify-around">
-          <div className="mb-2 flex justify-between">
+        <div className="w-1/2 m-auto my-8 text-center">
+          <div className="mb-2 text-xl">
             <div>Withdraw</div>
           </div>
-          <div className="flex justify-between">
-            <div className="w-3/5 flex">
-              <p className="m-auto text-white text-2xl">Your Staked: {depositedAmount} MATIC</p>
-              <button onClick={refresh}>
-                <p className="text-2xl">🔄</p>
-              </button>
-            </div>
-            <button onClick={withdraw} className="h-10 w-1/4 bg-marimo-5 rounded-lg hover:opacity-75">
-              Withdraw
+          <div className="flex mb-2">
+            <p className="m-auto text-white text-2xl">{depositedAmount}MATIC</p>
+            <button onClick={refresh}>
+              <p className="text-2xl">🔄</p>
             </button>
           </div>
+
+          <button onClick={withdraw} className="h-10 w-1/2 bg-marimo-5 rounded-lg hover:opacity-75">
+            Withdraw
+          </button>
         </div>
       </div>
     </div>
