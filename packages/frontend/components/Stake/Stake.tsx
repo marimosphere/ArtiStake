@@ -38,7 +38,15 @@ const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
   const refresh = () => {
     console.log("refresh");
     const stakeContract = getStakeContract();
+    console.log(stakeContract, "stakeContract");
+    stakeContract.getAtokenScaledBalance("0xF45444171435d0aCB08a8af493837eF18e86EE27").then((deposited) => {
+      console.log(deposited, "getAtokenScaledBalance");
+    });
+    stakeContract.getArtistTotalStaked(artistWalletAddress).then((deposited) => {
+      console.log(deposited, "getArtistTotalStaked");
+    });
     stakeContract.getStakerBalanceWithInterest(artistWalletAddress).then((deposited) => {
+      console.log(deposited);
       setDepositedAmount(ethers.utils.formatEther(deposited.toString()).toString());
     });
   };
@@ -49,7 +57,7 @@ const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
   };
 
   const getAbis = () => {
-    const networkId = process.env.NODE_ENV == "development" ? 4 : 137;
+    const networkId = process.env.NODE_ENV == "test" ? 4 : 137;
     const stakeContractAddress = externalContracts[networkId].contracts.stake.address;
     const stakeContractAbi = externalContracts[networkId].contracts.stake.abi;
     return { stakeContractAddress, stakeContractAbi };

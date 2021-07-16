@@ -191,6 +191,25 @@ const stakeAbi = [
         name: "",
         type: "address",
       },
+    ],
+    name: "artistStakedAmounts",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
       {
         internalType: "address",
         name: "",
@@ -240,6 +259,25 @@ const stakeAbi = [
       },
     ],
     name: "depositedAmounts",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "artistAddress",
+        type: "address",
+      },
+    ],
+    name: "getArtistTotalStaked",
     outputs: [
       {
         internalType: "uint256",
@@ -895,8 +933,8 @@ export default {
   },
   137: {
     contracts: {
-      tip: { address: "0x47c05BCCA7d57c87083EB4e586007530eE4539e9", abi: tipAbi },
-      stake: { address: "0x67B6cB5502C1e24095e1868309dF33F09Deec0F1", abi: stakeAbi },
+      tip: { address: "0xDf795df2e0ad240a82d773DA01a812B96345F9C5", abi: tipAbi },
+      stake: { address: "0x0Ff833129533546D96A5847C22b57AACccD00FD5", abi: stakeAbi },
       jpyc: { address: "0x408F924BAEC71cC3968614Cb2c58E155A35e6890", abi: jpycAbi },
     },
   },

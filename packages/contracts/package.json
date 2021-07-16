@@ -6,6 +6,7 @@
     "test": "hardhat test",
     "coverage": "hardhat coverage",
     "deploy-contract-to-localchain": "hardhat run scripts/setup.ts --network localhost",
+    "deploy-contract-to-mumbai": "hardhat run scripts/setup.ts --network mumbai",
     "run-localchain": "yarn hardhat node",
     "run-polygon-chain": "yarn hardhat node --fork https://rpc-mainnet.matic.network"
   },
