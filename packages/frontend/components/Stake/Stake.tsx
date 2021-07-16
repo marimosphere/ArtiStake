@@ -1,6 +1,7 @@
 import * as React from "react";
 import { StakeProps } from "./types";
 import { useWallet } from "../../hooks/useWallet";
+import { useArtiStake } from "../../hooks/useContract";
 import externalContracts from "../../contracts/external_contracts";
 import { Contract, ethers } from "ethers";
 
@@ -8,43 +9,27 @@ const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
   const [connectWallet, account, library] = useWallet();
   const [stakeAmount, setStakeAmount] = React.useState("");
   const [depositedAmount, setDepositedAmount] = React.useState("0");
+  const stakeContract = useArtiStake();
 
   React.useEffect(() => {
     if (!library) return;
     refresh();
   }, [library]);
 
-  const getStakeContract = () => {
-    // @ts-ignore:
-    const signer = library.getSigner();
-    const { stakeContractAddress, stakeContractAbi } = getAbis();
-    const stakeContract = new ethers.Contract(stakeContractAddress, stakeContractAbi, signer);
-    return stakeContract;
-  };
-
   const stake = async () => {
     console.log("stake");
-    const stakeContract = getStakeContract();
+
     const value = ethers.utils.parseEther(stakeAmount).toString();
     await stakeContract.deposit(artistWalletAddress, 0, { value: value });
   };
 
   const withdraw = async () => {
     console.log("withdraw");
-    const stakeContract = getStakeContract();
     stakeContract.withdraw(artistWalletAddress);
   };
 
   const refresh = () => {
     console.log("refresh");
-    const stakeContract = getStakeContract();
-    console.log(stakeContract, "stakeContract");
-    stakeContract.getAtokenScaledBalance("0xF45444171435d0aCB08a8af493837eF18e86EE27").then((deposited) => {
-      console.log(deposited, "getAtokenScaledBalance");
-    });
-    stakeContract.getArtistTotalStaked(artistWalletAddress).then((deposited) => {
-      console.log(deposited, "getArtistTotalStaked");
-    });
     stakeContract.getStakerBalanceWithInterest(artistWalletAddress).then((deposited) => {
       console.log(deposited);
       setDepositedAmount(ethers.utils.formatEther(deposited.toString()).toString());
@@ -56,12 +41,6 @@ const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
     setStakeAmount(event.target.value);
   };
 
-  const getAbis = () => {
-    const networkId = process.env.NODE_ENV == "test" ? 4 : 137;
-    const stakeContractAddress = externalContracts[networkId].contracts.stake.address;
-    const stakeContractAbi = externalContracts[networkId].contracts.stake.abi;
-    return { stakeContractAddress, stakeContractAbi };
-  };
   return (
     <div className="w-full mx-auto text-white">
       <div className="bg-marimo-2 flex text-center grid lg:grid-cols-3">
@@ -89,9 +68,16 @@ const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
             placeholder="MATIC"
             className="h-10 w-2/3 border-2 pr-2 border-marimo-5 rounded-l-lg text-black text-right"
           />
-          <button onClick={stake} className="h-10 w-1/3 bg-marimo-5 rounded-r-lg hover:opacity-75">
-            Stake
-          </button>
+          {!account ? (
+            // @ts-ignore:
+            <button onClick={connectWallet} className="h-10 w-1/3 bg-marimo-5 rounded-r-lg text-xs hover:opacity-75">
+              Connect Wallet
+            </button>
+          ) : (
+            <button onClick={stake} className="h-10 w-1/3 bg-marimo-5 rounded-r-lg hover:opacity-75">
+              Stake
+            </button>
+          )}
         </div>
         <div className="w-1/2 m-auto my-8 text-center">
           <div className="mb-2 text-xl">
@@ -103,10 +89,16 @@ const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
               <p className="text-2xl">🔄</p>
             </button>
           </div>
-
-          <button onClick={withdraw} className="h-10 w-1/2 bg-marimo-5 rounded-lg hover:opacity-75">
-            Withdraw
-          </button>
+          {!account ? (
+            // @ts-ignore:
+            <button onClick={connectWallet} className="h-10 w-1/2 bg-marimo-5 rounded-lg hover:opacity-75">
+              Connect Wallet
+            </button>
+          ) : (
+            <button onClick={withdraw} className="h-10 w-1/2 bg-marimo-5 rounded-lg hover:opacity-75">
+              Withdraw
+            </button>
+          )}
         </div>
       </div>
     </div>
