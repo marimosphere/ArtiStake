@@ -926,15 +926,15 @@ const jpycAbi = [
 export default {
   4: {
     contracts: {
-      tip: { address: "0x6D712CB50297b97b79dE784d10F487C00d7f8c2C", abi: tipAbi },
-      stake: { address: "0xB1c05b498Cb58568B2470369FEB98B00702063dA", abi: stakeAbi },
+      tip: { address: "0xAf7868a9BB72E16B930D50636519038d7F057470", abi: tipAbi },
+      stake: { address: "0x10d16E2A026C4b5264A2aAC51cA65749cDf2037E", abi: stakeAbi },
       jpyc: { address: "0x04F339eC4D75Cf2833069e6e61b60eF56461CD7C", abi: jpycAbi },
     },
   },
   137: {
     contracts: {
-      tip: { address: "0xDf795df2e0ad240a82d773DA01a812B96345F9C5", abi: tipAbi },
-      stake: { address: "0x0Ff833129533546D96A5847C22b57AACccD00FD5", abi: stakeAbi },
+      tip: { address: "0x9cC87998ba85D81e017E6B7662aC00eE2Ab8fe13", abi: tipAbi },
+      stake: { address: "0xD6b8Eb34413f07a1a67A469345cFEa6633efd58d", abi: stakeAbi },
       jpyc: { address: "0x408F924BAEC71cC3968614Cb2c58E155A35e6890", abi: jpycAbi },
     },
   },

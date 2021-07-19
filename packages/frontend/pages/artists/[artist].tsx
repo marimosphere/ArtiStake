@@ -9,30 +9,38 @@ import { getAllArtists, getArtistByFileName } from "../../lib/api";
 
 import { Artist } from "../../types/artist";
 
+import { ApolloClient, InMemoryCache, ApolloProvider, useQuery, gql } from "@apollo/client";
+
+const client = new ApolloClient({
+  uri: "https://api.thegraph.com/subgraphs/name/aave/aave-v2-polygon-mumbai",
+  cache: new InMemoryCache(),
+});
 interface Props {
   artist: Artist;
 }
 
 const ArtistPage: React.FC<Props> = ({ artist }) => {
   return (
-    <div>
-      <Header />
-      <ArtistHeader
-        name={artist.name}
-        description={artist.description}
-        aboutMyWork={artist.aboutMyWork}
-        avatar={artist.avatar}
-        bannar={artist.bannar}
-      />
-      <Stake artistWalletAddress={artist.walletAddress} />
-      <ArtistWorks
-        walletAddress={artist.walletAddress}
-        galleryTumbnail={artist.galleryTumbnail}
-        galleryUrl={artist.galleryUrl}
-        shopTumbnail={artist.shopTumbnail}
-        shopUrl={artist.shopUrl}
-      />
-    </div>
+    <ApolloProvider client={client}>
+      <div>
+        <Header />
+        <ArtistHeader
+          name={artist.name}
+          description={artist.description}
+          aboutMyWork={artist.aboutMyWork}
+          avatar={artist.avatar}
+          bannar={artist.bannar}
+        />
+        <Stake artistWalletAddress={artist.walletAddress} />
+        <ArtistWorks
+          walletAddress={artist.walletAddress}
+          galleryTumbnail={artist.galleryTumbnail}
+          galleryUrl={artist.galleryUrl}
+          shopTumbnail={artist.shopTumbnail}
+          shopUrl={artist.shopUrl}
+        />
+      </div>
+    </ApolloProvider>
   );
 };
 

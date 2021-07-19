@@ -2,17 +2,19 @@ import * as React from "react";
 import { StakeProps } from "./types";
 import { useWallet } from "../../hooks/useWallet";
 import { useArtiStake } from "../../hooks/useContract";
-import externalContracts from "../../contracts/external_contracts";
 import { Contract, ethers } from "ethers";
+import { useQuery, gql } from "@apollo/client";
 
 const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
   const [connectWallet, account, library] = useWallet();
   const [stakeAmount, setStakeAmount] = React.useState("");
   const [depositedAmount, setDepositedAmount] = React.useState("0");
+  const [artistTotalStaked, setArtistTotalStaked] = React.useState("0");
   const stakeContract = useArtiStake();
 
   React.useEffect(() => {
     if (!library) return;
+
     refresh();
   }, [library]);
 
@@ -34,6 +36,11 @@ const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
       console.log(deposited);
       setDepositedAmount(ethers.utils.formatEther(deposited.toString()).toString());
     });
+
+    stakeContract.getArtistTotalStaked(artistWalletAddress).then((deposited) => {
+      console.log(deposited);
+      setArtistTotalStaked(ethers.utils.formatEther(deposited.toString()).toString());
+    });
   };
 
   const handleStakeAmount = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,20 +48,41 @@ const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
     setStakeAmount(event.target.value);
   };
 
+  const LIQUIDITY_RATES = gql`
+    query {
+      reserves(where: { name: "Wrapped Matic" }) {
+        id
+        name
+        liquidityRate
+      }
+    }
+  `;
+
+  function APY() {
+    const { loading, error, data } = useQuery(LIQUIDITY_RATES);
+
+    if (loading) return <p className="m-auto p-4 flex-1 text-white text-2xl">Loading...</p>;
+    if (error) return <p className="m-auto p-4 flex-1 text-white text-2xl">Error</p>;
+
+    return (
+      <p className="m-auto p-4 flex-1 text-white text-2xl">
+        APY
+        <br /> {data.reserves[0].liquidityRate / 100000000000000000000000000}%
+      </p>
+    );
+  }
+
   return (
     <div className="w-full mx-auto text-white">
       <div className="bg-marimo-2 flex text-center grid lg:grid-cols-3">
         <p className="m-auto p-4 flex-1 text-white text-2xl">
-          Toatal Staking Value <br /> 1,234,567,890 MATIC
+          Toatal Staked <br /> {artistTotalStaked} MATIC
         </p>
-        <p className="m-auto p-4 flex-1 text-white text-2xl">
-          APY
-          <br /> 888%
-        </p>
-        <p className="m-auto p-4 flex-1 text-white text-2xl">
+        <APY />
+        {/* <p className="m-auto p-4 flex-1 text-white text-2xl">
           Reward
           <br /> 52,456 MATIC
-        </p>
+        </p> */}
       </div>
       <div className="bg-marimo-3 grid lg:grid-cols-2">
         <div className="m-auto w-1/2 my-16 text-center justify-around">
