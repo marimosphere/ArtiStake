@@ -86,7 +86,7 @@ const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
         </p> */}
       </div>
       <div className="bg-marimo-3 grid lg:grid-cols-2">
-        <div className="m-auto w-1/2 my-16 text-center justify-around">
+        <div className="m-auto w-2/3 my-8 text-center">
           <div className="mb-2 text-xl">
             <p>Stake</p>
           </div>
@@ -95,36 +95,36 @@ const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
             onChange={handleStakeAmount}
             value={stakeAmount}
             placeholder="MATIC"
-            className="h-10 w-2/3 border-2 pr-2 border-marimo-5 rounded-l-lg text-black text-right"
+            className="h-10 mb-2 w-2/3 border-2 pr-2 border-marimo-5 text-black text-right"
           />
           {!account ? (
             // @ts-ignore:
-            <button onClick={connectWallet} className="h-10 w-1/3 bg-marimo-5 rounded-r-lg text-xs hover:opacity-75">
+            <button onClick={connectWallet} className="h-10 w-2/3 bg-marimo-5 rounded-lg hover:opacity-75">
               Connect Wallet
             </button>
           ) : (
-            <button onClick={stake} className="h-10 w-1/3 bg-marimo-5 rounded-r-lg hover:opacity-75">
+            <button onClick={stake} className="h-10 w-2/3 bg-marimo-5 rounded-lg hover:opacity-75">
               Stake
             </button>
           )}
         </div>
-        <div className="w-1/2 m-auto my-8 text-center">
+        <div className="w-2/3 m-auto my-8 text-center">
           <div className="mb-2 text-xl">
             <div>Withdraw</div>
           </div>
           <div className="flex mb-2">
-            <p className="m-auto text-white text-2xl">{depositedAmount}MATIC</p>
+            <p className="m-auto text-white lg:text-2xl">{depositedAmount} MATIC</p>
             <button onClick={refresh}>
               <p className="text-2xl">🔄</p>
             </button>
           </div>
           {!account ? (
             // @ts-ignore:
-            <button onClick={connectWallet} className="h-10 w-1/2 bg-marimo-5 rounded-lg hover:opacity-75">
+            <button onClick={connectWallet} className="h-10 w-2/3 bg-marimo-5 rounded-lg hover:opacity-75">
               Connect Wallet
             </button>
           ) : (
-            <button onClick={withdraw} className="h-10 w-1/2 bg-marimo-5 rounded-lg hover:opacity-75">
+            <button onClick={withdraw} className="h-10 w-2/3 bg-marimo-5 rounded-lg hover:opacity-75">
               Withdraw
             </button>
           )}
