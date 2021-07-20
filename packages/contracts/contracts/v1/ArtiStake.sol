@@ -100,9 +100,10 @@ contract ArtiStake is Ownable {
         uint256 contractBalanceBefore = getAtokenScaledBalance(aTokenAddress);
         IWETHGateway(aaveWETHGateway).depositETH{value: msg.value}(aaveLendingPool, address(this), _referralCode);
         uint256 contractBalanceAfter = getAtokenScaledBalance(aTokenAddress);
-        atokenAmounts[artistAddress][msg.sender] += (contractBalanceAfter - contractBalanceBefore);
-        depositedAmounts[artistAddress][msg.sender] += msg.value;
-        artistStakedAmounts[artistAddress] += (contractBalanceAfter - contractBalanceBefore);
+        uint256 depositedAtoken = contractBalanceAfter.sub(contractBalanceBefore);
+        atokenAmounts[artistAddress][msg.sender] = atokenAmounts[artistAddress][msg.sender].add(depositedAtoken);
+        depositedAmounts[artistAddress][msg.sender] = depositedAmounts[artistAddress][msg.sender].add(msg.value);
+        artistStakedAmounts[artistAddress] = artistStakedAmounts[artistAddress].add(depositedAtoken);
         emit Deposited(msg.sender, artistAddress, msg.value);
     }
 
@@ -110,18 +111,16 @@ contract ArtiStake is Ownable {
         uint256 atokenAmount = atokenAmounts[artistAddress][msg.sender];
         require(atokenAmount > 0, "currently not deposited");
         uint256 depositedAmount = depositedAmounts[artistAddress][msg.sender];
-        uint256 userBalanceWithInterest = atokenAmount.rayMul(
-            ILendingPool(aaveLendingPool).getReserveNormalizedIncome(underlyingAsset)
-        );
-        uint256 totalInterest = userBalanceWithInterest - depositedAmount;
+        uint256 userBalanceWithInterest = getAmountWithInterest(atokenAmount);
+        uint256 totalInterest = userBalanceWithInterest.sub(depositedAmount);
         IWETHGateway(aaveWETHGateway).withdrawETH(aaveLendingPool, userBalanceWithInterest, address(this));
-        uint256 artistInterest = (totalInterest * artistInterestRatio) / interestRatioBase;
-        uint256 artiStakeFee = (totalInterest * artiStakeFeeRatio) / interestRatioBase;
-        uint256 stakerReward = userBalanceWithInterest - artistInterest - artiStakeFee;
+        uint256 artistInterest = (totalInterest.mul(artistInterestRatio)).div(interestRatioBase);
+        uint256 artiStakeFee = (totalInterest.mul(artiStakeFeeRatio)).div(interestRatioBase);
+        uint256 stakerReward = userBalanceWithInterest.sub(artistInterest).sub(artiStakeFee);
 
         atokenAmounts[artistAddress][msg.sender] = 0;
         depositedAmounts[artistAddress][msg.sender] = 0;
-        artistStakedAmounts[artistAddress] -= atokenAmount;
+        artistStakedAmounts[artistAddress] = artistStakedAmounts[artistAddress].sub(atokenAmount);
 
         artistAddress.transfer(artistInterest);
         payable(owner()).transfer(artiStakeFee);
@@ -133,31 +132,34 @@ contract ArtiStake is Ownable {
         return IERC20(asset).scaledBalanceOf(address(this));
     }
 
-    function getStakerBalanceWithInterest(address artistAddress) public view returns (uint256) {
-        uint256 atokenAmount = atokenAmounts[artistAddress][msg.sender];
-        uint256 userBalanceWithInterest = atokenAmount.rayMul(
-            ILendingPool(aaveLendingPool).getReserveNormalizedIncome(underlyingAsset)
-        );
+    function getStakerBalanceWithInterest(address artistAddress, address sender) public view returns (uint256) {
+        uint256 atokenAmount = atokenAmounts[artistAddress][sender];
+        uint256 userBalanceWithInterest = getAmountWithInterest(atokenAmount);
         return userBalanceWithInterest;
     }
 
     function getArtistTotalStaked(address artistAddress) public view returns (uint256) {
         uint256 atokenAmount = artistStakedAmounts[artistAddress];
-        uint256 artistTotalStaked = atokenAmount.rayMul(
-            ILendingPool(aaveLendingPool).getReserveNormalizedIncome(underlyingAsset)
-        );
+        uint256 artistTotalStaked = getAmountWithInterest(atokenAmount);
         return artistTotalStaked;
     }
 
+    function getAmountWithInterest(uint256 atokenAmount) internal view returns (uint256) {
+        return atokenAmount.rayMul(ILendingPool(aaveLendingPool).getReserveNormalizedIncome(underlyingAsset));
+    }
+
     function updateArtistInterestRatio(uint256 ratio) public onlyOwner {
-        require(ratio + artiStakeFeeRatio < interestRatioBase, "ratio + artiStakeFeeRatio must be smaller than base");
+        require(
+            ratio.add(artiStakeFeeRatio) < interestRatioBase,
+            "ratio + artiStakeFeeRatio must be smaller than base"
+        );
         artistInterestRatio = ratio;
         emit UpdatedArtistInterestRatio(ratio);
     }
 
     function updateArtiStakeFeeRatio(uint256 ratio) public onlyOwner {
         require(
-            ratio + artistInterestRatio < interestRatioBase,
+            ratio.add(artistInterestRatio) < interestRatioBase,
             "ratio + artistInterestRatio must be smaller than base"
         );
         artiStakeFeeRatio = ratio;
