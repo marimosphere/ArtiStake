@@ -28,6 +28,12 @@ module.exports = {
     //   url: network.kovan.rpc,
     //   accounts: [privateKey],
     // },
+    mumbai: {
+      url: "https://polygon-mumbai.infura.io/v3/7495501b681645b0b80f955d4139add9",
+      accounts: [privateKey],
+      gas: 2100000,
+      gasPrice: 8000000000,
+    },
   },
   mocha: {
     timeout: 50000,

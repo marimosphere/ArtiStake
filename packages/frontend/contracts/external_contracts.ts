@@ -191,6 +191,25 @@ const stakeAbi = [
         name: "",
         type: "address",
       },
+    ],
+    name: "artistStakedAmounts",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
       {
         internalType: "address",
         name: "",
@@ -240,6 +259,25 @@ const stakeAbi = [
       },
     ],
     name: "depositedAmounts",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "artistAddress",
+        type: "address",
+      },
+    ],
+    name: "getArtistTotalStaked",
     outputs: [
       {
         internalType: "uint256",
@@ -574,23 +612,7 @@ const tipAbi = [
 
 const jpycAbi = [
   {
-    inputs: [
-      {
-        internalType: "string",
-        name: "name",
-        type: "string",
-      },
-      {
-        internalType: "string",
-        name: "symbol",
-        type: "string",
-      },
-      {
-        internalType: "uint8",
-        name: "decimals",
-        type: "uint8",
-      },
-    ],
+    inputs: [],
     stateMutability: "nonpayable",
     type: "constructor",
   },
@@ -775,19 +797,18 @@ const jpycAbi = [
   {
     inputs: [
       {
+        internalType: "address",
+        name: "to",
+        type: "address",
+      },
+      {
         internalType: "uint256",
-        name: "value",
+        name: "amount",
         type: "uint256",
       },
     ],
     name: "mint",
-    outputs: [
-      {
-        internalType: "bool",
-        name: "",
-        type: "bool",
-      },
-    ],
+    outputs: [],
     stateMutability: "nonpayable",
     type: "function",
   },
@@ -888,16 +909,16 @@ const jpycAbi = [
 export default {
   4: {
     contracts: {
-      tip: { address: "0x6D712CB50297b97b79dE784d10F487C00d7f8c2C", abi: tipAbi },
-      stake: { address: "0xB1c05b498Cb58568B2470369FEB98B00702063dA", abi: stakeAbi },
-      jpyc: { address: "0x04F339eC4D75Cf2833069e6e61b60eF56461CD7C", abi: jpycAbi },
+      tip: { address: "0xAf7868a9BB72E16B930D50636519038d7F057470", abi: tipAbi },
+      stake: { address: "0x10d16E2A026C4b5264A2aAC51cA65749cDf2037E", abi: stakeAbi },
+      jpyc: { address: "0x3aD2306eDfBe72ce013cdb6b429212d9CdDE4F96", abi: jpycAbi },
     },
   },
   137: {
     contracts: {
-      tip: { address: "0x47c05BCCA7d57c87083EB4e586007530eE4539e9", abi: tipAbi },
-      stake: { address: "0x67B6cB5502C1e24095e1868309dF33F09Deec0F1", abi: stakeAbi },
-      jpyc: { address: "0x408F924BAEC71cC3968614Cb2c58E155A35e6890", abi: jpycAbi },
+      tip: { address: "0x9cC87998ba85D81e017E6B7662aC00eE2Ab8fe13", abi: tipAbi },
+      stake: { address: "0xD6b8Eb34413f07a1a67A469345cFEa6633efd58d", abi: stakeAbi },
+      jpyc: { address: "0x3aD2306eDfBe72ce013cdb6b429212d9CdDE4F96", abi: jpycAbi },
     },
   },
 };

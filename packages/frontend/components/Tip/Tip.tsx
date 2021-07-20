@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useWallet } from "../../hooks/useWallet";
+import { useTip, useJpyc } from "../../hooks/useContract";
 import { Contract, ethers } from "ethers";
 import externalContracts from "../../contracts/external_contracts";
 import { TipProps } from "./types";
@@ -9,36 +10,19 @@ const Tip: React.FC<TipProps> = ({ artistWalletAddress }) => {
   const [tipAmount, setTipAmount] = React.useState("");
   const [explorer, setExplorer] = React.useState("");
   const [connectWallet, account, library] = useWallet();
-  let tipContract;
-  let jpycContract;
-
-  const getAbis = async () => {
-    const networkId = process.env.NODE_ENV == "development" ? 4 : 137;
-    const tipContractAddress = externalContracts[networkId].contracts.tip.address;
-    const tipContractAbi = externalContracts[networkId].contracts.tip.abi;
-    const jpycAddress = externalContracts[networkId].contracts.jpyc.address;
-    const jpycAbi = externalContracts[networkId].contracts.jpyc.abi;
-    return { tipContractAddress, tipContractAbi, jpycAddress, jpycAbi };
-  };
+  const tipContract = useTip();
+  const jpycContract = useJpyc();
 
   const approve = async () => {
-    const signer = library.getSigner();
-    const signerNetwork = await signer.provider.getNetwork();
-    console.log(signerNetwork, "signerNetwork");
-    const { tipContractAddress, tipContractAbi, jpycAddress, jpycAbi } = await getAbis();
-    jpycContract = new ethers.Contract(jpycAddress, jpycAbi, signer);
     const value = ethers.utils.parseEther(tipAmount).toString();
-    await jpycContract.approve(tipContractAddress, value);
+    await jpycContract.approve(tipContract.address, value);
     setTipStatus("tip");
   };
 
   const tip = async () => {
-    const signer = library.getSigner();
-    const { tipContractAddress, tipContractAbi, jpycAddress, jpycAbi } = await getAbis();
-    tipContract = new ethers.Contract(tipContractAddress, tipContractAbi, signer);
     setTipStatus("confirm");
     const value = ethers.utils.parseEther(tipAmount).toString();
-    const { hash: tx } = await tipContract.tip(jpycAddress, artistWalletAddress, value);
+    const { hash: tx } = await tipContract.tip(jpycContract.address, artistWalletAddress, value);
     setExplorer(`https://polygonscan.com/tx/${tx}`);
     console.log(tx);
   };
@@ -54,6 +38,7 @@ const Tip: React.FC<TipProps> = ({ artistWalletAddress }) => {
       {!account ? (
         <div className="text-center">
           <button
+            // @ts-ignore:
             onClick={connectWallet}
             className="w-40 h-8 bg-marimo-5 hover:opacity-75 text-white font-bold rounded-lg "
           >
