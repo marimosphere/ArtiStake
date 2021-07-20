@@ -5,7 +5,7 @@ import "hardhat/console.sol";
 import {IERC20} from "./libraries/openzeppelin/IERC20.sol";
 import {Ownable} from "./libraries/openzeppelin/Ownable.sol";
 
-contract Tip is Ownable {
+contract ArtisTip is Ownable {
     event Tipped(address indexed from, address indexed to, address indexed erc20, uint256 amount);
 
     function tip(

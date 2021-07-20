@@ -6,15 +6,10 @@ import {
 } from "../lib/constants";
 
 export const main = async () => {
-  console.log(hre.network.name);
-  const Tip = await ethers.getContractFactory("Tip");
-  const tipContract = await Tip.deploy();
-  const ERC20 = await ethers.getContractFactory("MintableERC20");
-  const mockErc20Contract = await ERC20.deploy("TestToken", "TT", 18);
-  await mockErc20Contract.mint(1000000000000000);
-  await tipContract.addToWhitelist(mockErc20Contract.address);
-  console.log(tipContract.address, "tipContract.address");
-  console.log(mockErc20Contract.address, "mockErc20Contract.address");
+  const ERC20 = await ethers.getContractFactory("JPYC");
+  const mockErc20Contract = await ERC20.deploy();
+  console.log(mockErc20Contract.address);
+  await mockErc20Contract.mint("0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266", 1000000000000000);
 };
 
 main()

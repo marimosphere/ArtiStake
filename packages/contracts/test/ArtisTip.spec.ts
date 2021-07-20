@@ -6,7 +6,7 @@ import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
 chai.use(solidity);
 const { expect } = chai;
 
-describe("Tip", function () {
+describe("ArtisTip", function () {
   let tipContract: any;
   let jpycContract: any;
   let signer: SignerWithAddress;
@@ -14,7 +14,7 @@ describe("Tip", function () {
   let artist: SignerWithAddress;
   this.beforeEach(async function () {
     [signer, user, artist] = await ethers.getSigners();
-    const Tip = await ethers.getContractFactory("Tip");
+    const Tip = await ethers.getContractFactory("ArtisTip");
     tipContract = await Tip.deploy();
     const JPYC = await ethers.getContractFactory("JPYC");
     jpycContract = await JPYC.deploy();

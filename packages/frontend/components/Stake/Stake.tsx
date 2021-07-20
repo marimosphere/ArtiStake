@@ -32,7 +32,8 @@ const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
 
   const refresh = () => {
     console.log("refresh");
-    stakeContract.getStakerBalanceWithInterest(artistWalletAddress).then((deposited) => {
+    console.log(account);
+    stakeContract.getStakerBalanceWithInterest(artistWalletAddress, account).then((deposited) => {
       console.log(deposited);
       setDepositedAmount(ethers.utils.formatEther(deposited.toString()).toString());
     });

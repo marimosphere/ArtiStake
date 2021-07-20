@@ -144,7 +144,7 @@ contract ArtiStake is Ownable {
         return artistTotalStaked;
     }
 
-    function getAmountWithInterest(uint256 atokenAmount) internal view returns (uint256) {
+    function getAmountWithInterest(uint256 atokenAmount) public view returns (uint256) {
         return atokenAmount.rayMul(ILendingPool(aaveLendingPool).getReserveNormalizedIncome(underlyingAsset));
     }
 
