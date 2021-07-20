@@ -36,11 +36,15 @@ describe("ArtiStake", function () {
     expect(balanceATokenBefore).to.equal(0);
     await artiStakeContract.connect(stakerA).deposit(artistA.address, 0, { value: 100000000000000 });
     const balanceATokenAfter = await artiStakeContract.getAtokenScaledBalance(POLYGON_AAVE_WETH_ATOKEN_ADDRESS);
-    const userBalanceBefore = await artiStakeContract.connect(stakerA).getStakerBalanceWithInterest(artistA.address);
+    const userBalanceBefore = await artiStakeContract
+      .connect(stakerA)
+      .getStakerBalanceWithInterest(artistA.address, stakerA.address);
     expect(balanceATokenAfter).to.be.above(0);
     await ethers.provider.send("evm_increaseTime", [31536000]);
     await ethers.provider.send("evm_mine", []);
-    const userBalanceAfter = await artiStakeContract.connect(stakerA).getStakerBalanceWithInterest(artistA.address);
+    const userBalanceAfter = await artiStakeContract
+      .connect(stakerA)
+      .getStakerBalanceWithInterest(artistA.address, stakerA.address);
     expect(userBalanceAfter).to.be.above(userBalanceBefore);
   });
 
@@ -52,7 +56,9 @@ describe("ArtiStake", function () {
     const stakerBalanceBefore = await ethers.provider.getBalance(stakerA.address);
     await artiStakeContract.connect(stakerA).withdraw(artistA.address);
     // 全額引き出せているか？
-    const stakerStakingBalance = await artiStakeContract.connect(stakerA).getStakerBalanceWithInterest(artistA.address);
+    const stakerStakingBalance = await artiStakeContract
+      .connect(stakerA)
+      .getStakerBalanceWithInterest(artistA.address, stakerA.address);
     expect(stakerStakingBalance).to.equal(0);
     const artistBalanceAfter = await ethers.provider.getBalance(artistA.address);
     const stakerBalanceAfter = await ethers.provider.getBalance(stakerA.address);

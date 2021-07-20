@@ -6,7 +6,7 @@ import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
 chai.use(solidity);
 const { expect } = chai;
 
-describe.only("Tip", function () {
+describe("Tip", function () {
   let tipContract: any;
   let jpycContract: any;
   let signer: SignerWithAddress;
