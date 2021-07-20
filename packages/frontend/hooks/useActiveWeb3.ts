@@ -5,7 +5,10 @@ import { Web3Provider } from "@ethersproject/providers";
 import { Web3ReactContextInterface } from "@web3-react/core/dist/types";
 import { ethers } from "ethers";
 
-const rpc = process.env.NODE_ENV == "development" ? "http://localhost:8545" : "https://rpc-mumbai.matic.today";
+const rpc =
+  process.env.NODE_ENV == "development"
+    ? "http://localhost:8545"
+    : "https://polygon-mumbai.infura.io/v3/7495501b681645b0b80f955d4139add9";
 
 export const simpleRpcProvider = new ethers.providers.JsonRpcProvider(rpc);
 /**
