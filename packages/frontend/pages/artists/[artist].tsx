@@ -6,13 +6,14 @@ import { Stake } from "../../components/Stake";
 import { ArtistWorks } from "../../components/ArtistWorks";
 
 import { getAllArtists, getArtistByFileName } from "../../lib/api";
+import { subgraphUrl } from "../../lib/env";
 
 import { Artist } from "../../types/artist";
 
 import { ApolloClient, InMemoryCache, ApolloProvider, useQuery, gql } from "@apollo/client";
 
 const client = new ApolloClient({
-  uri: "https://api.thegraph.com/subgraphs/name/aave/aave-v2-polygon-mumbai",
+  uri: subgraphUrl,
   cache: new InMemoryCache(),
 });
 interface Props {
