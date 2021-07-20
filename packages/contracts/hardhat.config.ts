@@ -1,4 +1,5 @@
 import "@nomiclabs/hardhat-waffle";
+import "@nomiclabs/hardhat-etherscan";
 import "hardhat-typechain";
 import "hardhat-deploy";
 import "solidity-coverage";
@@ -34,6 +35,9 @@ module.exports = {
       gas: 2100000,
       gasPrice: 8000000000,
     },
+  },
+  etherscan: {
+    apiKey: process.env.ETHERSCAN_KEY,
   },
   mocha: {
     timeout: 50000,
