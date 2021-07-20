@@ -23,7 +23,7 @@ const Header = () => {
       <div className="flex justify-end px-4 pt-4 py-2">
         <div>
           {account ? (
-            <button className="text-white text-sm focus:outline-none">{account}</button>
+            <button className="text-white text-xs lg:text-sm focus:outline-none">{account}</button>
           ) : (
             <button
               // @ts-ignore:
