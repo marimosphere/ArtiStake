@@ -20,7 +20,7 @@ const Header = () => {
   ];
 
   return (
-    <div className="bg-marimo-1">
+    <div className="bg-marimo-1 w-full">
       <div className="flex justify-end px-4 pt-4 py-2">
         <div>
           {account ? (

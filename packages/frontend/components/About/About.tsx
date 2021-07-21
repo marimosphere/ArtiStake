@@ -1,6 +1,6 @@
 const About = () => {
   return (
-    <div className="w-full bg-marimo-1 py-8 px-40">
+    <div className="w-full bg-marimo-1 p-8 lg:px-40">
       <h2 className="text-center text-2xl text-white my-8">About ArtiStake</h2>
       <h3 className="text-white text-xl mb-4">-EN-</h3>
       <p className="text-white mb-4">"ArtiStake" is a platform for supporting artists and an artist-based community.</p>
