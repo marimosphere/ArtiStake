@@ -8,7 +8,7 @@ import { ethers } from "ethers";
 const rpc =
   process.env.NODE_ENV == "development"
     ? "http://localhost:8545"
-    : "https://polygon-mumbai.infura.io/v3/7495501b681645b0b80f955d4139add9";
+    : "https://polygon-mainnet.infura.io/v3/7495501b681645b0b80f955d4139add9";
 
 export const simpleRpcProvider = new ethers.providers.JsonRpcProvider(rpc);
 /**
