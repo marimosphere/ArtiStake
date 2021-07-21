@@ -1,7 +1,6 @@
 //SPDX-License-Identifier: Unlicense
 pragma solidity ^0.6.12;
 
-import "hardhat/console.sol";
 import {IERC20} from "./libraries/openzeppelin/IERC20.sol";
 import {Ownable} from "./libraries/openzeppelin/Ownable.sol";
 
@@ -10,10 +9,15 @@ contract ArtisTip is Ownable {
 
     function tip(
         address token,
-        address to,
+        address payable to,
         uint256 amount
     ) public payable {
-        IERC20(token).transferFrom(msg.sender, to, amount);
-        emit Tipped(msg.sender, to, token, amount);
+        if (token == address(0)) {
+            to.transfer(msg.value);
+            emit Tipped(msg.sender, to, token, amount);
+        } else {
+            IERC20(token).transferFrom(msg.sender, to, amount);
+            emit Tipped(msg.sender, to, token, amount);
+        }
     }
 }

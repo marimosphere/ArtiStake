@@ -4,12 +4,14 @@ import { useWallet } from "../../hooks/useWallet";
 import { useArtiStake } from "../../hooks/useContract";
 import { Contract, ethers } from "ethers";
 import { useQuery, gql } from "@apollo/client";
+import axios from "axios";
 
 const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
   const [connectWallet, account, library] = useWallet();
   const [stakeAmount, setStakeAmount] = React.useState("");
   const [depositedAmount, setDepositedAmount] = React.useState("0");
   const [artistTotalStaked, setArtistTotalStaked] = React.useState("0");
+  const [apy, setApy] = React.useState("0");
   const stakeContract = useArtiStake();
 
   React.useEffect(() => {
@@ -42,6 +44,12 @@ const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
       console.log(deposited);
       setArtistTotalStaked(ethers.utils.formatEther(deposited.toString()).toString());
     });
+
+    axios
+      .get("https://aave-api-v2.aave.com/data/liquidity/v2?poolId=0xd05e3E715d945B59290df0ae8eF85c1BdB684744")
+      .then((list) => {
+        setApy(list.data[0].liquidityRate);
+      });
   };
 
   const handleStakeAmount = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -49,37 +57,16 @@ const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
     setStakeAmount(event.target.value);
   };
 
-  const LIQUIDITY_RATES = gql`
-    query {
-      reserves(where: { name: "Wrapped Matic" }) {
-        id
-        name
-        liquidityRate
-      }
-    }
-  `;
-
-  function APY() {
-    const { loading, error, data } = useQuery(LIQUIDITY_RATES);
-
-    if (loading) return <p className="m-auto p-4 flex-1 text-white text-2xl">Loading...</p>;
-    if (error) return <p className="m-auto p-4 flex-1 text-white text-2xl">Error</p>;
-
-    return (
-      <p className="m-auto p-4 flex-1 text-white text-2xl">
-        APY
-        <br /> {data.reserves[0].liquidityRate / 100000000000000000000000000}%
-      </p>
-    );
-  }
-
   return (
     <div className="w-full mx-auto text-white">
       <div className="bg-marimo-2 flex text-center grid lg:grid-cols-3">
         <p className="m-auto p-4 flex-1 text-white text-2xl">
           Toatal Staked <br /> {artistTotalStaked} MATIC
         </p>
-        <APY />
+        <p className="m-auto p-4 flex-1 text-white text-2xl">
+          APY
+          <br /> {Number(apy) * 100}%
+        </p>
         {/* <p className="m-auto p-4 flex-1 text-white text-2xl">
           Reward
           <br /> 52,456 MATIC
