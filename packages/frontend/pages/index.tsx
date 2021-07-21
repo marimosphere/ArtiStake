@@ -13,7 +13,7 @@ interface Props {
 
 const IndexPage: React.FC<Props> = ({ artists }) => {
   return (
-    <div>
+    <div className="overflow-hidden">
       <Header />
       <Hero />
       <div className="w-full mx-auto grid md:grid-cols-3">

@@ -22,7 +22,7 @@ const Header = () => {
   return (
     <div className="bg-marimo-1 w-full">
       <div className="flex justify-end px-4 pt-4 py-2">
-        <div>
+        <div className="overflow-hidden">
           {account ? (
             <button className="text-white text-xs lg:text-sm focus:outline-none">{account}</button>
           ) : (
