@@ -16,7 +16,7 @@ const IndexPage: React.FC<Props> = ({ artists }) => {
     <div className="overflow-hidden">
       <Header />
       <Hero />
-      <div className="w-full mx-auto grid md:grid-cols-3">
+      <div className="w-full mx-auto grid md:grid-cols-3 bg-marimo-1">
         {artists.map((artist, index) => {
           return (
             <a href={`/artists/${artist.id}`} key={index}>
