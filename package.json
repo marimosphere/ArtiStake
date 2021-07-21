@@ -17,6 +17,9 @@
   "scripts": {
     "prepare": "husky install",
     "format": "prettier --ignore-path .gitignore --write \"**/*.{.ts,.js,tsx,jsx,json,md,sol}\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "yarn workspace frontend build",
+    "export": "yarn workspace frontend export",
+    "deploy": "yarn workspace frontend deploy"
   }
 }
