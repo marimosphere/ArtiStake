@@ -1,5 +1,7 @@
 # ArtiStake
 
+テスト
+
 -EN-
 
 "ArtiStake" is a platform for supporting artists and an artist-based community.
