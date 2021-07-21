@@ -1,0 +1,20 @@
+name: CD
+on:
+  push:
+    branches:
+      - main
+jobs:
+  cd:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12.16.3
+      - run: cd ./packages/frontend
+      - run: yarn
+      - run: yarn build
+      - run: yarn export
+      - run: yarn deploy
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
