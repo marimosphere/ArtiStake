@@ -21,7 +21,7 @@ const ArtistWorks: React.FC<ArtistWorksProps> = ({
         </div>
       </div>
       <div className="bg-marimo-1 p-4">
-        <p className="text-center text-white text-xl">Artist Shop</p>
+        <p className="text-center text-white text-xl">Artist Store</p>
         <div className="p-8">
           <a href={shopUrl} target="_blank">
             <img className="mx-auto h-48 object-cover" src={shopTumbnail} />
