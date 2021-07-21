@@ -13,7 +13,7 @@ const ArtistWorks: React.FC<ArtistWorksProps> = ({
   return (
     <div className="w-full mx-auto grid lg:grid-cols-3">
       <div className="bg-marimo-2 p-4">
-        <p className="text-center text-white">Artist Gellery</p>
+        <p className="text-center text-white text-xl">Artist Gellery</p>
         <div className="p-8">
           <a href={galleryUrl} target="_blank">
             <img className="mx-auto h-48 object-cover" src={galleryTumbnail} />
@@ -21,7 +21,7 @@ const ArtistWorks: React.FC<ArtistWorksProps> = ({
         </div>
       </div>
       <div className="bg-marimo-1 p-4">
-        <p className="text-center text-white">Artist Shop</p>
+        <p className="text-center text-white text-xl">Artist Shop</p>
         <div className="p-8">
           <a href={shopUrl} target="_blank">
             <img className="mx-auto h-48 object-cover" src={shopTumbnail} />
@@ -29,7 +29,7 @@ const ArtistWorks: React.FC<ArtistWorksProps> = ({
         </div>
       </div>
       <div className="bg-marimo-2 p-4">
-        <p className="text-center text-white">Tip JPYC</p>
+        <p className="text-center text-white text-xl">Tip JPYC</p>
         <div className="flex justify-center p-8">
           <Tip artistWalletAddress={walletAddress} />
         </div>
