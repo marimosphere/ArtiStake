@@ -2,21 +2,26 @@ import * as React from "react";
 import { useWallet } from "../../hooks/useWallet";
 import { useTip, useJpyc } from "../../hooks/useContract";
 import { Contract, ethers } from "ethers";
-import externalContracts from "../../contracts/external_contracts";
 import { TipProps } from "./types";
 
 const Tip: React.FC<TipProps> = ({ artistWalletAddress }) => {
   const [tipStatus, setTipStatus] = React.useState<"approve" | "tip" | "confirm">("approve");
   const [tipAmount, setTipAmount] = React.useState("");
   const [explorer, setExplorer] = React.useState("");
+  const [errorMessage, setErrorMessage] = React.useState("");
   const [connectWallet, account, library] = useWallet();
   const tipContract = useTip();
   const jpycContract = useJpyc();
 
   const approve = async () => {
+    if (!tipAmount) {
+      setErrorMessage("please input amount");
+      return;
+    }
     const value = ethers.utils.parseEther(tipAmount).toString();
     await jpycContract.approve(tipContract.address, value);
     setTipStatus("tip");
+    setErrorMessage("");
   };
 
   const tip = async () => {
@@ -24,7 +29,6 @@ const Tip: React.FC<TipProps> = ({ artistWalletAddress }) => {
     const value = ethers.utils.parseEther(tipAmount).toString();
     const { hash: tx } = await tipContract.tip(jpycContract.address, artistWalletAddress, value);
     setExplorer(`https://polygonscan.com/tx/${tx}`);
-    console.log(tx);
   };
 
   const handleTipAmount = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -60,14 +64,14 @@ const Tip: React.FC<TipProps> = ({ artistWalletAddress }) => {
         </div>
       ) : tipStatus === "tip" ? (
         <div className="text-center">
-          <p className="text-white  text-base text-center">{tipAmount} JPYC</p>
+          <p className="text-white text-base text-center">{tipAmount} JPYC</p>
           <button onClick={tip} className="w-24 h-8 bg-marimo-5 text-white font-bold rounded-lg">
             Tip
           </button>
         </div>
       ) : (
         <div className="">
-          <p className="text-white  text-base text-center">
+          <p className="text-white text-base text-center">
             Thank you!{" "}
             <a href={explorer} className="underline">
               Receipt
@@ -75,6 +79,9 @@ const Tip: React.FC<TipProps> = ({ artistWalletAddress }) => {
           </p>
         </div>
       )}
+      <div>
+        <p className="text-red-500 text-base text-center">{errorMessage}</p>
+      </div>
     </div>
   );
 };

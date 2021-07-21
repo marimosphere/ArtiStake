@@ -34,14 +34,12 @@ const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
 
   const refresh = () => {
     console.log("refresh");
-    console.log(account);
     stakeContract.getStakerBalanceWithInterest(artistWalletAddress, account).then((deposited) => {
       console.log(deposited);
       setDepositedAmount(ethers.utils.formatEther(deposited.toString()).toString());
     });
 
     stakeContract.getArtistTotalStaked(artistWalletAddress).then((deposited) => {
-      console.log(deposited);
       setArtistTotalStaked(ethers.utils.formatEther(deposited.toString()).toString());
     });
 
@@ -60,14 +58,14 @@ const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
   return (
     <div className="w-full mx-auto text-white">
       <div className="bg-marimo-2 flex text-center grid lg:grid-cols-3">
-        <p className="m-auto p-4 flex-1 text-white text-2xl">
+        <p className="m-auto p-8 flex-1 text-white text-2xl">
           Toatal Staked <br /> {artistTotalStaked} MATIC
         </p>
-        <p className="m-auto p-4 flex-1 text-white text-2xl">
+        <p className="m-auto p-8 flex-1 text-white text-2xl">
           APY
           <br /> {Number(apy) * 100}%
         </p>
-        {/* <p className="m-auto p-4 flex-1 text-white text-2xl">
+        {/* <p className="m-auto p-8 flex-1 text-white text-2xl">
           Reward
           <br /> 52,456 MATIC
         </p> */}

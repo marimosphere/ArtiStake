@@ -3,7 +3,6 @@
 pragma solidity 0.6.12;
 pragma experimental ABIEncoderV2;
 
-import "hardhat/console.sol";
 import {WadRayMath} from "./libraries/math/WadRayMath.sol";
 import {Ownable} from "./libraries/openzeppelin/Ownable.sol";
 import {SafeMath} from "./libraries/openzeppelin/SafeMath.sol";

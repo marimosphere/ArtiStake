@@ -18,11 +18,11 @@ const ArtistHeader: React.FC<ArtistHeaderProps> = ({ name, description, aboutMyW
           <img className="w-full h-48 object-cover" src={bannar} />
         </div>
       </div>
-      <div className="bg-marimo-3 h-6 text-white">
-        <p className="ml-8 text-md">About My Works</p>
+      <div className="bg-marimo-3 text-white">
+        <p className="ml-8 text-lg py-1">About My Works</p>
       </div>
       <div>
-        <p className="text-white text-xs p-8">{aboutMyWork}</p>
+        <p className="text-white text-sm p-8">{aboutMyWork}</p>
       </div>
     </div>
   );
