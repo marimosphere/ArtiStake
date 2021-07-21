@@ -4,8 +4,8 @@ import { ArtistHeaderProps } from "./types";
 const ArtistHeader: React.FC<ArtistHeaderProps> = ({ name, description, aboutMyWork, avatar, bannar }) => {
   return (
     <div className="w-full mx-auto bg-marimo-1">
-      <div className="flex pt-4 pb-8">
-        <div className="flex px-8">
+      <div className="flex pt-4 pb-8 grid lg:grid-cols-2">
+        <div className="flex px-2 py-2 lg:px-8">
           <div>
             <img className="w-40 rounded-full" src={avatar} />
           </div>
