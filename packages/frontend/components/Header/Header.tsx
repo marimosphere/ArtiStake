@@ -12,15 +12,18 @@ const Header = () => {
   const [connectWallet, account, library] = useWallet();
 
   const navs = [
-    { text: "Home", to: "/" },
-    { text: "About", to: "/about" },
-    { text: "How to get Matic", to: "#" },
-    { text: "How to get JPYC", to: "https://app.jpyc.jp/" },
-    { text: "Artist Registration", to: "#" },
+    { text: "Home", to: "/", target: false },
+    { text: "About", to: "/about", target: false },
+    { text: "How to get Matic", to: "#", target: true },
+    { text: "How to get JPYC", to: "https://app.jpyc.jp/", target: true },
+    { text: "Artist Registration", to: "#", target: true },
   ];
 
   return (
-    <div className="bg-marimo-1 w-full">
+    <div className="flex justify-between bg-marimo-1 w-full">
+      <a href="/">
+        <img className="h-12 m-2" src="/assets/img/hero.png" />
+      </a>
       <div className="flex justify-end px-4 pt-4 py-2">
         <div className="overflow-hidden">
           {account ? (
@@ -48,9 +51,15 @@ const Header = () => {
           {navs.map((nav, index) => {
             return (
               <div key={index}>
-                <a href={nav.to} rel="noreferrer" target="_blank" className="text-white block px-4 py-2 text-sm">
-                  {nav.text}
-                </a>
+                {nav.target ? (
+                  <a href={nav.to} rel="noreferrer" target="_blank" className="text-white block px-4 py-2 text-sm">
+                    {nav.text}
+                  </a>
+                ) : (
+                  <a href={nav.to} className="text-white block px-4 py-2 text-sm">
+                    {nav.text}
+                  </a>
+                )}
               </div>
             );
           })}
