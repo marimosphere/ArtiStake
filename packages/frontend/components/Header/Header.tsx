@@ -48,7 +48,7 @@ const Header = () => {
           {navs.map((nav, index) => {
             return (
               <div key={index}>
-                <a href={nav.to} className="text-white block px-4 py-2 text-sm">
+                <a href={nav.to} rel="noreferrer" target="_blank" className="text-white block px-4 py-2 text-sm">
                   {nav.text}
                 </a>
               </div>

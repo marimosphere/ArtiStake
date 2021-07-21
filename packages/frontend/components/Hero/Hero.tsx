@@ -9,7 +9,7 @@ const Hero = () => {
           </div>
           <p className="text-white text-2xl lg:text-4xl marimo-tracking-hero">ArtiStake</p>
         </div>
-        <div className="bg-marimo-4 h-6" />
+        <div className="bg-marimo-4 h-3" />
         <div className="bg-marimo-3 h-6" />
       </div>
     </div>
