@@ -14,7 +14,8 @@ const Header = () => {
   const navs = [
     { text: "Home", to: "/" },
     { text: "About", to: "/about" },
-    { text: "Buy Matic", to: "#" },
+    { text: "How to get Matic", to: "#" },
+    { text: "How to get JPYC", to: "https://app.jpyc.jp/" },
     { text: "Artist Registration", to: "#" },
   ];
 
