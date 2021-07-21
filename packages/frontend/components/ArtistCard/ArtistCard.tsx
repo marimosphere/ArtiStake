@@ -12,7 +12,7 @@ const ArtistCard: React.FC<ArtistCardProps> = ({ index, name, description, avata
         </div>
         <div className="ml-4">
           <p className="text-white text-md mb-2">{name}</p>
-          <p className="text-white h-32 text-xs">{description}</p>
+          <p className="text-white h-20 text-xs">{description}</p>
         </div>
       </div>
       <div>
