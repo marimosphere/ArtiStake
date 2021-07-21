@@ -80,7 +80,7 @@ const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
             onChange={handleStakeAmount}
             value={stakeAmount}
             placeholder="MATIC"
-            className="h-10 mb-2 w-2/3 border-2 pr-2 border-marimo-5 text-black text-right"
+            className="h-10 mb-2 w-2/3 border-2 pr-2 border-marimo-5 text-black text-right rounded-lg "
           />
           {!account ? (
             // @ts-ignore:
@@ -98,9 +98,9 @@ const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
             <div>Withdraw</div>
           </div>
           <div className="flex mb-2">
-            <p className="m-auto text-white lg:text-2xl">{depositedAmount} MATIC</p>
+            <p className="m-auto text-white lg:text-2xl pl-4">{depositedAmount} MATIC</p>
             <button onClick={refresh}>
-              <img className="h-10" src="/assets/img/reload.png" />
+              <img className="h-7" src="/assets/img/reload.png" />
             </button>
           </div>
           {!account ? (
