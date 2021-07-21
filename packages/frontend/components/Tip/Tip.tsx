@@ -38,7 +38,7 @@ const Tip: React.FC<TipProps> = ({ artistWalletAddress }) => {
 
   return (
     <div className="w-full mx-auto">
-      <img className="mx-auto h-20 object-cover mb-4" src="/assets/img/jpyc.png" />
+      <img className="mx-auto h-20 object-cover mt-10 mb-4" src="/assets/img/jpyc.png" />
       {!account ? (
         <div className="text-center">
           <button

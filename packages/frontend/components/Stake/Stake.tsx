@@ -100,7 +100,7 @@ const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
           <div className="flex mb-2">
             <p className="m-auto text-white lg:text-2xl">{depositedAmount} MATIC</p>
             <button onClick={refresh}>
-              <p className="text-2xl">🔄</p>
+              <img className="h-10" src="/assets/img/reload.png" />
             </button>
           </div>
           {!account ? (
