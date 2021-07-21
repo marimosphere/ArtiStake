@@ -314,6 +314,11 @@ const stakeAbi = [
         name: "artistAddress",
         type: "address",
       },
+      {
+        internalType: "address",
+        name: "sender",
+        type: "address",
+      },
     ],
     name: "getStakerBalanceWithInterest",
     outputs: [
@@ -437,19 +442,6 @@ const tipAbi = [
       {
         indexed: true,
         internalType: "address",
-        name: "addedToken",
-        type: "address",
-      },
-    ],
-    name: "AddedToWhitelist",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: "address",
         name: "previousOwner",
         type: "address",
       },
@@ -461,19 +453,6 @@ const tipAbi = [
       },
     ],
     name: "OwnershipTransferred",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: "address",
-        name: "removedToken",
-        type: "address",
-      },
-    ],
-    name: "RemovedFromWhitelist",
     type: "event",
   },
   {
@@ -508,19 +487,6 @@ const tipAbi = [
     type: "event",
   },
   {
-    inputs: [
-      {
-        internalType: "address",
-        name: "addToken",
-        type: "address",
-      },
-    ],
-    name: "addToWhitelist",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
     inputs: [],
     name: "owner",
     outputs: [
@@ -531,19 +497,6 @@ const tipAbi = [
       },
     ],
     stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "removeToken",
-        type: "address",
-      },
-    ],
-    name: "removeFromWhitelist",
-    outputs: [],
-    stateMutability: "nonpayable",
     type: "function",
   },
   {
@@ -587,25 +540,6 @@ const tipAbi = [
     name: "transferOwnership",
     outputs: [],
     stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
-    name: "whitelisted",
-    outputs: [
-      {
-        internalType: "bool",
-        name: "",
-        type: "bool",
-      },
-    ],
-    stateMutability: "view",
     type: "function",
   },
 ];
@@ -909,15 +843,15 @@ const jpycAbi = [
 export default {
   4: {
     contracts: {
-      tip: { address: "0xAf7868a9BB72E16B930D50636519038d7F057470", abi: tipAbi },
-      stake: { address: "0x10d16E2A026C4b5264A2aAC51cA65749cDf2037E", abi: stakeAbi },
-      jpyc: { address: "0x3aD2306eDfBe72ce013cdb6b429212d9CdDE4F96", abi: jpycAbi },
+      tip: { address: "0x77e6Bd5c1988d8d766698F9CeEa5C24559b999f8", abi: tipAbi },
+      stake: { address: "0x1A223F93131cD7d898c28Ee0B905C39Db474FA08", abi: stakeAbi },
+      jpyc: { address: "0x7314AEeC874A25A1131F49dA9679D05f8d931175", abi: jpycAbi },
     },
   },
   137: {
     contracts: {
-      tip: { address: "0x9cC87998ba85D81e017E6B7662aC00eE2Ab8fe13", abi: tipAbi },
-      stake: { address: "0xD6b8Eb34413f07a1a67A469345cFEa6633efd58d", abi: stakeAbi },
+      tip: { address: "0x77e6Bd5c1988d8d766698F9CeEa5C24559b999f8", abi: tipAbi },
+      stake: { address: "0x1A223F93131cD7d898c28Ee0B905C39Db474FA08", abi: stakeAbi },
       jpyc: { address: "0x3aD2306eDfBe72ce013cdb6b429212d9CdDE4F96", abi: jpycAbi },
     },
   },

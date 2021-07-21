@@ -170,4 +170,9 @@ describe("ArtiStake", function () {
     await artiStakeContract.connect(signer).updateArtiStakeFeeRatio(changedRatio);
     expect(await artiStakeContract.artiStakeFeeRatio()).to.equal(changedRatio);
   });
+
+  it("getAmountWithInterest", async function () {
+    const amountWithInterest = await artiStakeContract.connect(stakerA).getAmountWithInterest(1000000);
+    expect(amountWithInterest).to.be.above(1000000);
+  });
 });

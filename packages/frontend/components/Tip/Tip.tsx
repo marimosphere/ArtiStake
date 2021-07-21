@@ -40,9 +40,9 @@ const Tip: React.FC<TipProps> = ({ artistWalletAddress }) => {
           <button
             // @ts-ignore:
             onClick={connectWallet}
-            className="w-40 h-8 bg-marimo-5 hover:opacity-75 text-white font-bold rounded-lg "
+            className="w-40 h-8 bg-marimo-5 hover:opacity-75 text-white rounded-lg "
           >
-            connectWallet
+            Connect Wallet
           </button>
         </div>
       ) : tipStatus === "approve" ? (
