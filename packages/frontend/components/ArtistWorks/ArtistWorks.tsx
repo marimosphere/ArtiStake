@@ -13,7 +13,7 @@ const ArtistWorks: React.FC<ArtistWorksProps> = ({
   return (
     <div className="w-full mx-auto grid lg:grid-cols-3">
       <div className="bg-marimo-2 p-4">
-        <p className="text-center text-white text-xl">Artist Gellery</p>
+        <p className="text-center text-white text-xl">Artist Gallery</p>
         <div className="p-8">
           <a href={galleryUrl} target="_blank">
             <img className="mx-auto h-48 object-cover" src={galleryTumbnail} />
