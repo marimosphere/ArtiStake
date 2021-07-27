@@ -3,7 +3,6 @@ import * as React from "react";
 import { Header } from "../components/Header";
 import { Hero } from "../components/Hero";
 import { ArtistCard } from "../components/ArtistCard";
-import { Seo } from "../components/Seo";
 
 import { getAllArtists } from "../lib/api";
 import { Artist } from "../types/artist";
@@ -15,7 +14,6 @@ interface Props {
 const IndexPage: React.FC<Props> = ({ artists }) => {
   return (
     <div className="overflow-hidden">
-      <Seo />
       <Header />
       <Hero />
       <div className="w-full mx-auto grid lg:grid-cols-3 bg-marimo-1">
