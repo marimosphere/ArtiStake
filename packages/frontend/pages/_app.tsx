@@ -12,6 +12,11 @@ const MyApp = ({ Component, pageProps }) => {
   return (
     <Web3ReactProvider getLibrary={getLibrary}>
       <Component {...pageProps} />
+      <style jsx global>{`
+        body {
+          background: #1c203c;
+        }
+      `}</style>
     </Web3ReactProvider>
   );
 };
