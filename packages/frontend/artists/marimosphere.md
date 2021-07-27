@@ -10,5 +10,5 @@ bannar: "/assets/img/artists/marimosphere/bannar.png"
 galleryTumbnail: "/assets/img/artists/marimosphere/gallery.png"
 shopTumbnail: "/assets/img/artists/marimosphere/shop.png"
 galleryUrl: "https://www.instagram.com/marimosphere/"
-shopUrl: "https://marimosphere.ogn.app/#/"
+shopUrl: "https://nanakusa.io/market/marimosphere"
 ---
