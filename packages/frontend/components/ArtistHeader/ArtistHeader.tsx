@@ -1,7 +1,14 @@
 import * as React from "react";
 import { ArtistHeaderProps } from "./types";
 
-const ArtistHeader: React.FC<ArtistHeaderProps> = ({ name, description, aboutMyWork, avatar, bannar }) => {
+const ArtistHeader: React.FC<ArtistHeaderProps> = ({
+  name,
+  description,
+  aboutMyWork,
+  aboutMyWorkImage,
+  avatar,
+  bannar,
+}) => {
   return (
     <div className="w-full mx-auto bg-marimo-1">
       <div className="flex pt-4 pb-8 grid lg:grid-cols-2">
@@ -21,9 +28,16 @@ const ArtistHeader: React.FC<ArtistHeaderProps> = ({ name, description, aboutMyW
       <div className="bg-marimo-3 text-white">
         <p className="ml-8 text-lg py-1">About My Works</p>
       </div>
-      <div>
-        <p className="text-white text-sm p-8">{aboutMyWork}</p>
-      </div>
+      {aboutMyWorkImage ? (
+        <div className="flex">
+          <p className="text-white text-sm p-8">{aboutMyWork}</p>
+          <img className=" h-48 m-4" src={aboutMyWorkImage} />
+        </div>
+      ) : (
+        <div>
+          <p className="text-white text-sm p-8">{aboutMyWork}</p>
+        </div>
+      )}
     </div>
   );
 };

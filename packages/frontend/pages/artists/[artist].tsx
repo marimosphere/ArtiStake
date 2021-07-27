@@ -28,6 +28,7 @@ const ArtistPage: React.FC<Props> = ({ artist }) => {
         <ArtistHeader
           name={artist.name}
           description={artist.description}
+          aboutMyWorkImage={artist.aboutMyWorkImage}
           aboutMyWork={artist.aboutMyWork}
           avatar={artist.avatar}
           bannar={artist.bannar}
