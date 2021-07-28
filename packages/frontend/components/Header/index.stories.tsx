@@ -1,9 +1,14 @@
 import Header from "./Header";
+import { HeaderProps } from "./types";
+
+const args: HeaderProps = {
+  isConnectWallet: true,
+};
 
 export default {
   title: "Header",
   component: Header,
-  argTypes: {},
+  args,
 };
 
-export const Default: React.FC = () => <Header />;
+export const Default: React.FC<HeaderProps> = (props) => <Header {...props} />;
