@@ -14,7 +14,7 @@ interface Props {
 const IndexPage: React.FC<Props> = ({ artists }) => {
   return (
     <div className="overflow-hidden">
-      <Header />
+      <Header isConnectWallet={false} />
       <Hero />
       <div className="w-full mx-auto grid lg:grid-cols-3 bg-marimo-1">
         {artists.map((artist, index) => {

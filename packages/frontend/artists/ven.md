@@ -1,6 +1,6 @@
 ---
 name: Ven
-description: A voxel artist who leads the Japanese team in the blockchain game The Sandbox. Ven's unique worldview with a sense of story makes viewers enjoy the world of voxel art. 
+description: A voxel artist who leads the Japanese team in the blockchain game The Sandbox. Ven's unique worldview with a sense of story makes viewers enjoy the world of voxel art.
 aboutMyWork: We will create works that stimulate everyone's imagination a bit in the deformed world of Voxel.
 walletAddress: "0x27444897D2E6C10395F423BE75165d97dD161c69"
 avatar: "/assets/img/artists/ven/avatar.png"

@@ -24,7 +24,7 @@ const ArtistPage: React.FC<Props> = ({ artist }) => {
   return (
     <ApolloProvider client={client}>
       <div>
-        <Header />
+        <Header isConnectWallet={true} />
         <ArtistHeader
           name={artist.name}
           description={artist.description}

@@ -5,7 +5,7 @@ import { About } from "../components/About";
 const AboutPage = () => {
   return (
     <div>
-      <Header />
+      <Header isConnectWallet={false} />
       <Hero />
       <About />
     </div>

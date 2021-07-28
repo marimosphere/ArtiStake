@@ -6,8 +6,9 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { useWeb3React } from "@web3-react/core";
 import { injectedConnector } from "../../lib/web3";
 import { useWallet } from "../../hooks/useWallet";
+import { HeaderProps } from "./types";
 
-const Header = () => {
+const Header: React.FC<HeaderProps> = ({ isConnectWallet }) => {
   const [isNavigactionOpen, setIsNavigationOpen] = React.useState(false);
 
   const [connectWallet, account, library] = useWallet();
@@ -41,19 +42,21 @@ const Header = () => {
         <img className="h-12 m-2" src="/assets/img/hero.png" />
       </a>
       <div className="flex justify-end px-4 pt-4 py-2">
-        <div className="overflow-hidden">
-          {account ? (
-            <button className="text-white text-xs lg:text-sm focus:outline-none">{account}</button>
-          ) : (
-            <button
-              // @ts-ignore:
-              onClick={connectWallet}
-              className="text-white text-sm focus:outline-none"
-            >
-              Connect Wallet
-            </button>
-          )}
-        </div>
+        {isConnectWallet && (
+          <div className="overflow-hidden">
+            {account ? (
+              <button className="text-white text-xs lg:text-sm focus:outline-none">{account}</button>
+            ) : (
+              <button
+                // @ts-ignore:
+                onClick={connectWallet}
+                className="text-white text-sm focus:outline-none"
+              >
+                Connect Wallet
+              </button>
+            )}
+          </div>
+        )}
         <div>
           <FontAwesomeIcon
             className="cursor-pointer text-white ml-8"
