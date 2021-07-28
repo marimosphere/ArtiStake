@@ -29,10 +29,10 @@ const ArtistHeader: React.FC<ArtistHeaderProps> = ({
         <p className="ml-8 text-lg py-1">About My Works</p>
       </div>
       {aboutMyWorkImage ? (
-        <div className="flex grid lg:grid-cols-3 ">
-          <p className="text-white text-sm p-8 lg:col-span-2">{aboutMyWork}</p>
-          <div className="lg:col-span-1">
-            <img className="mx-auto h-48 m-4" src={aboutMyWorkImage} />
+        <div className="flex grid lg:grid-cols-5 ">
+          <p className="text-white text-sm p-8 lg:col-span-3">{aboutMyWork}</p>
+          <div className="lg:col-span-2">
+            <img className="mx-auto m-4 max-h-96" src={aboutMyWorkImage} />
           </div>
         </div>
       ) : (
