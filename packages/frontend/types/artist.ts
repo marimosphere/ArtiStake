@@ -7,7 +7,7 @@ export interface Artist {
   walletAddress: string;
   avatar: string;
   thumbnail: string;
-  bannar: string;
+  banner: string;
   galleryTumbnail: string;
   shopTumbnail: string;
   galleryUrl: string;

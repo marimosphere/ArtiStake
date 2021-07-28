@@ -5,7 +5,7 @@ aboutMyWork: I am creating a virtual world. I use them as motifs for my video an
 walletAddress: "0xd9a126b386455925E7a464eAC06Ab603c5043b2f"
 avatar: "/assets/img/artists/misoshita/avatar.png"
 thumbnail: "/assets/img/artists/misoshita/thumbnail.png"
-bannar: "/assets/img/artists/misoshita/bannar.png"
+banner: "/assets/img/artists/misoshita/banner.png"
 galleryTumbnail: "/assets/img/artists/misoshita/gallery.png"
 shopTumbnail: "/assets/img/artists/misoshita/shop.png"
 galleryUrl: "https://poemcoretokyo.wixsite.com/misoshita"

@@ -7,7 +7,7 @@ const args: ArtistHeaderProps = {
   aboutMyWork:
     "Crypto Artist, Visual Artist, VJ, Projection Mapping, Dome Visual, VR. Crypto Artist, Visual Artist, VJ, Projection Mapping, Dome Visual, VR. Crypto Artist, Visual Artist, VJ, Projection Mapping, Dome Visual, VR. Crypto Artist, Visual Artist, VJ, Projection Mapping, Dome Visual, VR. Crypto Artist, Visual Artist, VJ, Projection Mapping, Dome Visual, VR. Crypto Artist, Visual Artist, VJ, Projection Mapping, Dome Visual, VR. Crypto Artist, Visual Artist, VJ, Projection Mapping, Dome Visual, VR. Crypto Artist, Visual Artist, VJ, Projection Mapping, Dome Visual, VR. Crypto Artist, Visual Artist, VJ, Projection Mapping, Dome Visual, VR. Crypto Artist, Visual Artist, VJ, Projection Mapping, Dome Visual, VR. Crypto Artist, Visual Artist, VJ, Projection Mapping, Dome Visual, VR. Crypto Artist, Visual Artist, VJ, Projection Mapping, Dome Visual, VR.",
   avatar: "assets/img/artists/marimosphere/avatar.png",
-  bannar: "assets/img/artists/marimosphere/bannar.png",
+  banner: "assets/img/artists/marimosphere/banner.png",
 };
 
 export default {

@@ -7,7 +7,7 @@ const ArtistHeader: React.FC<ArtistHeaderProps> = ({
   aboutMyWork,
   aboutMyWorkImage,
   avatar,
-  bannar,
+  banner,
 }) => {
   return (
     <div className="w-full mx-auto bg-marimo-1">
@@ -22,7 +22,7 @@ const ArtistHeader: React.FC<ArtistHeaderProps> = ({
           </div>
         </div>
         <div>
-          <img className="w-full h-48 object-cover" src={bannar} />
+          <img className="w-full h-48 object-cover" src={banner} />
         </div>
       </div>
       <div className="bg-marimo-3 text-white">

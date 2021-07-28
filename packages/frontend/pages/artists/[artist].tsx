@@ -31,7 +31,7 @@ const ArtistPage: React.FC<Props> = ({ artist }) => {
           aboutMyWorkImage={artist.aboutMyWorkImage}
           aboutMyWork={artist.aboutMyWork}
           avatar={artist.avatar}
-          bannar={artist.bannar}
+          banner={artist.banner}
         />
         <Stake artistWalletAddress={artist.walletAddress} />
         <ArtistWorks

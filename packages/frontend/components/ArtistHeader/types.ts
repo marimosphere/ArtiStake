@@ -4,5 +4,5 @@ export interface ArtistHeaderProps {
   aboutMyWork: string;
   aboutMyWorkImage?: string;
   avatar: string;
-  bannar: string;
+  banner: string;
 }
