@@ -1,4 +1,6 @@
 import * as React from "react";
+import Zoom from "react-medium-image-zoom";
+import "react-medium-image-zoom/dist/styles.css";
 import { ArtistHeaderProps } from "./types";
 
 const ArtistHeader: React.FC<ArtistHeaderProps> = ({ name, description, aboutMyWork, mywork, avatar, banner }) => {
@@ -25,7 +27,9 @@ const ArtistHeader: React.FC<ArtistHeaderProps> = ({ name, description, aboutMyW
         <div className="flex grid lg:grid-cols-5 ">
           <p className="text-white text-sm p-8 lg:col-span-3">{aboutMyWork}</p>
           <div className="lg:col-span-2">
-            <img className="mx-auto m-4 max-h-96" src={mywork} />
+            <Zoom overlayBgColorEnd={"rgba(28, 32, 60, 0.95)"}>
+              <img className="mx-auto m-4 max-h-96" src={mywork} />
+            </Zoom>
           </div>
         </div>
       ) : (
