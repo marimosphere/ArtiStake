@@ -8,7 +8,7 @@ walletAddress: "0xA635A54b4305d786dB7A2Cb3a1c8BC90BB15123e"
 avatar: "/assets/img/artists/piprycto/avatar.png"
 thumbnail: "/assets/img/artists/piprycto/thumbnail.jpg"
 banner: "/assets/img/artists/piprycto/banner.png"
-aboutMyWorkImage: "/assets/img/artists/piprycto/aboutMyWork.png"
+mywork: "/assets/img/artists/piprycto/aboutMyWork.png"
 galleryTumbnail: "/assets/img/artists/piprycto/gallery.png"
 shopTumbnail: "/assets/img/artists/piprycto/shop.png"
 ---

@@ -2,7 +2,7 @@ export interface ArtistHeaderProps {
   name: string;
   description: string;
   aboutMyWork: string;
-  aboutMyWorkImage?: string;
+  mywork?: string;
   avatar: string;
   banner: string;
 }

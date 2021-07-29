@@ -11,7 +11,7 @@ shopUrl: "https://foundation.app/@kinnaradesila"
 avatar: "/assets/img/artists/desila/avatar.jpg"
 thumbnail: "/assets/img/artists/desila/thumbnail.png"
 banner: "/assets/img/artists/desila/banner.png"
-aboutMyWorkImage: "/assets/img/artists/desila/aboutMyWork.png"
+mywork: "/assets/img/artists/desila/aboutMyWork.png"
 galleryTumbnail: "/assets/img/artists/desila/gallery.png"
 shopTumbnail: "/assets/img/artists/desila/shop.png"
 ---

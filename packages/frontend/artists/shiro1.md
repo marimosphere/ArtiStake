@@ -8,7 +8,7 @@ walletAddress: "0x820C00E609FC01eC31816C782276f7F7fE460774"
 avatar: "/assets/img/artists/shiro1/avatar.jpg"
 thumbnail: "/assets/img/artists/shiro1/thumbnail.png"
 banner: "/assets/img/artists/shiro1/banner.jpg"
-aboutMyWorkImage: "/assets/img/artists/shiro1/aboutMyWork.jpg"
+mywork: "/assets/img/artists/shiro1/aboutMyWork.jpg"
 galleryTumbnail: "/assets/img/artists/shiro1/gallery.jpg"
 shopTumbnail: "/assets/img/artists/shiro1/shop.png"
 ---

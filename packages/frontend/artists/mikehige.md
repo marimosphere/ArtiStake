@@ -8,7 +8,7 @@ shopUrl: "https://app.rarible.com/mikehige"
 avatar: "/assets/img/artists/mikehige/avatar.png"
 thumbnail: "/assets/img/artists/mikehige/thumbnail.png"
 banner: "/assets/img/artists/mikehige/banner.png"
-aboutMyWorkImage: "/assets/img/artists/mikehige/aboutMyWork.png"
+mywork: "/assets/img/artists/mikehige/aboutMyWork.png"
 galleryTumbnail: "/assets/img/artists/migehige/gallery.png"
 shopTumbnail: "/assets/img/artists/migehige/shop.png"
 ---

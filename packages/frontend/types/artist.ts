@@ -3,7 +3,7 @@ export interface Artist {
   name: string;
   description: string;
   aboutMyWork: string;
-  aboutMyWorkImage?: string;
+  mywork?: string;
   walletAddress: string;
   avatar: string;
   thumbnail: string;
