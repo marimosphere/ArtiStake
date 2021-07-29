@@ -1,3 +1,5 @@
+import { firebase } from "../../lib/firebase";
+
 import * as React from "react";
 import Head from "next/head";
 

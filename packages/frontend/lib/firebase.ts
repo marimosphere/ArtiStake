@@ -1,4 +1,4 @@
-import firebase from "firebase/app";
+import fb from "firebase/app";
 import "firebase/analytics";
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -12,11 +12,7 @@ const firebaseConfig = {
   measurementId: "G-NSNQHLGFG5",
 };
 
-let app: firebase.app.App;
-if (!firebase.apps.length) {
-  app = firebase.initializeApp(firebaseConfig);
-} else {
-  app = firebase.app();
+export const firebase = typeof window !== "undefined" && !fb.apps.length ? fb.initializeApp(firebaseConfig) : fb.app();
+if (process.env.NODE_ENV === "production") {
+  firebase.analytics();
 }
-
-export default app;
