@@ -14,10 +14,11 @@ const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
   const stakeContract = useArtiStake();
 
   React.useEffect(() => {
+    getApy();
+    if (!library) return;
     stakeContract.getArtistTotalStaked(artistWalletAddress).then((deposited) => {
       setArtistTotalStaked(ethers.utils.formatEther(deposited.toString()).toString());
     });
-    getApy();
   }, []);
 
   React.useEffect(() => {
