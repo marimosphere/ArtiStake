@@ -844,7 +844,7 @@ export default {
   4: {
     contracts: {
       tip: { address: "0x77e6Bd5c1988d8d766698F9CeEa5C24559b999f8", abi: tipAbi },
-      stake: { address: "0x1A223F93131cD7d898c28Ee0B905C39Db474FA08", abi: stakeAbi },
+      stake: { address: "0xD1760AA0FCD9e64bA4ea43399Ad789CFd63C7809", abi: stakeAbi },
       jpyc: { address: "0x7314AEeC874A25A1131F49dA9679D05f8d931175", abi: jpycAbi },
     },
   },

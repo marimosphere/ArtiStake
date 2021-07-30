@@ -3,7 +3,6 @@ import { StakeProps } from "./types";
 import { useWallet } from "../../hooks/useWallet";
 import { useArtiStake } from "../../hooks/useContract";
 import { Contract, ethers } from "ethers";
-import { useQuery, gql } from "@apollo/client";
 import axios from "axios";
 
 const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
@@ -15,39 +14,46 @@ const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
   const stakeContract = useArtiStake();
 
   React.useEffect(() => {
+    getArtistTotalStaked();
+    getApy();
+  }, []);
+
+  React.useEffect(() => {
     if (!library) return;
 
     refresh();
   }, [library]);
 
   const stake = async () => {
-    console.log("stake");
-
     const value = ethers.utils.parseEther(stakeAmount).toString();
     await stakeContract.deposit(artistWalletAddress, 0, { value: value });
   };
 
   const withdraw = async () => {
-    console.log("withdraw");
     stakeContract.withdraw(artistWalletAddress);
   };
 
-  const refresh = () => {
-    console.log("refresh");
-    stakeContract.getStakerBalanceWithInterest(artistWalletAddress, account).then((deposited) => {
-      console.log(deposited);
-      setDepositedAmount(ethers.utils.formatEther(deposited.toString()).toString());
-    });
-
-    stakeContract.getArtistTotalStaked(artistWalletAddress).then((deposited) => {
-      setArtistTotalStaked(ethers.utils.formatEther(deposited.toString()).toString());
-    });
-
+  const getApy = () => {
     axios
       .get("https://aave-api-v2.aave.com/data/liquidity/v2?poolId=0xd05e3E715d945B59290df0ae8eF85c1BdB684744")
       .then((list) => {
         setApy(list.data[0].liquidityRate);
       });
+  };
+
+  const getArtistTotalStaked = () => {
+    stakeContract.getArtistTotalStaked(artistWalletAddress).then((deposited) => {
+      setArtistTotalStaked(ethers.utils.formatEther(deposited.toString()).toString());
+    });
+  };
+
+  const refresh = () => {
+    stakeContract.getStakerBalanceWithInterest(artistWalletAddress, account).then((deposited) => {
+      console.log(deposited);
+      setDepositedAmount(ethers.utils.formatEther(deposited.toString()).toString());
+    });
+    getArtistTotalStaked();
+    getApy();
   };
 
   const handleStakeAmount = (event: React.ChangeEvent<HTMLInputElement>) => {
