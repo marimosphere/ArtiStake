@@ -14,7 +14,9 @@ const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
   const stakeContract = useArtiStake();
 
   React.useEffect(() => {
-    getArtistTotalStaked();
+    stakeContract.getArtistTotalStaked(artistWalletAddress).then((deposited) => {
+      setArtistTotalStaked(ethers.utils.formatEther(deposited.toString()).toString());
+    });
     getApy();
   }, []);
 
@@ -52,7 +54,9 @@ const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
       console.log(deposited);
       setDepositedAmount(ethers.utils.formatEther(deposited.toString()).toString());
     });
-    getArtistTotalStaked();
+    stakeContract.getArtistTotalStaked(artistWalletAddress).then((deposited) => {
+      setArtistTotalStaked(ethers.utils.formatEther(deposited.toString()).toString());
+    });
     getApy();
   };
 
