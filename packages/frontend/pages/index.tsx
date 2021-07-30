@@ -17,8 +17,8 @@ const IndexPage: React.FC<Props> = ({ artists }) => {
       <Header isConnectWallet={false} />
       <Hero />
       <div className="w-full bg-marimo-1 p-8 lg:px-40">
-        <h2 className="text-white text-2xl mb-4">About ArtiStake</h2>
-        <h3 className="text-white text-xl mb-4">{"<EN>"}</h3>
+        <h2 className="text-center text-white text-2xl mb-4">About ArtiStake</h2>
+        <h3 className="text-white text-lg mb-4">-EN-</h3>
         <p className="text-white mb-4">
           ArtiStake is a platform to introduce the artist's worldview, concept, and other activities of the artist
           themselves, to communicate the artist's appeal, and to grow the fan community, artist community & ecosystem.
@@ -36,7 +36,7 @@ const IndexPage: React.FC<Props> = ({ artists }) => {
           Please join us in "ArtiStake", a community of crypto artists which can connect artists and fans who want to
           support them and make everyone happy.
         </p>
-        <h3 className="text-white text-xl mb-4">{"<JP>"}</h3>
+        <h3 className="text-white text-lg mb-4">-JP-</h3>
         <p className="text-white mb-4">
           ArtiStakeは、アーティストの世界観やコンセプトなどアーティスト自身の活動を紹介し、アーティストの魅力を伝えて、ファンコミュニティ、アーティストコミュニティ&エコシステムを育てていくためのプラットフォームです。
         </p>
