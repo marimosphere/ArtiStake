@@ -64,7 +64,7 @@ const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
     <div className="w-full mx-auto text-white">
       <div className="bg-marimo-2 flex text-center grid lg:grid-cols-3">
         <p className="m-auto p-8 flex-1 text-white text-2xl">
-          Toatal Staked <br /> {artistTotalStaked} MATIC
+          Total Staked <br /> {artistTotalStaked} MATIC
         </p>
         <p className="m-auto p-8 flex-1 text-white text-2xl">
           APY
