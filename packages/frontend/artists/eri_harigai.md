@@ -5,7 +5,7 @@ aboutMyWork: Eri Harigai is a Japanese/Taiwanese stage visual artist experienced
 walletAddress: "eriharigai.eth"
 galleryUrl: "https://instagram.com/eri_harigai  https://tryshowtime.com/needles"
 shopUrl: "https://foundation.app/needles"
-avatar: "/assets/img/artists/eri_harigai/avatar.png"
+avatar: "/assets/img/artists/eri_harigai/avatar.jpg"
 thumbnail: "/assets/img/artists/eri_harigai/thumbnail.png"
 banner: "/assets/img/artists/eri_harigai/banner.png"
 mywork: "/assets/img/artists/eri_harigai/aboutMyWork.png"
