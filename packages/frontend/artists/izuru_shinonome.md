@@ -1,7 +1,7 @@
 ---
 name: Hikage
-description: Tattoo art creator and tattoo artist, Photographer, NFT artist, Create a mix of traditional design and photography. I like cyberpunk
-aboutMyWork: I want to tell the truth about this world full of lies and deceit by taking pictures and mixing them with tattoo designs. I want to use urban night scenes and neon lights to represent the light, and tattoo designs to represent the shadows. Where there is light, there is always shadow. Where there is newness, there is history. Where there is joy, there is sorrow I want to create art that can gently accompany someone's melancholy. In order to support Artistake, all staking rewards and donations to Piprycto will be sent to the management team's wallet.
+description: Lives and works in Tokyo. Graduated from Tokyo Metropolitan Art High School, majoring in fine arts and design. Started working as an NFT artist in 2021. Anifty certified painter. 東京都在住。東京都立芸術高等学校美術科・デザイン科卒業。2021年よりNFTアーティストとして活動開始。ANIFTY公認絵師。
+aboutMyWork:I create illustrations in the Japanese animation style. I want to bring my work to many foreign fans who are waiting for Japanese anime style NFT art.
 galleryUrl: "https://www.instagram.com/hikage369nft/?hl=ja"
 shopUrl: "https://nanakusa.io/market/HIKAGE369Omelas"
 walletAddress: "0xA671e6C908332Cf2394f46ADE2B476D4E8fc9792"
