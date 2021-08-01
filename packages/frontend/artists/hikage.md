@@ -1,5 +1,5 @@
 ---
-name: takio koizumi
+name: Hikage
 description: Tattoo art creator and tattoo artist, Photographer, NFT artist, Create a mix of traditional design and photography. I like cyberpunk
 aboutMyWork: I want to tell the truth about this world full of lies and deceit by taking pictures and mixing them with tattoo designs. I want to use urban night scenes and neon lights to represent the light, and tattoo designs to represent the shadows. Where there is light, there is always shadow. Where there is newness, there is history. Where there is joy, there is sorrow I want to create art that can gently accompany someone's melancholy.
 galleryUrl: "https://www.instagram.com/hikage369nft/?hl=ja"
