@@ -16,7 +16,7 @@ const Header: React.FC<HeaderProps> = ({ isConnectWallet }) => {
   const navs = [
     { text: "Home", to: "/", target: false },
     { text: "About", to: "/about", target: false },
-    { text: "How to get Matic", to: "#", target: true },
+    { text: "How to get Matic", to: "http://cryptoart.tokyo/how-to-get-matic/", target: true },
     { text: "How to get JPYC", to: "https://app.jpyc.jp/", target: true },
     /*{
       text: "Artist Registration",
