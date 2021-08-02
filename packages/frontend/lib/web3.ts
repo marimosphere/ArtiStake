@@ -12,7 +12,18 @@ const getAbis = () => {
   const tipContractAbi = externalContracts[networkId].contracts.tip.abi;
   const jpycAddress = externalContracts[networkId].contracts.jpyc.address;
   const jpycAbi = externalContracts[networkId].contracts.jpyc.abi;
-  return { stakeContractAddress, stakeContractAbi, tipContractAddress, tipContractAbi, jpycAddress, jpycAbi };
+  const usdcAddress = externalContracts[networkId].contracts.usdc.address;
+  const usdcAbi = externalContracts[networkId].contracts.usdc.abi;
+  return {
+    stakeContractAddress,
+    stakeContractAbi,
+    tipContractAddress,
+    tipContractAbi,
+    jpycAddress,
+    jpycAbi,
+    usdcAddress,
+    usdcAbi,
+  };
 };
 
 const getContract = (abi: any, address: string, signer?: ethers.Signer | ethers.providers.Provider) => {
@@ -35,4 +46,9 @@ export const getTipContract = (signer?: ethers.Signer | ethers.providers.Provide
 export const getJpycContract = (signer?: ethers.Signer | ethers.providers.Provider) => {
   const { jpycAddress, jpycAbi } = getAbis();
   return getContract(jpycAbi, jpycAddress, signer);
+};
+
+export const getUsdcContract = (signer?: ethers.Signer | ethers.providers.Provider) => {
+  const { usdcAddress, usdcAbi } = getAbis();
+  return getContract(usdcAbi, usdcAddress, signer);
 };
