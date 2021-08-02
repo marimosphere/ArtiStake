@@ -843,7 +843,7 @@ const jpycAbi = [
 export default {
   4: {
     contracts: {
-      tip: { address: "0x77e6Bd5c1988d8d766698F9CeEa5C24559b999f8", abi: tipAbi },
+      tip: { address: "0x75b0B516B47A27b1819D21B26203Abf314d42CCE", abi: tipAbi },
       stake: { address: "0xD1760AA0FCD9e64bA4ea43399Ad789CFd63C7809", abi: stakeAbi },
       jpyc: { address: "0x7314AEeC874A25A1131F49dA9679D05f8d931175", abi: jpycAbi },
     },

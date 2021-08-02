@@ -15,7 +15,6 @@ const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
 
   React.useEffect(() => {
     if (!library) return;
-
     refresh();
   }, [library]);
 
@@ -25,6 +24,9 @@ const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
       .then((list) => {
         setApy(list.data[0].liquidityRate);
       });
+    stakeContract.getArtistTotalStaked(artistWalletAddress).then((deposited) => {
+      setArtistTotalStaked(ethers.utils.formatEther(deposited.toString()).toString());
+    });
   }, []);
 
   const stake = async () => {

@@ -45,7 +45,7 @@ const Header: React.FC<HeaderProps> = ({ isConnectWallet }) => {
         {isConnectWallet && (
           <div className="overflow-hidden">
             {account ? (
-              <button className="text-white text-xs lg:text-sm focus:outline-none">{account}</button>
+              <button className="text-white text-2xs lg:text-sm focus:outline-none">{account}</button>
             ) : (
               <button
                 // @ts-ignore:
@@ -59,7 +59,7 @@ const Header: React.FC<HeaderProps> = ({ isConnectWallet }) => {
         )}
         <div>
           <FontAwesomeIcon
-            className="cursor-pointer text-white ml-8"
+            className="cursor-pointer text-white ml-2 md:ml-8"
             icon={faBars}
             onClick={() => setIsNavigationOpen(!isNavigactionOpen)}
           />
