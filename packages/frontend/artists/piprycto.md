@@ -1,7 +1,7 @@
 ---
 name: Piprycto
 description: Multimedia NFT project / Illustrations, Animations, Pixelart, Novels, Music, Games, and so on
-aboutMyWork: Piprycto is a multimedia NFT project from Japan. Cute characters created by top creators will appear in illustrations, animations, PixelArt, novels, music, games, and much more!
+aboutMyWork: Piprycto is a multimedia NFT project from Japan. Cute characters created by top creators will appear in illustrations, animations, PixelArt, novels, music, games, and much more! In order to support Artistake, all staking rewards and donations to Piprycto will be sent to the management team's wallet.
 galleryUrl: "https://www.cryptovoxels.com/parcels/3791"
 shopUrl: "https://opensea.io/collection/piprycto-v2"
 walletAddress: "0x7508e11f9DEA26Bf81B033b44eAE3F7A750F4D1E"
