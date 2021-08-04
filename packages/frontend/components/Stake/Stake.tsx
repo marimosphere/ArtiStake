@@ -14,7 +14,6 @@ const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
   const stakeContract = useArtiStake();
 
   React.useEffect(() => {
-    if (!library) return;
     refresh();
   }, [account]);
 
