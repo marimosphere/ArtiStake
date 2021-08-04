@@ -16,7 +16,7 @@ const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
   React.useEffect(() => {
     if (!library) return;
     refresh();
-  }, [library]);
+  }, [account]);
 
   React.useEffect(() => {
     axios
