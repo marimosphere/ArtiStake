@@ -5,11 +5,11 @@ aboutMyWork: I create illustrations in the Japanese animation style. I want to b
 galleryUrl: "https://izuru01.tumblr.com/"
 shopUrl: "https://anifty.jp/@izuru_shinonome"
 walletAddress: "0xA671e6C908332Cf2394f46ADE2B476D4E8fc9792"
-avatar: "/assets/img/artists/izuru_shinonome/avatar.jpg"
+avatar: "/assets/img/artists/izuru_shinonome/avatar.png"
 thumbnail: "/assets/img/artists/izuru_shinonome/thumbnail.jpg"
-banner: "/assets/img/artists/izuru_shinonome/banner.jpg"
+banner: "/assets/img/artists/izuru_shinonome/banner.png"
 mywork: "/assets/img/artists/izuru_shinonome/aboutMyWork.png"
-galleryTumbnail: "/assets/img/artists/izuru_shinonome/gallery.jpg"
-shopTumbnail: "/assets/img/artists/izuru_shinonome/shop.jpg"
+galleryTumbnail: "/assets/img/artists/izuru_shinonome/gallery.png"
+shopTumbnail: "/assets/img/artists/izuru_shinonome/shop.png"
 ---
 
