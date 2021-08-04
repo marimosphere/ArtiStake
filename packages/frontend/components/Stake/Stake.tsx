@@ -24,9 +24,6 @@ const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
       .then((list) => {
         setApy(list.data[0].liquidityRate);
       });
-    stakeContract.getArtistTotalStaked(artistWalletAddress).then((deposited) => {
-      setArtistTotalStaked(ethers.utils.formatEther(deposited.toString()).toString());
-    });
   }, []);
 
   const stake = async () => {
@@ -66,7 +63,7 @@ const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
     <div className="w-full mx-auto text-white">
       <div className="bg-marimo-2 flex text-center grid lg:grid-cols-3">
         <p className="m-auto p-8 flex-1 text-white text-2xl">
-          Total Staked <br /> {artistTotalStaked} MATIC
+          Total Staked <br /> {account && <>{artistTotalStaked} MATIC</>}
         </p>
         <p className="m-auto p-8 flex-1 text-white text-2xl">
           APY

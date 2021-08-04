@@ -12,4 +12,3 @@ mywork: "/assets/img/artists/izuru_shinonome/aboutMyWork.png"
 galleryTumbnail: "/assets/img/artists/izuru_shinonome/gallery.png"
 shopTumbnail: "/assets/img/artists/izuru_shinonome/shop.png"
 ---
-
