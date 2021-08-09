@@ -55,7 +55,7 @@ https://prtimes.jp/main/html/rd/p/000000002.000081751.html
 https://finders.me/articles.php?id=2870
 
 そして 2021/7/9 - 7/17 の会期で
-CryptoArtWeekAsia in Tokyo 　として、フィジカル NFT 展覧会を企画制作しました！
+CryptoArtWeekAsia in Tokyo　として、フィジカルNFT展覧会を企画制作しました！
 
 https://www.cryptoartweekasia.com/
 
