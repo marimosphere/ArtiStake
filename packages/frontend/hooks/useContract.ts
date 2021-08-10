@@ -17,3 +17,8 @@ export const useJpyc = () => {
   const { library } = useActiveWeb3React();
   return useMemo(() => getJpycContract(library.getSigner()), [library]);
 };
+
+export const useUsdc = () => {
+  const { library } = useActiveWeb3React();
+  return useMemo(() => getJpycContract(library.getSigner()), [library]);
+};

@@ -846,6 +846,7 @@ export default {
       tip: { address: "0x75b0B516B47A27b1819D21B26203Abf314d42CCE", abi: tipAbi },
       stake: { address: "0xD1760AA0FCD9e64bA4ea43399Ad789CFd63C7809", abi: stakeAbi },
       jpyc: { address: "0x7314AEeC874A25A1131F49dA9679D05f8d931175", abi: jpycAbi },
+      usdc: { address: "0x7314AEeC874A25A1131F49dA9679D05f8d931175", abi: jpycAbi },
     },
   },
   137: {
@@ -853,6 +854,7 @@ export default {
       tip: { address: "0xef359560f038286379f41C2E59A30ad41b3CD4Cc", abi: tipAbi },
       stake: { address: "0x481d7c4a9B6Cc3B7CD70fC39fe765415170241B3", abi: stakeAbi },
       jpyc: { address: "0x6AE7Dfc73E0dDE2aa99ac063DcF7e8A63265108c", abi: jpycAbi },
+      usdc: { address: "0x2791bca1f2de4661ed88a30c99a7a9449aa84174", abi: jpycAbi },
     },
   },
 };
