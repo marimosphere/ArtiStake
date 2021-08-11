@@ -26,29 +26,29 @@ const getAbis = () => {
   };
 };
 
-const getContract = (abi: any, address: string, signer?: ethers.Signer | ethers.providers.Provider) => {
+export const simpleRpcProvider = new ethers.providers.JsonRpcProvider(rpc);
+
+const getContract = (abi: any, address: string, signer?: ethers.Signer) => {
   const signerOrProvider = signer ?? simpleRpcProvider;
   return new ethers.Contract(address, abi, signerOrProvider);
 };
 
-export const simpleRpcProvider = new ethers.providers.JsonRpcProvider(rpc);
-
-export const getArtistakeContract = (signer?: ethers.Signer | ethers.providers.Provider) => {
+export const getArtistakeContract = (signer?: ethers.Signer) => {
   const { stakeContractAddress, stakeContractAbi } = getAbis();
   return getContract(stakeContractAbi, stakeContractAddress, signer);
 };
 
-export const getTipContract = (signer?: ethers.Signer | ethers.providers.Provider) => {
+export const getTipContract = (signer?: ethers.Signer) => {
   const { tipContractAddress, tipContractAbi } = getAbis();
   return getContract(tipContractAbi, tipContractAddress, signer);
 };
 
-export const getJpycContract = (signer?: ethers.Signer | ethers.providers.Provider) => {
+export const getJpycContract = (signer?: ethers.Signer) => {
   const { jpycAddress, jpycAbi } = getAbis();
   return getContract(jpycAbi, jpycAddress, signer);
 };
 
-export const getUsdcContract = (signer?: ethers.Signer | ethers.providers.Provider) => {
+export const getUsdcContract = (signer?: ethers.Signer) => {
   const { usdcAddress, usdcAbi } = getAbis();
   return getContract(usdcAbi, usdcAddress, signer);
 };
