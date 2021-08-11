@@ -45,7 +45,11 @@ const Tip: React.FC<TipProps> = ({ artistWalletAddress }) => {
       {!currency ? (
         <div className="flex w-full text-center">
           <div className="w-1/2">
-            <img className="mx-auto h-20 object-cover mt-10 mb-4" src={`/assets/img/JPYC_logo.png`} />
+            <img
+              className="mx-auto h-20 object-cover mt-10 mb-4"
+              src={`/assets/img/JPYC.png`}
+              onClick={() => setCurrency("JPYC")}
+            />
             <button
               onClick={() => setCurrency("JPYC")}
               className="w-40 h-8 bg-marimo-5 hover:opacity-75 text-white rounded-lg"
@@ -54,7 +58,11 @@ const Tip: React.FC<TipProps> = ({ artistWalletAddress }) => {
             </button>
           </div>
           <div className="w-1/2">
-            <img className="mx-auto h-20 object-cover mt-10 mb-4" src={`/assets/img/USDC.png`} />
+            <img
+              className="mx-auto h-20 object-cover mt-10 mb-4"
+              src={`/assets/img/USDC.png`}
+              onClick={() => setCurrency("USDC")}
+            />
             <button
               onClick={() => setCurrency("USDC")}
               className="w-40 h-8 bg-marimo-5 hover:opacity-75 text-white rounded-lg"

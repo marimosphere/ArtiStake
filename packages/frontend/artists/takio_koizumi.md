@@ -9,6 +9,6 @@ avatar: "/assets/img/artists/takio_koizumi/avatar.jpg"
 thumbnail: "/assets/img/artists/takio_koizumi/thumbnail.png"
 banner: "/assets/img/artists/takio_koizumi/banner.jpg"
 mywork: "/assets/img/artists/takio_koizumi/aboutMyWork.png"
-galleryTumbnail: "/assets/img/artists/toratakio_koizumizo/gallery.png"
+galleryTumbnail: "/assets/img/artists/takio_koizumi/gallery.png"
 shopTumbnail: "/assets/img/artists/takio_koizumi/shop.png"
 ---
