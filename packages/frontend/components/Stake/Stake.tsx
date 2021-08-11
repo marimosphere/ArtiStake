@@ -17,9 +17,6 @@ const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
 
   React.useEffect(() => {
     refresh();
-  }, [account]);
-
-  React.useEffect(() => {
     axios
       .get("https://aave-api-v2.aave.com/data/liquidity/v2?poolId=0xd05e3E715d945B59290df0ae8eF85c1BdB684744")
       .then((list) => {
@@ -40,7 +37,6 @@ const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
 
   const refresh = () => {
     stakeContract.getStakerBalanceWithInterest(artistWalletAddress, account).then((deposited) => {
-      console.log(deposited);
       setDepositedAmount(ethers.utils.formatEther(deposited.toString()).toString());
     });
 
