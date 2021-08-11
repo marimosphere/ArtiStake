@@ -27,6 +27,7 @@ const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
   }, []);
 
   React.useEffect(() => {
+    if (!account) return;
     stakeContract.getStakerBalanceWithInterest(artistWalletAddress, account).then((deposited) => {
       setDepositedAmount(ethers.utils.formatEther(deposited.toString()).toString());
     });
@@ -59,7 +60,7 @@ const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
     <div className="w-full mx-auto text-white">
       <div className="bg-marimo-2 flex text-center grid lg:grid-cols-3">
         <p className="m-auto p-8 flex-1 text-white text-2xl">
-          Total Staked <br /> {account && <>{artistTotalStaked} MATIC</>}
+          Total Staked <br /> {artistTotalStaked} MATIC
         </p>
         <p className="m-auto p-8 flex-1 text-white text-2xl">
           APY
