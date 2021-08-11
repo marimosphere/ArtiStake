@@ -4,6 +4,7 @@ import { useWallet } from "../../hooks/useWallet";
 import { useArtiStake } from "../../hooks/useContract";
 import { Contract, ethers } from "ethers";
 import axios from "axios";
+import { simpleRpcProvider, getArtistakeContract } from "../../lib/web3";
 
 const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
   const [connectWallet, account, library] = useWallet();
@@ -11,7 +12,8 @@ const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
   const [depositedAmount, setDepositedAmount] = React.useState("0");
   const [artistTotalStaked, setArtistTotalStaked] = React.useState("0");
   const [apy, setApy] = React.useState("0");
-  const stakeContract = useArtiStake();
+  const stakeContractWithSigner = useArtiStake();
+  const stakeContract = getArtistakeContract();
 
   React.useEffect(() => {
     if (!library) return;
@@ -33,11 +35,11 @@ const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
     console.log("stake");
 
     const value = ethers.utils.parseEther(stakeAmount).toString();
-    await stakeContract.deposit(artistWalletAddress, 0, { value: value });
+    await stakeContractWithSigner.deposit(artistWalletAddress, 0, { value: value });
   };
 
   const withdraw = async () => {
-    stakeContract.withdraw(artistWalletAddress);
+    stakeContractWithSigner.withdraw(artistWalletAddress);
   };
 
   const refresh = () => {
