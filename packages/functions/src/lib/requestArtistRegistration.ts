@@ -104,7 +104,7 @@ const main = async (
 
   const imageTrees = postImageBlobsResponses.map((postImageBlobsResponse, i) => {
     return {
-      path: `packages/frontend/public/assets/img/artists/${imagesFileName[i]}.png`,
+      path: `packages/frontend/public/assets/img/artists/${id}/${imagesFileName[i]}.png`,
       mode: "100644",
       type: "blob",
       sha: postImageBlobsResponse.data.sha,
