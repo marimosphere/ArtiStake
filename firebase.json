@@ -1,6 +1,7 @@
 {
   "hosting": {
     "public": "packages/frontend/out",
+    "predeploy": "yarn workspace frontend build",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {
@@ -12,6 +13,7 @@
   },
   "functions": {
     "source": "packages/functions",
+    "predeploy": "yarn workspace functions build",
     "runtime": "nodejs14"
   }
 }

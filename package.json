@@ -22,9 +22,6 @@
     "dev": "run-p dev:*",
     "dev:functions": "yarn workspace functions dev",
     "dev:react-app": "yarn workspace frontend dev",
-    "dev:firebase": "firebase emulators:start --only functions",
-    "build": "yarn workspace frontend build",
-    "export": "yarn workspace frontend export",
-    "deploy": "yarn workspace frontend deploy"
+    "dev:firebase": "firebase emulators:start --only functions"
   }
 }
