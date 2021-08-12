@@ -15,7 +15,7 @@ const ArtistWorks: React.FC<ArtistWorksProps> = ({
       <div className="bg-marimo-2 p-4">
         <p className="text-center text-white text-xl">Artist Gallery</p>
         <div className="p-8">
-          <a href={galleryUrl} target="_blank">
+          <a href={galleryUrl} target="_blank" rel="noreferrer">
             <img className="mx-auto h-48 object-cover" src={galleryTumbnail} />
           </a>
         </div>
@@ -23,7 +23,7 @@ const ArtistWorks: React.FC<ArtistWorksProps> = ({
       <div className="bg-marimo-1 p-4">
         <p className="text-center text-white text-xl">Artist Store</p>
         <div className="p-8">
-          <a href={shopUrl} target="_blank">
+          <a href={shopUrl} target="_blank" rel="noreferrer">
             <img className="mx-auto h-48 object-cover" src={shopTumbnail} />
           </a>
         </div>
