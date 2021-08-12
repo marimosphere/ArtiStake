@@ -1,4 +1,5 @@
 import { Octokit } from "@octokit/core";
+import axios from "axios";
 
 const GITHUB_ACCESS_TOKEN = process.env.GITHUB_ACCESS_TOKEN || "";
 const GITHUB_ORG = process.env.GITHUB_ORG || "";
@@ -20,7 +21,7 @@ const main = async (
   const octokit = new Octokit({ auth: GITHUB_ACCESS_TOKEN });
   const owner = GITHUB_ORG;
   const repo = GITHUB_REPO;
-  const encoding = "utf-8";
+
   const baseBranch = "main";
 
   // 現在のCommitのshaとtree_shaを取得する
@@ -41,8 +42,21 @@ const main = async (
     sha: latestCommitSha,
   });
 
+  const fileId = "1NGoOM7D57u4Ci4iblpBVh3zxTjAixiKL";
+  const googleDriveBasePath = "https://drive.google.com/uc?id=";
+  const res = await axios.get(`${googleDriveBasePath}${fileId}`, { responseType: "arraybuffer" });
+  const imageContent = Buffer.from(res.data, "binary").toString("base64");
+
+  const postImageBlobsResponse = await octokit.request("POST /repos/{owner}/{repo}/git/blobs", {
+    owner,
+    repo,
+    content: imageContent,
+    encoding: "base64",
+  });
+  const createdImageContentBlobSha = postImageBlobsResponse.data.sha;
+
   // BLOB作成
-  const content = `---
+  const mdContent = `---
 name: ${name}
 description: ${description}
 aboutMyWork: ${aboutMyWork}
@@ -51,13 +65,13 @@ galleryUrl: ${galleryUrl}
 shopUrl: ${shopUrl}
 ---
   `;
-  const postBlobsResponse = await octokit.request("POST /repos/{owner}/{repo}/git/blobs", {
+  const postMdBlobsResponse = await octokit.request("POST /repos/{owner}/{repo}/git/blobs", {
     owner,
     repo,
-    content,
-    encoding,
+    content: mdContent,
+    encoding: "utf-8",
   });
-  const createdContentBlobSha = postBlobsResponse.data.sha;
+  const createdMdContentBlobSha = postMdBlobsResponse.data.sha;
 
   // 現在のTree取得
   const getTreesResponse = await octokit.request("GET /repos/{owner}/{repo}/git/trees/{tree_sha}", {
@@ -74,7 +88,13 @@ shopUrl: ${shopUrl}
       path: `${id}.md`,
       mode: "100644",
       type: "blob",
-      sha: createdContentBlobSha,
+      sha: createdMdContentBlobSha,
+    },
+    {
+      path: `${id}.png`,
+      mode: "100644",
+      type: "blob",
+      sha: createdImageContentBlobSha,
     },
   ]) as any;
 
