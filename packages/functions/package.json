@@ -8,7 +8,7 @@
   },
   "main": "lib/index.js",
   "dependencies": {
-    "axios": "^0.21.1",
+    "@octokit/core": "^3.5.1",
     "firebase-admin": "^9.8.0",
     "firebase-functions": "^3.14.1"
   },
@@ -20,6 +20,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.22.0",
     "firebase-functions-test": "^0.2.0",
+    "ts-node": "^10.2.0",
     "typescript": "^3.8.0"
   },
   "private": true
