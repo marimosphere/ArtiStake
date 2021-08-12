@@ -4,11 +4,33 @@ function onFormSubmit(e) {
   var allResponses = form.getResponses();
   var latestResponse = allResponses[allResponses.length - 1];
   var response = latestResponse.getItemResponses();
+  var images = ["avatar", "thumbnail", "banner", "gallery", "shop"];
+  var mapping = {
+    ID: "id",
+    "Artist Name": "name",
+    Description: "description",
+    AboutMyWork: "aboutMyWork",
+    walletAddress: "walletAddress",
+    "avatar.png (or .jpg)": "avatar",
+    "thumbnail.png (or .jpg)": "thumbnail",
+    "banner.png (or .jpg)": "banner",
+    "gallery.png (or .jpg)": "gallery",
+    "shop.png (or .jpg)": "shop",
+    galleryUrl: "galleryUrl",
+    shopUrl: "shopUrl",
+  };
   var payload = {};
   for (var i = 0; i < response.length; i++) {
     var question = response[i].getItem().getTitle();
     var answer = response[i].getResponse();
-    payload[question] = answer;
+    var key = mapping[question];
+    if (key) {
+      if (images.includes(key)) {
+        payload[key] = answer[0];
+      } else {
+        payload[key] = answer;
+      }
+    }
   }
   var options = {
     method: "post",
