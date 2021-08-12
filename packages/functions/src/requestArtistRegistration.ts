@@ -21,8 +21,25 @@ const main = async (
   const owner = GITHUB_ORG;
   const repo = GITHUB_REPO;
   const encoding = "utf-8";
+  const baseBranch = "main";
 
-  // TODO: Branch作成
+  // 現在のCommitのshaとtree_shaを取得する
+  const getCommitsResponse = await octokit.request(`GET /repos/{owner}/{repo}/commits/${baseBranch}`, {
+    owner: GITHUB_ORG,
+    repo: GITHUB_REPO,
+  });
+  const latestTreeSha = getCommitsResponse.data.commit.tree.sha;
+  const latestCommitSha = getCommitsResponse.data.sha;
+
+  // Branch作成
+  const headBranch = `create-${id}`;
+  const ref = `heads/${headBranch}`;
+  await octokit.request("POST /repos/{owner}/{repo}/git/refs", {
+    owner,
+    repo,
+    ref: `refs/${ref}`,
+    sha: latestCommitSha,
+  });
 
   // BLOB作成
   const content = `---
@@ -41,14 +58,6 @@ shopUrl: ${shopUrl}
     encoding,
   });
   const createdContentBlobSha = postBlobsResponse.data.sha;
-
-  // 現在のCommitのshaとtree_shaを取得する
-  const getCommitsResponse = await octokit.request("GET /repos/{owner}/{repo}/commits/main", {
-    owner: GITHUB_ORG,
-    repo: GITHUB_REPO,
-  });
-  const latestTreeSha = getCommitsResponse.data.commit.tree.sha;
-  const latestCommitSha = getCommitsResponse.data.sha;
 
   // 現在のTree取得
   const getTreesResponse = await octokit.request("GET /repos/{owner}/{repo}/git/trees/{tree_sha}", {
@@ -89,19 +98,25 @@ shopUrl: ${shopUrl}
   const updatedCommitSha = postCommitsResponse.data.sha;
 
   // Remote更新
-  const patchCommitsResponse = await octokit.request("PATCH /repos/{owner}/{repo}/git/refs/{ref}", {
+  await octokit.request("PATCH /repos/{owner}/{repo}/git/refs/{ref}", {
     owner,
     repo,
-    ref: "heads/main",
+    ref,
     sha: updatedCommitSha,
   });
-  console.log(patchCommitsResponse);
 
   // PR作成
+  await octokit.request("POST /repos/{owner}/{repo}/pulls", {
+    owner,
+    repo,
+    title: `${id} の作成`,
+    head: headBranch,
+    base: baseBranch,
+  });
 };
 
 main(
-  "taijusanagi",
+  "taijusanagi-3",
   "真木大樹",
   "This is me",
   "This is my work",
