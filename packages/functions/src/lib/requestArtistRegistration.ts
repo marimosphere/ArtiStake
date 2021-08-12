@@ -1,5 +1,6 @@
 import { Octokit } from "@octokit/core";
 import axios from "axios";
+import * as yaml from "js-yaml";
 
 interface Config {
   auth: string;
@@ -48,21 +49,27 @@ const main = async (
     sha: latestCommitSha,
   });
 
+  const artist = {
+    name,
+    description,
+    aboutMyWork,
+    walletAddress,
+    avatar: `/assets/img/artists/${id}/avatar.png`,
+    thumbnail: `/assets/img/artists/${id}/thumbnail.png`,
+    banner: `/assets/img/artists/${id}/banner.png`,
+    galleryTumbnail: `/assets/img/artists/${id}/gallery.png`,
+    shopTumbnail: `/assets/img/artists/${id}/shop.png`,
+    galleryUrl,
+    shopUrl,
+  };
+
+  const artistYml = yaml.dump(artist);
+
   // MDファイルのBLOB作成
   const mdContent = `---
-    name: ${name}
-    description: ${description}
-    aboutMyWork: ${aboutMyWork}
-    walletAddress: ${walletAddress}
-    avatar: "/assets/img/artists/${id}/avatar.png"
-    thumbnail: "/assets/img/artists/${id}/thumbnail.png"
-    banner: "/assets/img/artists/${id}/banner.png"
-    galleryTumbnail: "/assets/img/artists/${id}/gallery.png"
-    shopTumbnail: "/assets/img/artists/${id}/shop.png"
-    galleryUrl: ${galleryUrl}
-    shopUrl: ${shopUrl}
-    ---
-      `;
+${artistYml}
+---
+`;
   const postMdBlobsResponse = await octokit.request("POST /repos/{owner}/{repo}/git/blobs", {
     owner,
     repo,
