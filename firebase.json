@@ -9,5 +9,9 @@
       }
     ],
     "cleanUrls": true
+  },
+  "functions": {
+    "source": "packages/functions",
+    "runtime": "nodejs14"
   }
 }
