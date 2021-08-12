@@ -1,6 +1,6 @@
 ---
 name: keigoinoue
-description: 'Illustrator, designer, digital video creator. Creator of "Future Signage Art".' Collaborations: Kizuna Ai, Eve, Ado, and more
+description: 'Illustrator, designer, digital video creator. Creator of "Future Signage Art". Collaborations: Kizuna Ai, Eve, Ado, and more'
 aboutMyWork: 近未来のイラストをテーマに映像とイラストを組み合わせた手法で作品を発表し、アパレル展開等も行っています。
 galleryUrl: "https://www.keigo-inoue.com/gallery"
 shopUrl: "https://keigo-inoue.shop/"
