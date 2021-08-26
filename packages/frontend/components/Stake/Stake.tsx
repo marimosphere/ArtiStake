@@ -6,6 +6,12 @@ import { Contract, ethers } from "ethers";
 import axios from "axios";
 import { getArtistakeContract } from "../../lib/web3";
 
+declare global {
+  interface Window {
+    ethereum?: any;
+  }
+}
+
 const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
   const [connectWallet, account, library] = useWallet();
   const [stakeAmount, setStakeAmount] = React.useState("");
@@ -16,6 +22,20 @@ const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
   const stakeContract = getArtistakeContract();
 
   React.useEffect(() => {
+    const data = [
+      {
+        chainId: "0x89",
+        chainName: "Matic Network",
+        nativeCurrency: {
+          name: "Matic",
+          symbol: "Matic",
+          decimals: 18,
+        },
+        rpcUrls: ["https://rpc-mainnet.matic.network/"],
+        blockExplorerUrls: ["https://polygonscan.com/"],
+      },
+    ];
+    window.ethereum.request({ method: "wallet_addEthereumChain", params: data });
     stakeContract.getArtistTotalStaked(artistWalletAddress).then((deposited) => {
       setArtistTotalStaked(ethers.utils.formatEther(deposited.toString()).toString());
     });
