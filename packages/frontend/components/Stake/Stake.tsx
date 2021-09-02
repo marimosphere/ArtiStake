@@ -35,7 +35,9 @@ const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
         blockExplorerUrls: ["https://polygonscan.com/"],
       },
     ];
-    // window.ethereum.request({ method: "wallet_addEthereumChain", params: data });
+    if (window.ethereum) {
+      window.ethereum.request({ method: "wallet_addEthereumChain", params: data });
+    }
     stakeContract.getArtistTotalStaked(artistWalletAddress).then((deposited) => {
       setArtistTotalStaked(ethers.utils.formatEther(deposited.toString()).toString());
     });
