@@ -14,6 +14,7 @@ aboutMyWork: >-
   YOU. His work will be finalized inside your soul."
 walletAddress: '0x04f479e4228A05E995aa88b8C35f0C57E09d79e4'
 avatar: /assets/img/artists/vjyou/avatar.png
+mywork: "/assets/img/artists/mikehige/aboutMyWork.png"
 thumbnail: /assets/img/artists/vjyou/thumbnail.png
 banner: /assets/img/artists/vjyou/banner.png
 galleryTumbnail: /assets/img/artists/vjyou/gallery.png
