@@ -21,6 +21,7 @@ export const createArtist = functions.region("asia-northeast1").https.onRequest(
     avatar,
     thumbnail,
     banner,
+    mywork,
     gallery,
     shop,
     galleryUrl,
@@ -35,6 +36,7 @@ export const createArtist = functions.region("asia-northeast1").https.onRequest(
     !avatar ||
     !thumbnail ||
     !banner ||
+    !mywork ||
     !gallery ||
     !shop ||
     !galleryUrl ||
@@ -67,6 +69,7 @@ export const createArtist = functions.region("asia-northeast1").https.onRequest(
     avatar,
     thumbnail,
     banner,
+    mywork,
     gallery,
     shop,
     galleryUrl,

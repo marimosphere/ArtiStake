@@ -106,7 +106,7 @@ const Tip: React.FC<TipProps> = ({ artistWalletAddress }) => {
                 {tipAmount} {currency}
               </p>
               <button onClick={tip} className="w-24 h-8 bg-marimo-5 text-white font-bold rounded-lg">
-                Tip
+                Tip on Polygon
               </button>
             </div>
           ) : (

@@ -11,9 +11,9 @@ module.exports = {
         "marimo-5": "#60A5FA",
         "marimo-6": "#4B5563",
       },
-    },
-    fontSize: {
-      "2xs": "0.5em",
+      fontSize: {
+        "2xs": "0.5em",
+      },
     },
   },
   variants: {

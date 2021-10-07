@@ -96,7 +96,7 @@ const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
       <div className="bg-marimo-3 grid lg:grid-cols-2">
         <div className="m-auto w-2/3 my-8 text-center">
           <div className="mb-2 text-xl">
-            <p>Stake</p>
+            <p>Stake on Polygon</p>
           </div>
           <input
             type="number"

@@ -11,8 +11,8 @@ interface Config {
 // FIXME: パフォーマンスを上げるためにいくつかの処理を並行で動かすことができるが
 // そこまで厳密に効率を求めた実装していない、動いていればOK
 const main = async (
-  id: string,
-  name: string,
+  rawId: string,
+  rawName: string,
   description: string,
   aboutMyWork: string,
   walletAddress: string,
@@ -26,6 +26,9 @@ const main = async (
   shopUrl: string,
   config: Config
 ): Promise<void> => {
+  const id = rawId.toLowerCase();
+  const name = rawName.toLowerCase();
+
   const octokit = new Octokit({ auth: config.auth });
   const owner = config.owner;
   const repo = config.repo;
@@ -51,7 +54,7 @@ const main = async (
   });
 
   const artist = {
-    name,
+    name: name,
     description,
     aboutMyWork,
     walletAddress,

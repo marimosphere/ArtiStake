@@ -4,7 +4,7 @@
 
 @layer utilities {
   .marimo-tracking-hero {
-    letter-spacing: 1em;
-    margin-right: -1em;
+    letter-spacing: 0.4em;
+    margin-right: -0.4em;
   }
 }
