@@ -19,6 +19,7 @@ const main = async (
   avatar: string,
   thumbnail: string,
   banner: string,
+  mywork: string,
   gallery: string,
   shop: string,
   galleryUrl: string,
@@ -57,6 +58,7 @@ const main = async (
     avatar: `/assets/img/artists/${id}/avatar.png`,
     thumbnail: `/assets/img/artists/${id}/thumbnail.png`,
     banner: `/assets/img/artists/${id}/banner.png`,
+    mywork: `/assets/img/artists/${id}/mywork.png`,
     galleryTumbnail: `/assets/img/artists/${id}/gallery.png`,
     shopTumbnail: `/assets/img/artists/${id}/shop.png`,
     galleryUrl,
@@ -80,8 +82,8 @@ ${artistYml}
 
   // 画像ファイルのBLOB作成
   // This order cannot be changed
-  const images = [avatar, thumbnail, banner, gallery, shop];
-  const imagesFileName = ["avatar", "thumbnail", "banner", "gallery", "shop"];
+  const images = [avatar, thumbnail, banner, mywork, gallery, shop];
+  const imagesFileName = ["avatar", "thumbnail", "banner", "mywork", "gallery", "shop"];
 
   const googleDriveBasePath = "https://drive.google.com/uc?id=";
   const imageResponses = await Promise.all(

@@ -65,7 +65,7 @@ aboutMyWork: >-
   I hope my work will make you reflect on this question.
 
   "
-walletAddress: '0x3Eb7C6622924d92371724d3D597b77CF16193D8a'
+walletAddress: "0x3Eb7C6622924d92371724d3D597b77CF16193D8a"
 avatar: /assets/img/artists/tomohideikeya/avatar.png
 thumbnail: /assets/img/artists/tomohideikeya/thumbnail.png
 banner: /assets/img/artists/tomohideikeya/banner.png
@@ -73,5 +73,4 @@ galleryTumbnail: /assets/img/artists/tomohideikeya/gallery.png
 shopTumbnail: /assets/img/artists/tomohideikeya/shop.png
 galleryUrl: http://tomohide-ikeya.com
 shopUrl: https://www.artsy.net/artist/tomohide-ikeya
-
 ---

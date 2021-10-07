@@ -115,7 +115,7 @@ aboutMyWork: >-
   東京⇔京都を拠点に活動する現代美術サークル。
 
   「ストリート・イーサネット・フィールド」という現実と仮想の重なりをテーマに、個人的な記憶を物語や神話と交差しながら社会的な記録に変換する。作品は平面から立体や映像まで幅広く、クラブカルチャーやオタクカルチャーなどすべての境界線を曖昧にする。"
-walletAddress: '0x5a46449117d7a6461ad9b39d66f85ed770610e5b'
+walletAddress: "0x5a46449117d7a6461ad9b39d66f85ed770610e5b"
 avatar: /assets/img/artists/excalibur/avatar.png
 thumbnail: /assets/img/artists/excalibur/thumbnail.png
 banner: /assets/img/artists/excalibur/banner.png
@@ -123,5 +123,4 @@ galleryTumbnail: /assets/img/artists/excalibur/gallery.png
 shopTumbnail: /assets/img/artists/excalibur/shop.png
 galleryUrl: https://www.entaku.net/
 shopUrl: https://superrare.com/excalibur
-
 ---
