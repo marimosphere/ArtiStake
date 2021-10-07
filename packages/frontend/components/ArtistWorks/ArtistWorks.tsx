@@ -29,7 +29,7 @@ const ArtistWorks: React.FC<ArtistWorksProps> = ({
         </div>
       </div>
       <div className="bg-marimo-2 p-4">
-        <p className="text-center text-white text-xl">Tip to Artist</p>
+        <p className="text-center text-white text-xl">Tip to Artist on Polygon</p>
         <div className="flex justify-center p-8">
           <Tip artistWalletAddress={walletAddress} />
         </div>

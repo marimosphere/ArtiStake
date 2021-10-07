@@ -1,11 +1,11 @@
 import * as React from "react";
 import { useWallet } from "../../hooks/useWallet";
 import { useTip, useJpyc, useUsdc } from "../../hooks/useContract";
-import { Contract, ethers } from "ethers";
+import { ethers } from "ethers";
 import { TipProps } from "./types";
 
 const Tip: React.FC<TipProps> = ({ artistWalletAddress }) => {
-  const [tipStatus, setTipStatus] = React.useState<"approve" | "tip" | "confirm">("approve");
+  const [tipStatus, setTipStatus] = React.useState<"tip" | "confirm">("tip");
   const [tipAmount, setTipAmount] = React.useState("");
   const [explorer, setExplorer] = React.useState("");
   const [errorMessage, setErrorMessage] = React.useState("");
@@ -15,24 +15,22 @@ const Tip: React.FC<TipProps> = ({ artistWalletAddress }) => {
   const jpycContract = useJpyc();
   const usdcContract = useUsdc();
 
-  const approve = async () => {
-    if (!tipAmount) {
-      setErrorMessage("please input amount");
-      return;
-    }
+  const tip = async () => {
     const value = ethers.utils.parseEther(tipAmount).toString();
     const contract = currency == "JPYC" ? jpycContract : usdcContract;
-    await contract.approve(tipContract.address, value);
-    setTipStatus("tip");
-    setErrorMessage("");
-  };
-
-  const tip = async () => {
-    setTipStatus("confirm");
-    const value = ethers.utils.parseEther(tipAmount).toString();
-    const currencyAddress = currency == "JPYC" ? jpycContract.address : usdcContract.address;
-    const { hash: tx } = await tipContract.tip(currencyAddress, artistWalletAddress, value);
-    setExplorer(`https://polygonscan.com/tx/${tx}`);
+    const allowance = await contract.allowance(account, tipContract.address);
+    console.log(allowance);
+    console.log(value);
+    if (ethers.BigNumber.from(value).gt(allowance)) {
+      await contract.approve(tipContract.address, value);
+    }
+    try {
+      const { hash: tx } = await tipContract.tip(contract.address, artistWalletAddress, value);
+      setTipStatus("confirm");
+      setExplorer(`https://polygonscan.com/tx/${tx}`);
+    } catch (err) {
+      setErrorMessage(err.message);
+    }
   };
 
   const handleTipAmount = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -84,7 +82,7 @@ const Tip: React.FC<TipProps> = ({ artistWalletAddress }) => {
                 Connect Wallet
               </button>
             </div>
-          ) : tipStatus === "approve" ? (
+          ) : tipStatus === "tip" ? (
             <div className="text-center">
               <input
                 onChange={handleTipAmount}
@@ -93,26 +91,14 @@ const Tip: React.FC<TipProps> = ({ artistWalletAddress }) => {
                 placeholder={currency}
                 className="h-8 rounded-l-lg text-right border-2 border-marimo-5 pr-2"
               />
-              <button
-                onClick={approve}
-                className="w-24 h-8 bg-marimo-5 hover:opacity-75 text-white font-bold rounded-r-lg"
-              >
-                Approve
-              </button>
-            </div>
-          ) : tipStatus === "tip" ? (
-            <div className="text-center">
-              <p className="text-white text-base text-center">
-                {tipAmount} {currency}
-              </p>
-              <button onClick={tip} className="w-24 h-8 bg-marimo-5 text-white font-bold rounded-lg">
-                Tip on Polygon
+              <button onClick={tip} className="w-24 h-8 bg-marimo-5 hover:opacity-75 text-white font-bold rounded-r-lg">
+                Tip
               </button>
             </div>
           ) : (
             <div className="">
               <p className="text-white text-base text-center">
-                Thank you!{" "}
+                Thank you!
                 <a href={explorer} className="underline">
                   Receipt
                 </a>

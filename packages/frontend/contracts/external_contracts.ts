@@ -841,20 +841,20 @@ const jpycAbi = [
 ];
 
 export default {
-  4: {
-    contracts: {
-      tip: { address: "0x4f42528B7bF8Da96516bECb22c1c6f53a8Ac7312", abi: tipAbi },
-      stake: { address: "0xDf951d2061b12922BFbF22cb17B17f3b39183570", abi: stakeAbi },
-      jpyc: { address: "0x7314AEeC874A25A1131F49dA9679D05f8d931175", abi: jpycAbi },
-      usdc: { address: "0x7314AEeC874A25A1131F49dA9679D05f8d931175", abi: jpycAbi },
-    },
-  },
   137: {
     contracts: {
       tip: { address: "0xef359560f038286379f41C2E59A30ad41b3CD4Cc", abi: tipAbi },
       stake: { address: "0x481d7c4a9B6Cc3B7CD70fC39fe765415170241B3", abi: stakeAbi },
       jpyc: { address: "0x6AE7Dfc73E0dDE2aa99ac063DcF7e8A63265108c", abi: jpycAbi },
       usdc: { address: "0x2791bca1f2de4661ed88a30c99a7a9449aa84174", abi: jpycAbi },
+    },
+  },
+  80001: {
+    contracts: {
+      tip: { address: "0xBcF2DE3Dce8D36439783576889C9dF1BefcB31Aa", abi: tipAbi },
+      stake: { address: "0xC81699919A32FBF924404D689996D4f5F816D7cD", abi: stakeAbi },
+      jpyc: { address: "0xBB7B4e0603bB11FbB8e479617A62bC724f40E6a5", abi: jpycAbi },
+      usdc: { address: "0xBB7B4e0603bB11FbB8e479617A62bC724f40E6a5", abi: jpycAbi },
     },
   },
 };

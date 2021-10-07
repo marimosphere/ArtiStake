@@ -22,22 +22,6 @@ const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
   const stakeContract = getArtistakeContract();
 
   React.useEffect(() => {
-    const data = [
-      {
-        chainId: "0x89",
-        chainName: "Matic Network",
-        nativeCurrency: {
-          name: "Matic",
-          symbol: "Matic",
-          decimals: 18,
-        },
-        rpcUrls: ["https://rpc-mainnet.matic.network/"],
-        blockExplorerUrls: ["https://polygonscan.com/"],
-      },
-    ];
-    if (window.ethereum) {
-      window.ethereum.request({ method: "wallet_addEthereumChain", params: data });
-    }
     stakeContract.getArtistTotalStaked(artistWalletAddress).then((deposited) => {
       setArtistTotalStaked(ethers.utils.formatEther(deposited.toString()).toString());
     });

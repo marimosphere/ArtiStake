@@ -5,8 +5,8 @@
   "scripts": {
     "test": "hardhat test",
     "coverage": "hardhat coverage",
-    "deploy-contract-to-localchain": "hardhat run scripts/setup.ts --network localhost",
-    "deploy-contract-to-mumbai": "hardhat run scripts/setup.ts --network mumbai",
+    "deploy-mock-erc-20-to-mumbai": "hardhat run scripts/deployMockERC20.ts --network mumbai",
+    "mint-mock-erc-20-to-mumbai": "hardhat run scripts/mintMockERC20.ts --network mumbai",
     "run-localchain": "yarn hardhat node",
     "run-mumbai-chain": "yarn hardhat node --fork https://polygon-mumbai.infura.io/v3/7495501b681645b0b80f955d4139add9",
     "run-polygon-chain": "yarn hardhat node --fork https://rpc-mainnet.matic.network"

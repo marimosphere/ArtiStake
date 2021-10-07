@@ -8,12 +8,17 @@ import {
 } from "../lib/constants";
 
 const func = async (hre: any) => {
-  const { deployments, getNamedAccounts } = hre;
+  const { deployments, getNamedAccounts, network } = hre;
+  console.log(network.name === "polygon" ? POLYGON_AAVE_LENDING_POOL_ADDRESS : MUMBAI_AAVE_LENDING_POOL_ADDRESS);
   const { deploy } = deployments;
   const { deployer } = await getNamedAccounts();
   await deploy("ArtiStake", {
     from: deployer,
-    args: [POLYGON_AAVE_LENDING_POOL_ADDRESS, POLYGON_AAVE_WETH_GATEWAY_ADDRESS, POLYGON_WETH_ADDRESS],
+    args: [
+      network.name === "polygon" ? POLYGON_AAVE_LENDING_POOL_ADDRESS : MUMBAI_AAVE_LENDING_POOL_ADDRESS,
+      network.name === "polygon" ? POLYGON_AAVE_WETH_GATEWAY_ADDRESS : MUMBAI_AAVE_WETH_GATEWAY_ADDRESS,
+      network.name === "polygon" ? POLYGON_WETH_ADDRESS : MUMBAI_WETH_ADDRESS,
+    ],
     log: true,
   });
 };
