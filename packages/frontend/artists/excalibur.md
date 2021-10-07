@@ -1,7 +1,7 @@
 ---
 name: EXCALIBUR
 description: Japanese contemporary artist @ Tokyo / Kyoto
-aboutMyWork: >-
+aboutMyWork: |-
   STATEMENT
 
   We are blessed with the world's affluence by electrical signals of neuron, and

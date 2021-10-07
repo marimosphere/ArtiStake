@@ -19,8 +19,7 @@ const Tip: React.FC<TipProps> = ({ artistWalletAddress }) => {
     const value = ethers.utils.parseEther(tipAmount).toString();
     const contract = currency == "JPYC" ? jpycContract : usdcContract;
     const allowance = await contract.allowance(account, tipContract.address);
-    console.log(allowance);
-    console.log(value);
+
     if (ethers.BigNumber.from(value).gt(allowance)) {
       await contract.approve(tipContract.address, value);
     }

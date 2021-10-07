@@ -25,7 +25,7 @@ const ArtistHeader: React.FC<ArtistHeaderProps> = ({ name, description, aboutMyW
       </div>
       {mywork ? (
         <div className="flex grid lg:grid-cols-5 ">
-          <p className="text-white text-sm p-8 lg:col-span-3">{aboutMyWork}</p>
+          <p className="about-my-work text-white text-sm p-8 lg:col-span-3">{aboutMyWork}</p>
           <div className="lg:col-span-2">
             <Zoom overlayBgColorEnd={"rgba(28, 32, 60, 0.95)"}>
               <img className="mx-auto m-4 max-h-96" src={mywork} />
@@ -34,7 +34,7 @@ const ArtistHeader: React.FC<ArtistHeaderProps> = ({ name, description, aboutMyW
         </div>
       ) : (
         <div>
-          <p className="text-white text-sm p-8">{aboutMyWork}</p>
+          <p className="about-my-work text-white text-sm p-8">{aboutMyWork}</p>
         </div>
       )}
     </div>

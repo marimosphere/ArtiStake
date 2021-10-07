@@ -9,7 +9,6 @@ import {
 
 const func = async (hre: any) => {
   const { deployments, getNamedAccounts, network } = hre;
-  console.log(network.name === "polygon" ? POLYGON_AAVE_LENDING_POOL_ADDRESS : MUMBAI_AAVE_LENDING_POOL_ADDRESS);
   const { deploy } = deployments;
   const { deployer } = await getNamedAccounts();
   await deploy("ArtiStake", {

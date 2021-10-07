@@ -1,6 +1,8 @@
 import * as functions from "firebase-functions";
 import requestArtistRegistration from "./lib/requestArtistRegistration";
 
+import axios from "axios";
+
 const GITHUB_ACCESS_TOKEN = process.env.GITHUB_ACCESS_TOKEN || "";
 const GITHUB_ORG = process.env.GITHUB_ORG || "";
 const GITHUB_REPO = process.env.GITHUB_REPO || "";
