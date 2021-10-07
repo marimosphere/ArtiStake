@@ -91,19 +91,23 @@ const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
         .toLowerCase()}`
     );
 
-    const stakerDuplicated = stakeData.result.map((s) => {
-      return `0x${s.topics[1].slice(26)}`;
-    });
+    if (stakeData.result) {
+      const stakerDuplicated = stakeData.result.map((s) => {
+        return `0x${s.topics[1].slice(26)}`;
+      });
+      const staker = [...new Set(stakerDuplicated)];
+      setStakers(staker);
+    }
 
-    const staker = [...new Set(stakerDuplicated)];
+    if (tipData.result) {
+      const tipperDuplicated = tipData.result.map((t) => {
+        return `0x${t.topics[1].slice(26)}`;
+      });
 
-    const tipperDuplicated = tipData.result.map((t) => {
-      return `0x${t.topics[1].slice(26)}`;
-    });
+      const tipper = [...new Set(tipperDuplicated)];
+      setTippers(tipper);
+    }
 
-    const tipper = [...new Set(tipperDuplicated)];
-    setStakers(staker);
-    setTippers(tipper);
     setIsModalOpen(true);
   };
 
@@ -122,21 +126,34 @@ const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
         </button>
         <Modal isOpen={isModalOpen} close={() => setIsModalOpen(false)}>
           <p className="text-center">Staker</p>
-          {stakers.map((staker, i) => {
-            return (
-              <p key={i} className="text-xs text-center">
-                {staker}
-              </p>
-            );
-          })}
+
+          {stakers.length > 0 ? (
+            <>
+              {stakers.map((staker, i) => {
+                return (
+                  <p key={i} className="text-xs text-center">
+                    {staker}
+                  </p>
+                );
+              })}
+            </>
+          ) : (
+            <p className="text-xs text-center">None</p>
+          )}
           <p className="text-center">Tipper</p>
-          {tippers.map((tipper, i) => {
-            return (
-              <p key={i} className="text-xs text-center">
-                {tipper}
-              </p>
-            );
-          })}
+          {tippers.length > 0 ? (
+            <>
+              {tippers.map((tipper, i) => {
+                return (
+                  <p key={i} className="text-xs text-center">
+                    {tipper}
+                  </p>
+                );
+              })}
+            </>
+          ) : (
+            <p className="text-xs text-center">None</p>
+          )}
         </Modal>
       </div>
       <div className="bg-marimo-3 grid lg:grid-cols-2">
