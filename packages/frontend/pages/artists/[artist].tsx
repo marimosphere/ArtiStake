@@ -4,7 +4,7 @@ import { Header } from "../../components/Header";
 import { ArtistHeader } from "../../components/ArtistHeader";
 import { Stake } from "../../components/Stake";
 import { ArtistWorks } from "../../components/ArtistWorks";
-
+import { Footer } from "../../components/Footer";
 import { getAllArtists, getArtistByFileName } from "../../lib/api";
 import { subgraphUrl } from "../../lib/env";
 
@@ -42,6 +42,7 @@ const ArtistPage: React.FC<Props> = ({ artist }) => {
           shopUrl={artist.shopUrl}
         />
       </div>
+      <Footer />
     </ApolloProvider>
   );
 };

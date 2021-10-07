@@ -3,6 +3,7 @@ import * as React from "react";
 import { Header } from "../components/Header";
 import { Hero } from "../components/Hero";
 import { ArtistCard } from "../components/ArtistCard";
+import { Footer } from "../components/Footer";
 
 import { getAllArtists } from "../lib/api";
 import { Artist } from "../types/artist";
@@ -67,6 +68,7 @@ const IndexPage: React.FC<Props> = ({ artists }) => {
           );
         })}
       </div>
+      <Footer />
     </div>
   );
 };

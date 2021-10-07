@@ -158,7 +158,7 @@ const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
       </div>
       <div className="bg-marimo-3 grid lg:grid-cols-2">
         <div className="m-auto w-2/3 my-8 text-center">
-          <div className="mb-2 text-xl">
+          <div className="mt-4 mb-2 text-xl">
             <p>Stake on Polygon</p>
           </div>
           <input
@@ -181,15 +181,13 @@ const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
         </div>
         <div className="w-2/3 m-auto my-8 text-center">
           <div className="mb-2 text-xl">
+            <button className="mb-4" onClick={refresh}>
+              <img className="h-10" src="/assets/img/reload.png" />
+            </button>
             <div>Withdraw</div>
           </div>
           <div className="flex mb-2 justify-between">
-            <p className="m-auto text-white lg:text-2xl pl-4">
-              {depositedAmount} MATIC
-              <button onClick={refresh}>
-                <img className="h-7" src="/assets/img/reload.png" />
-              </button>
-            </p>
+            <p className="m-auto text-white lg:text-2xl pl-4">{depositedAmount} MATIC</p>
           </div>
           {!account ? (
             // @ts-ignore:

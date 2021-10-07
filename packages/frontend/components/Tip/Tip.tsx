@@ -40,10 +40,10 @@ const Tip: React.FC<TipProps> = ({ artistWalletAddress }) => {
   return (
     <div className="w-full mx-auto">
       {!currency ? (
-        <div className="flex w-full text-center">
+        <div className="flex w-full text-center space-x-4">
           <div className="w-1/2">
             <img
-              className="mx-auto h-20 object-cover mt-10 mb-4"
+              className="mx-auto h-20 object-cover mt-6 mb-8"
               src={`/assets/img/JPYC.png`}
               onClick={() => setCurrency("JPYC")}
             />
@@ -56,7 +56,7 @@ const Tip: React.FC<TipProps> = ({ artistWalletAddress }) => {
           </div>
           <div className="w-1/2">
             <img
-              className="mx-auto h-20 object-cover mt-10 mb-4"
+              className="mx-auto h-20 object-cover mt-6 mb-8"
               src={`/assets/img/USDC.png`}
               onClick={() => setCurrency("USDC")}
             />
@@ -70,13 +70,20 @@ const Tip: React.FC<TipProps> = ({ artistWalletAddress }) => {
         </div>
       ) : (
         <>
-          <img className="mx-auto h-20 object-cover mt-10 mb-4" src={`/assets/img/${currency}.png`} />
+          <img className="mx-auto h-20 object-cover mt-6 mb-8" src={`/assets/img/${currency}.png`} />
           {!account ? (
-            <div className="text-center">
+            <div className="text-center space-x-4">
+              <button
+                // @ts-ignore:
+                onClick={() => setCurrency("")}
+                className="px-4 py-1 hover:opacity-75 text-black rounded-lg bg-gray-200"
+              >
+                Back
+              </button>
               <button
                 // @ts-ignore:
                 onClick={connectWallet}
-                className="w-40 h-8 bg-marimo-5 hover:opacity-75 text-white rounded-lg"
+                className="px-4 py-1 bg-marimo-5 hover:opacity-75 text-white rounded-lg"
               >
                 Connect Wallet
               </button>
