@@ -49,6 +49,7 @@ const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
   }, [account]);
 
   const refresh = () => {
+    console.log(stakeContract);
     stakeContract.getArtistTotalStaked(artistWalletAddress).then((deposited) => {
       setArtistTotalStaked(ethers.utils.formatEther(deposited.toString()).toString());
     });
@@ -76,54 +77,63 @@ const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
       ? "https://api.polygonscan.com/api?module=logs&action=getLogs&fromBlock=0&toBlock=latest"
       : "https://api-testnet.polygonscan.com/api?module=logs&action=getLogs&fromBlock=0&toBlock=latest";
   const getSupporter = async () => {
-    const { data: stakeData } = await axios.get(
-      `${apiBase}&address=${
-        stakeContract.address
-      }&topic0=0x8752a472e571a816aea92eec8dae9baf628e840f4929fbcc2d155e6233ff68a7&topic2=0x000000000000000000000000${artistWalletAddress
-        .slice(2)
-        .toLowerCase()}`
-    );
-    const { data: tipData } = await axios.get(
-      `${apiBase}&address=${
-        tipContract.address
-      }&topic0=0x0fb1cbde779566d275463551cd9df0b4ac360231b152a4ebdb029dbb20becf6c&topic2=0x000000000000000000000000${artistWalletAddress
-        .slice(2)
-        .toLowerCase()}`
-    );
+    try {
+      const { data: stakeData } = await axios.get(
+        `${apiBase}&address=${
+          stakeContract.address
+        }&apikey=13JCDTK8DTRI35R7QWGRNJ2U51JK9HI6SV&topic0=0x8752a472e571a816aea92eec8dae9baf628e840f4929fbcc2d155e6233ff68a7&topic2=0x000000000000000000000000${artistWalletAddress
+          .slice(2)
+          .toLowerCase()}`
+      );
 
-    if (stakeData.result) {
-      const stakerDuplicated = stakeData.result.map((s) => {
-        return `0x${s.topics[1].slice(26)}`;
-      });
-      const staker = [...new Set(stakerDuplicated)];
-      setStakers(staker);
+      const { data: tipData } = await axios.get(
+        `${apiBase}&address=${
+          tipContract.address
+        }&apikey=M4KQZ482B5UHIAMMUWDQXQW6CZ3FFJ4RY7&topic0=0x0fb1cbde779566d275463551cd9df0b4ac360231b152a4ebdb029dbb20becf6c&topic2=0x000000000000000000000000${artistWalletAddress
+          .slice(2)
+          .toLowerCase()}`
+      );
+
+      if (Array.isArray(stakeData.result)) {
+        const stakerDuplicated = stakeData.result.map((s) => {
+          return `0x${s.topics[1].slice(26)}`;
+        });
+        const staker = [...new Set(stakerDuplicated)];
+        setStakers(staker);
+      }
+
+      if (Array.isArray(tipData.result)) {
+        const tipperDuplicated = tipData.result.map((t) => {
+          return `0x${t.topics[1].slice(26)}`;
+        });
+
+        const tipper = [...new Set(tipperDuplicated)];
+        setTippers(tipper);
+      }
+    } catch (err) {
+      console.log(err);
     }
-
-    if (tipData.result) {
-      const tipperDuplicated = tipData.result.map((t) => {
-        return `0x${t.topics[1].slice(26)}`;
-      });
-
-      const tipper = [...new Set(tipperDuplicated)];
-      setTippers(tipper);
-    }
-
     setIsModalOpen(true);
   };
 
   return (
     <div className="w-full mx-auto text-white">
       <div className="bg-marimo-2 flex text-center grid lg:grid-cols-3">
-        <p className="m-auto p-8 flex-1 text-white text-2xl">
-          Total Staked <br /> {artistTotalStaked} MATIC
+        <p className="m-auto p-8 flex-1 text-white text-lg">
+          Total Staked <br /> <span className="text-md">{artistTotalStaked} MATIC </span>&nbsp;
+          <button onClick={refresh}>
+            <img className="pt-1 h-4" src="/assets/img/reload.png" />
+          </button>
         </p>
-        <p className="m-auto p-8 flex-1 text-white text-2xl">
+        <p className="m-auto p-8 flex-1 text-white text-lg">
           APY
           <br /> {Number(apy) * 100}%
         </p>
-        <button className="text-white p-2 text-xs" onClick={getSupporter}>
-          See Supporter
-        </button>
+        <div className="flex justify-center items-center">
+          <button className="text-white py-2 px-4 rounded-lg text-lg border h-12" onClick={getSupporter}>
+            See Supporter
+          </button>
+        </div>
         <Modal isOpen={isModalOpen} close={() => setIsModalOpen(false)}>
           <p className="text-center">Staker</p>
 
@@ -158,7 +168,7 @@ const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
       </div>
       <div className="bg-marimo-3 grid lg:grid-cols-2">
         <div className="m-auto w-2/3 my-8 text-center">
-          <div className="mt-4 mb-2 text-xl">
+          <div className="mb-2 text-lg">
             <p>Stake on Polygon</p>
           </div>
           <input
@@ -180,14 +190,11 @@ const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
           )}
         </div>
         <div className="w-2/3 m-auto my-8 text-center">
-          <div className="mb-2 text-xl">
-            <button className="mb-4" onClick={refresh}>
-              <img className="h-10" src="/assets/img/reload.png" />
-            </button>
+          <div className="mb-1 text-lg">
             <div>Withdraw</div>
           </div>
           <div className="flex mb-2 justify-between">
-            <p className="m-auto text-white lg:text-2xl pl-4">{depositedAmount} MATIC</p>
+            <p className="m-auto text-white text-md pl-4">{depositedAmount} MATIC</p>
           </div>
           {!account ? (
             // @ts-ignore:
