@@ -27,7 +27,7 @@ walletAddress: "0x73Db901ff39f28d57Da2C0c9b358Dbe2DD929F13"
 avatar: /assets/img/artists/greyradian/avatar.png
 thumbnail: /assets/img/artists/greyradian/thumbnail.png
 banner: /assets/img/artists/greyradian/banner.png
-mywork: /assets/img/artists/greyradian/AboutMyWork.png
+mywork: /assets/img/artists/greyradian/mywork.png
 galleryTumbnail: /assets/img/artists/greyradian/gallery.png
 shopTumbnail: /assets/img/artists/greyradian/shop.png
 galleryUrl: instagram.com/greyradian
