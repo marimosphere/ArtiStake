@@ -119,6 +119,7 @@ walletAddress: "0x5a46449117d7a6461ad9b39d66f85ed770610e5b"
 avatar: /assets/img/artists/excalibur/avatar.png
 thumbnail: /assets/img/artists/excalibur/thumbnail.png
 banner: /assets/img/artists/excalibur/banner.png
+mywork: /assets/img/artists/greyradian/AboutMyWork.png
 galleryTumbnail: /assets/img/artists/excalibur/gallery.png
 shopTumbnail: /assets/img/artists/excalibur/shop.png
 galleryUrl: https://www.entaku.net/
