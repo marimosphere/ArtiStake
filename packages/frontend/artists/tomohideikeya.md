@@ -69,7 +69,7 @@ walletAddress: "0x3Eb7C6622924d92371724d3D597b77CF16193D8a"
 avatar: /assets/img/artists/tomohideikeya/avatar.png
 thumbnail: /assets/img/artists/tomohideikeya/thumbnail.png
 banner: /assets/img/artists/tomohideikeya/banner.png
-mywork: "/assets/img/artists/tomohideikeya/aboutMyWork.png"
+mywork: "/assets/img/artists/tomohideikeya/mywork.png"
 galleryTumbnail: /assets/img/artists/tomohideikeya/gallery.png
 shopTumbnail: /assets/img/artists/tomohideikeya/shop.png
 galleryUrl: http://tomohide-ikeya.com
