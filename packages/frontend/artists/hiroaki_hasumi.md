@@ -16,8 +16,8 @@ shopUrl: "https://nanakusa.io/accounts/0x0177e1c464aa127Bb244f1AE1e0c9F99fc5eF13
 walletAddress: "0x0177e1c464aa127Bb244f1AE1e0c9F99fc5eF138"
 avatar: "/assets/img/artists/hiroaki_hasumi/avatar.jpg"
 thumbnail: "/assets/img/artists/hiroaki_hasumi/thumbnail.jpg"
-banner: "/assets/img/artists/hiroaki_hasumi/banner.jpg"
+banner: "/assets/img/artists/hiroaki_hasumi/banner.png"
 mywork: "/assets/img/artists/hiroaki_hasumi/aboutMyWork.jpg"
-galleryTumbnail: "/assets/img/artists/hiroaki_hasumi/gallery.jpg"
+galleryTumbnail: "/assets/img/artists/hiroaki_hasumi/gallery.png"
 shopTumbnail: "/assets/img/artists/hiroaki_hasumi/shop.jpg"
 ---
