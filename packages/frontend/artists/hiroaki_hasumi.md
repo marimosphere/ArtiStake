@@ -6,7 +6,11 @@ Exhibition history:
 -ERARTA MUSEUM / St Petersburg, Russia (Scheduled in 2020)
 -THE BID Art Space / Pesaro, Italy (2019)
 -NOVOSIBIRSK INTERNATIONAL FESTIVAL OF CONTEMPORARY PHOTOGRAPHY / Novosibirsk, Russia (2019)
--SHATTO GALLERY / Los Angeles, U.S.A. (2019)"
+-SHATTO GALLERY / Los Angeles, U.S.A. (2019)
+
+何のために生まれてきたのか。蓮見浩明は若くして二輪のテストライダーという命を懸ける仕事を得たことで、自分の存在意義を早くに見つけることができました。但し、その仕事には危険がつきまといます。「もうだめだ！」と思った瞬間が何度もありましたが、その度に不思議な力が働き危険な状況から脱することができました。そのとき「お前にはまだやることがある」という声を聞いたと言います。やがて彼はファインアート写真に出会いました。それは人々への貢献のために神様が彼に与えた次なる役割だと思いました。被写体の中に隠れた日本人の霊性を探る彼の創作スタイルはこれまでの不思議な体験が大きく影響しています。
+出展履歴
+2019年イタリア・ペーサロのTHE BID Art Spaceで開催された「LANDSCAPES. East meets West International Group Show」に出展。ロシアのNOVOSIBIRSK INTERNATIONAL FESTIVAL OF CONTEMPORARY PHOTOGRAPHYに招待。ロサンゼルスのSHATTO GALLERYに出展。2020年にはロシア・サンクトペテルブルグのエルータ美術館で展示.。"
 galleryUrl: "https://www.hasumi.photography/"
 shopUrl: "https://nanakusa.io/accounts/0x0177e1c464aa127Bb244f1AE1e0c9F99fc5eF138/hold?networkname=eth"
 walletAddress: "0x0177e1c464aa127Bb244f1AE1e0c9F99fc5eF138"
