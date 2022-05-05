@@ -12,10 +12,5 @@
         "destination": "/index.html"
       }
     ]
-  },
-  "functions": {
-    "source": "packages/functions",
-    "predeploy": "yarn workspace functions build",
-    "runtime": "nodejs14"
   }
 }
