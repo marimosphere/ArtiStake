@@ -1,4 +1,4 @@
-# ArtiStake
+# MetaverStake
 
 テスト
 
