@@ -19,6 +19,16 @@
     "rpc": "https://rpc-mumbai.matic.today",
     "explore": "https://explorer-mumbai.maticvigil.com/"
   },
+  "shibuya": {
+    "chainId": "81",
+    "rpc": "https://rpc.shibuya.astar.network:8545",
+    "explore": "https://shibuya.subscan.io/"
+  },
+  "astar": {
+    "chainId": "592",
+    "rpc": "https://astar.api.onfinality.io/public",
+    "explore": "https://astar.subscan.io/"
+  },
   "localhost": {
     "chainId": "31337",
     "rpc": "http://localhost:8545",

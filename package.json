@@ -1,7 +1,7 @@
 {
-  "name": "artistake",
-  "description": "ArtiStake is a platform to support artists.",
-  "author": "taijusanagi",
+  "name": "metaverstake",
+  "description": "MetaverStake is a platform to support various projects.",
+  "author": "avcdsld",
   "version": "1.0.0",
   "private": true,
   "workspaces": [

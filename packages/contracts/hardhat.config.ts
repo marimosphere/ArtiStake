@@ -41,6 +41,12 @@ module.exports = {
       gas: 2100000,
       gasPrice: 8000000000,
     },
+    shibuya: {
+      url: "https://rpc.shibuya.astar.network:8545",
+      accounts: [privateKey],
+      gas: 13000000,
+      gasPrice: 12000000000,
+    },
   },
   etherscan: {
     apiKey: process.env.ETHERSCAN_KEY,

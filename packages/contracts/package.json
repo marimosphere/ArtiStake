@@ -9,7 +9,8 @@
     "mint-mock-erc-20-to-mumbai": "hardhat run scripts/mintMockERC20.ts --network mumbai",
     "run-localchain": "yarn hardhat node",
     "run-mumbai-chain": "yarn hardhat node --fork https://polygon-mumbai.infura.io/v3/7495501b681645b0b80f955d4139add9",
-    "run-polygon-chain": "yarn hardhat node --fork https://rpc-mainnet.matic.network"
+    "run-polygon-chain": "yarn hardhat node --fork https://rpc-mainnet.matic.network",
+    "deploy-mock-wethgateway-to-shibuya": "hardhat run scripts/deployMockWETHGateway.ts --network shibuya"
   },
   "dependencies": {
     "@aave/protocol-v2": "^1.0.1",
@@ -26,7 +27,7 @@
     "chai": "^4.3.4",
     "ethereum-waffle": "^3.3.0",
     "ethers": "^5.3.1",
-    "hardhat": "^2.3.3",
+    "hardhat": "^2.9.3",
     "hardhat-deploy": "^0.8.6",
     "hardhat-typechain": "^0.3.5",
     "solidity-coverage": "^0.7.16",

@@ -19,33 +19,60 @@ const MyApp = ({ Component, pageProps }) => {
 
     if (window.ethereum) {
       const data =
-        networkId === 137
+        networkId === 81
           ? [
               {
-                chainId: "0x89",
-                chainName: "Matic Network",
+                chainId: "0x51",
+                chainName: "Shibuya",
                 nativeCurrency: {
-                  name: "Matic",
-                  symbol: "Matic",
+                  name: "SBY",
+                  symbol: "SBY",
                   decimals: 18,
                 },
-                rpcUrls: ["https://rpc-mainnet.matic.network/"],
-                blockExplorerUrls: ["https://polygonscan.com/"],
+                rpcUrls: ["https://rpc.shibuya.astar.network:8545"],
+                blockExplorerUrls: ["https://shibuya.subscan.io/"],
               },
             ]
           : [
               {
-                chainId: "0x13881",
-                chainName: "Matic Test Network",
+                chainId: "0x250",
+                chainName: "Astar",
                 nativeCurrency: {
-                  name: "Matic",
-                  symbol: "Matic",
+                  name: "ASTR",
+                  symbol: "ASTR",
                   decimals: 18,
                 },
-                rpcUrls: ["https://rpc-mumbai.matic.today/"],
-                blockExplorerUrls: ["https://explorer-mumbai.maticvigil.com/"],
+                rpcUrls: ["https://rpc.astar.network:8545", "https://astar.api.onfinality.io/public"],
+                blockExplorerUrls: ["https://blockscout.com/astar/"],
               },
             ];
+      // networkId === 137
+      //   ? [
+      //       {
+      //         chainId: "0x89",
+      //         chainName: "Matic Network",
+      //         nativeCurrency: {
+      //           name: "Matic",
+      //           symbol: "Matic",
+      //           decimals: 18,
+      //         },
+      //         rpcUrls: ["https://rpc-mainnet.matic.network/"],
+      //         blockExplorerUrls: ["https://polygonscan.com/"],
+      //       },
+      //     ]
+      //   : [
+      //       {
+      //         chainId: "0x13881",
+      //         chainName: "Matic Test Network",
+      //         nativeCurrency: {
+      //           name: "Matic",
+      //           symbol: "Matic",
+      //           decimals: 18,
+      //         },
+      //         rpcUrls: ["https://rpc-mumbai.matic.today/"],
+      //         blockExplorerUrls: ["https://explorer-mumbai.maticvigil.com/"],
+      //       },
+      //     ];
 
       window.ethereum.request({ method: "wallet_addEthereumChain", params: data });
     }

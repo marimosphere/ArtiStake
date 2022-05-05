@@ -91,28 +91,35 @@ contract ArtiStake is Ownable {
         aaveLendingPool = _aaveLendingPool;
         aaveWETHGateway = _aaveWETHGateway;
         underlyingAsset = _currency;
-        aTokenAddress = ILendingPool(_aaveLendingPool).getReserveData(_currency).aTokenAddress;
-        IERC20(aTokenAddress).approve(aaveWETHGateway, MAX_UINT);
+        // aTokenAddress = ILendingPool(_aaveLendingPool).getReserveData(_currency).aTokenAddress;
+        // IERC20(aTokenAddress).approve(aaveWETHGateway, MAX_UINT);
     }
 
     function deposit(address artistAddress, uint16 _referralCode) public payable {
-        uint256 contractBalanceBefore = getAtokenScaledBalance(aTokenAddress);
-        IWETHGateway(aaveWETHGateway).depositETH{value: msg.value}(aaveLendingPool, address(this), _referralCode);
-        uint256 contractBalanceAfter = getAtokenScaledBalance(aTokenAddress);
-        uint256 depositedAtoken = contractBalanceAfter.sub(contractBalanceBefore);
+        // TODO: Mock
+        uint256 depositedAtoken = msg.value;
         atokenAmounts[artistAddress][msg.sender] = atokenAmounts[artistAddress][msg.sender].add(depositedAtoken);
         depositedAmounts[artistAddress][msg.sender] = depositedAmounts[artistAddress][msg.sender].add(msg.value);
         artistStakedAmounts[artistAddress] = artistStakedAmounts[artistAddress].add(depositedAtoken);
         emit Deposited(msg.sender, artistAddress, msg.value);
+        // uint256 contractBalanceBefore = getAtokenScaledBalance(aTokenAddress);
+        // IWETHGateway(aaveWETHGateway).depositETH{value: msg.value}(aaveLendingPool, address(this), _referralCode);
+        // uint256 contractBalanceAfter = getAtokenScaledBalance(aTokenAddress);
+        // uint256 depositedAtoken = contractBalanceAfter.sub(contractBalanceBefore);
+        // atokenAmounts[artistAddress][msg.sender] = atokenAmounts[artistAddress][msg.sender].add(depositedAtoken);
+        // depositedAmounts[artistAddress][msg.sender] = depositedAmounts[artistAddress][msg.sender].add(msg.value);
+        // artistStakedAmounts[artistAddress] = artistStakedAmounts[artistAddress].add(depositedAtoken);
+        // emit Deposited(msg.sender, artistAddress, msg.value);
     }
 
     function withdraw(address payable artistAddress) public {
+        // TODO: Mock
         uint256 atokenAmount = atokenAmounts[artistAddress][msg.sender];
         require(atokenAmount > 0, "currently not deposited");
         uint256 depositedAmount = depositedAmounts[artistAddress][msg.sender];
         uint256 userBalanceWithInterest = getAmountWithInterest(atokenAmount);
         uint256 totalInterest = userBalanceWithInterest.sub(depositedAmount);
-        IWETHGateway(aaveWETHGateway).withdrawETH(aaveLendingPool, userBalanceWithInterest, address(this));
+        // IWETHGateway(aaveWETHGateway).withdrawETH(aaveLendingPool, userBalanceWithInterest, address(this));
         uint256 artistInterest = (totalInterest.mul(artistInterestRatio)).div(interestRatioBase);
         uint256 artiStakeFee = (totalInterest.mul(artiStakeFeeRatio)).div(interestRatioBase);
         uint256 stakerReward = userBalanceWithInterest.sub(artistInterest).sub(artiStakeFee);
@@ -144,7 +151,9 @@ contract ArtiStake is Ownable {
     }
 
     function getAmountWithInterest(uint256 atokenAmount) public view returns (uint256) {
-        return atokenAmount.rayMul(ILendingPool(aaveLendingPool).getReserveNormalizedIncome(underlyingAsset));
+        // TODO: Mock
+        return atokenAmount;
+        // return atokenAmount.rayMul(ILendingPool(aaveLendingPool).getReserveNormalizedIncome(underlyingAsset));
     }
 
     function updateArtistInterestRatio(uint256 ratio) public onlyOwner {
