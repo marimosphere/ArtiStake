@@ -2,13 +2,13 @@ const About = () => {
   return (
     <div className="w-full overflow-hidden">
       <div className="w-full bg-marimo-1 p-8 lg:px-40">
-        <h2 className="text-center text-2xl text-white my-8">About ArtiStake</h2>
+        <h2 className="text-center text-2xl text-white my-8">About MetaverStake</h2>
         <h3 className="text-white text-xl mb-4">-EN-</h3>
         <p className="text-white mb-4">
-          "ArtiStake" is a platform for supporting artists and an artist-based community.
+          "MetaverStake" is a platform for supporting artists and an artist-based community.
         </p>
         <p className="text-white mb-4">
-          We are launching “ArtiStake”, a platform for supporting artists, with the aim of creating a new community of
+          We are launching “MetaverStake”, a platform for supporting artists, with the aim of creating a new community of
           artists and a sustainable ecosystem as a DAO(Decentralized Autonomous Organization). By staking an artist you
           want to support, the platform will reward both the artist and the stakers with staking rewards. By learning
           about the artist's work, the process of creation, and the background story behind the work, we will provide a
@@ -71,10 +71,10 @@ const About = () => {
         <h3 className="text-white text-xl mb-8">-JP-</h3>
 
         <p className="text-white mb-4">
-          "ArtiStake"は、アーティストの支援のためのプラットフォームであり、アーティストベースのコミュニティです。
+          "MetaverStake"は、アーティストの支援のためのプラットフォームであり、アーティストベースのコミュニティです。
         </p>
         <p className="text-white mb-8">
-          私たちはアーティストの新しいコミュニティのあり方、サステイナブルなエコシステムをDAOとして作ることを目的に、アーティストの支援のためのプラットフォーム"ArtiStake"を立ち上げます。
+          私たちはアーティストの新しいコミュニティのあり方、サステイナブルなエコシステムをDAOとして作ることを目的に、アーティストの支援のためのプラットフォーム"MetaverStake"を立ち上げます。
           このプラットフォームでは、自分の応援したいアーティストにステーキングをすることで、アーティストとステーカーそれぞれにリワードとしてステーキング報酬が発生します。アーティストの作品や、作品制作の様子、作品の背後にあるバックグラウンドストーリーを知ることで、アーティストの魅力をさらに知ることができ、応援したくなるような仕組みを提供します。
           アーティストをステーキングで支援してくださった方には、ステーキングの額と期間に応じて、アーティストのNFTをリワードとして受け取ることができるようになります。
           アーティストや開発者はこのコミュニティに所属すると、コミュニティトークンがもらえます。

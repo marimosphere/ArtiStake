@@ -18,10 +18,10 @@ const IndexPage: React.FC<Props> = ({ artists }) => {
       <Header isConnectWallet={false} />
       <Hero />
       <div className="w-full bg-marimo-1 p-8 lg:px-40">
-        <h2 className="text-center text-white text-2xl mb-4">About ArtiStake</h2>
+        <h2 className="text-center text-white text-2xl mb-4">About MetaverStake</h2>
         <h3 className="text-white text-lg mb-4">-EN-</h3>
         <p className="text-white mb-4">
-          ArtiStake is a platform to introduce the artist's worldview, concept, and other activities of the artist
+        MetaverStake is a platform to introduce the artist's worldview, concept, and other activities of the artist
           themselves, to communicate the artist's appeal, and to grow the fan community, artist community & ecosystem.
         </p>
         <p className="text-white mb-4">
@@ -34,12 +34,12 @@ const IndexPage: React.FC<Props> = ({ artists }) => {
         </p>
 
         <p className="text-white mb-4">
-          Please join us in "ArtiStake", a community of crypto artists which can connect artists and fans who want to
+          Please join us in "MetaverStake", a community of crypto artists which can connect artists and fans who want to
           support them and make everyone happy.
         </p>
         <h3 className="text-white text-lg mb-4">-JP-</h3>
         <p className="text-white mb-4">
-          ArtiStake は、アーティストの世界観やコンセプトなどアーティスト自身の活動を紹介し、アーティストの魅力を伝えて、ファンコミュニティ、アーティストコミュニティ&エコシステムを育てていくためのプラットフォームです。
+        MetaverStake は、アーティストの世界観やコンセプトなどアーティスト自身の活動を紹介し、アーティストの魅力を伝えて、ファンコミュニティ、アーティストコミュニティ&エコシステムを育てていくためのプラットフォームです。
         </p>
         <p className="text-white mb-4">
           参加者は自分が応援したいアーティストを、ステーキングや投げ銭で支援することができます。トークンがステーキングされると、自動的にDeFiで運用され、その運用益としてのステーキング報酬がアーティストと支援者の双方にリワードとして入ります。

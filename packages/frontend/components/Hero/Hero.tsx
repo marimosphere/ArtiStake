@@ -3,9 +3,9 @@ const Hero = () => {
     <div>
       <div className="w-full overflow-hidden">
         <div className="flex flex-col items-center mx-auto bg-marimo-1 p-4 pb-6">
-          <p className="text-white text-3xl sm:text-6xl marimo-tracking-hero">ArtiStake</p>
+          <p className="text-white text-3xl sm:text-6xl marimo-tracking-hero">MetaverStake</p>
           <div className="p-4">
-            <img className="h-80" src="/assets/img/hero.png" />
+            <img className="h-80" src="/assets/img/site_header.jpg" />
           </div>
           <p className="text-white text-xs marimo-tracking-hero">STAKING FOR CRYPTO ARTISTS</p>
         </div>

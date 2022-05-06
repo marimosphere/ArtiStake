@@ -1,3 +1,3 @@
-# ArtiStake Frontend
+# MetaverStake Frontend
 
-This is ArtiStake Frontend
+This is MetaverStake Frontend

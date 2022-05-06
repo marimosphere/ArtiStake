@@ -4,12 +4,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        "marimo-1": "#1C203C",
-        "marimo-2": "#17207F",
-        "marimo-3": "#234F90",
-        "marimo-4": "#408D9D",
-        "marimo-5": "#60A5FA",
-        "marimo-6": "#4B5563",
+        "marimo-1": "#4E944F", // 34A0A4
+        "marimo-2": "#76C893", // background 2
+        "marimo-3": "#52B69A", // bg 3
+        "marimo-4": "#99D98C", // 帯の色
+        "marimo-5": "#D9ED92", // ボタン
+        "marimo-6": "#4B5563", // 黒色
       },
       fontSize: {
         "2xs": "0.5em",

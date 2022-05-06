@@ -19,6 +19,10 @@ export const getAllArtists = (fields: string[] = []) => {
   const fileNames = getArtistFileNames();
   const artists = fileNames
     .map((fileName) => getArtistByFileName(fileName, fields))
-    .sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
-  return artists;
+    .sort((post1, post2) => (post1.date > post2.date ? -1 : 1));  
+  let result = []
+  artists.map((v) => result.push(v))
+  artists.map((v) => result.push(v))
+  artists.map((v) => result.push(v))
+  return result;
 };
