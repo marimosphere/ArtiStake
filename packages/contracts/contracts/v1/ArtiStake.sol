@@ -77,6 +77,8 @@ contract ArtiStake is Ownable {
     mapping(address => mapping(address => uint256)) public depositedAmounts;
     mapping(address => mapping(address => uint256)) public atokenAmounts;
     mapping(address => uint256) public artistStakedAmounts;
+    mapping(address => uint256) public stakerTotalCount;
+    mapping(address => uint256) public stakerTotalAmount;
 
     event Deposited(address indexed from, address indexed artistAddress, uint256 amount);
     event Withdrew(address indexed withdrawer, address indexed artistAddress, uint256 amount);
@@ -101,6 +103,8 @@ contract ArtiStake is Ownable {
         atokenAmounts[artistAddress][msg.sender] = atokenAmounts[artistAddress][msg.sender].add(depositedAtoken);
         depositedAmounts[artistAddress][msg.sender] = depositedAmounts[artistAddress][msg.sender].add(msg.value);
         artistStakedAmounts[artistAddress] = artistStakedAmounts[artistAddress].add(depositedAtoken);
+        stakerTotalCount[msg.sender] = stakerTotalCount[msg.sender].add(1);
+        stakerTotalAmount[msg.sender] = stakerTotalAmount[msg.sender].add(msg.value);
         emit Deposited(msg.sender, artistAddress, msg.value);
         // uint256 contractBalanceBefore = getAtokenScaledBalance(aTokenAddress);
         // IWETHGateway(aaveWETHGateway).depositETH{value: msg.value}(aaveLendingPool, address(this), _referralCode);
@@ -109,6 +113,8 @@ contract ArtiStake is Ownable {
         // atokenAmounts[artistAddress][msg.sender] = atokenAmounts[artistAddress][msg.sender].add(depositedAtoken);
         // depositedAmounts[artistAddress][msg.sender] = depositedAmounts[artistAddress][msg.sender].add(msg.value);
         // artistStakedAmounts[artistAddress] = artistStakedAmounts[artistAddress].add(depositedAtoken);
+        // stakerTotalCount[msg.sender] = stakerTotalCount[msg.sender].add(1);
+        // stakerTotalAmount[msg.sender] = stakerTotalAmount[msg.sender].add(msg.value);
         // emit Deposited(msg.sender, artistAddress, msg.value);
     }
 
@@ -127,6 +133,7 @@ contract ArtiStake is Ownable {
         atokenAmounts[artistAddress][msg.sender] = 0;
         depositedAmounts[artistAddress][msg.sender] = 0;
         artistStakedAmounts[artistAddress] = artistStakedAmounts[artistAddress].sub(atokenAmount);
+        stakerTotalAmount[msg.sender] = stakerTotalAmount[msg.sender].sub(atokenAmount);
 
         artistAddress.transfer(artistInterest);
         payable(owner()).transfer(artiStakeFee);
