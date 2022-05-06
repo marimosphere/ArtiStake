@@ -11,7 +11,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
-          node-version: 14.16.1
+          node-version: 14.17.3
       - run: yarn workspace functions build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
