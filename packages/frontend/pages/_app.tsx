@@ -13,10 +13,6 @@ const getLibrary = (provider: any) => {
 
 const MyApp = ({ Component, pageProps }) => {
   React.useEffect(() => {
-    if (process.env.NODE_ENV === "production") {
-      firebase.analytics();
-    }
-
     if (window.ethereum) {
       const data =
         networkId === 81
