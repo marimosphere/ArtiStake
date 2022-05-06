@@ -16,9 +16,8 @@ const Header: React.FC<HeaderProps> = ({ isConnectWallet }) => {
   const navs = [
     { text: "Home", to: "/", target: false },
     { text: "About", to: "/about", target: false },
-    //{ text: "How to get Matic", to: "http://cryptoart.tokyo/how-to-get-matic/", target: true },
-    { text: "How to get Matic", to: "https://defipocket.jp/index.php/defi/polygon/543/", target: true },
-    { text: "How to get JPYC", to: "https://app.jpyc.jp/", target: true },
+    { text: "How to get ASTR", to: "https://simplecryptoguide.com/ja/how-to-buy-eastar/", target: true },
+    { text: "Get JPYC on Astar", to: "https://app.jpyc.jp/", target: true },
     /*{
       text: "Artist Registration",
       to: "https://docs.google.com/forms/d/e/1FAIpQLSeQmx1eeEfVFtSa14i1WtAtyAspm21ejuz54g1TEnoOr-OrFw/viewform?usp=sf_link",
@@ -27,31 +26,31 @@ const Header: React.FC<HeaderProps> = ({ isConnectWallet }) => {
   ];
 
   return (
-    <div className="flex justify-between bg-marimo-1 w-full">
+    <div className="flex justify-between w-full bg-marimo-3">
       <Head>
-        <title>MetaverStake - Metaverse Staking Platform</title>
+        <title>MetaverStake - Staking for Social Good Projects</title>
         <meta name="viewport" content="width=device-width" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta property="og:url" content="https://artistake.tokyo.app" />
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="MetaverStake - Metaverse Staking Platform" />
-        <meta property="og:description" content=" MetaverStake supports artists by staking tokens" />
+        <meta property="og:title" content="MetaverStake - Staking for Social Good Projects" />
+        <meta property="og:description" content=" MetaverStake supports social good projects by staking tokens" />
         <meta property="og:site_name" content="MetaverStake" />
         <meta property="og:image" content="https://artistake.tokyo/assets/img/ogp.png" />
       </Head>
       <a href="/">
-        <img className="h-12 m-2" src="/assets/img/hero.png" />
+        <img className="h-12 m-1 ml-2 py-1" src="/assets/img/MetaverStake_logo_white.png" />
       </a>
       <div className="flex justify-end px-4 pt-4 py-2">
         {isConnectWallet && (
           <div className="overflow-hidden">
             {account ? (
-              <button className="text-white text-2xs lg:text-sm focus:outline-none">{account}</button>
+              <button className="text-black text-2xs lg:text-sm focus:outline-none">{account}</button>
             ) : (
               <button
                 // @ts-ignore:
                 onClick={connectWallet}
-                className="text-white text-sm focus:outline-none"
+                className="text-black text-sm focus:outline-none"
               >
                 Connect Wallet
               </button>
@@ -59,24 +58,29 @@ const Header: React.FC<HeaderProps> = ({ isConnectWallet }) => {
           </div>
         )}
         <div>
-          <FontAwesomeIcon
-            className="cursor-pointer text-white ml-2 md:ml-8"
-            icon={faBars}
-            onClick={() => setIsNavigationOpen(!isNavigactionOpen)}
-          />
+          <FontAwesomeIcon className="cursor-pointer text-black ml-2 md:ml-8" icon={faBars} onClick={() => setIsNavigationOpen(!isNavigactionOpen)} />
         </div>
       </div>
+      {/* {!isNavigactionOpen && (
+               <div className="px-4 pt-4 py-2">
+                <FontAwesomeIcon
+                  className="cursor-pointer text-black ml-2 md:ml-8"
+                  icon={faBars}
+                  onClick={() => setIsNavigationOpen(!isNavigactionOpen)}
+                />
+              </div>
+      )} */}
       {isNavigactionOpen && (
-        <div className="origin-top-right absolute right-0 text-right bg-marimo-1">
+        <div className="origin-top-right absolute right-0 text-right bg-marimo-1 z-50 bg-opacity-90">
           {navs.map((nav, index) => {
             return (
               <div key={index}>
                 {nav.target ? (
-                  <a href={nav.to} rel="noreferrer" target="_blank" className="text-white block px-4 py-2 text-sm">
+                  <a href={nav.to} rel="noreferrer" target="_blank" className="text-black block px-4 py-2 text-sm">
                     {nav.text}
                   </a>
                 ) : (
-                  <a href={nav.to} className="text-white block px-4 py-2 text-sm">
+                  <a href={nav.to} className="text-black block px-4 py-2 text-sm">
                     {nav.text}
                   </a>
                 )}

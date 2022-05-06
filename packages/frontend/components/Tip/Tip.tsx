@@ -44,27 +44,28 @@ const Tip: React.FC<TipProps> = ({ artistWalletAddress }) => {
           <div className="w-1/2">
             <img
               className="mx-auto h-20 object-cover mt-6 mb-8"
+              src={`/assets/img/ASTR.png`}
+              onClick={() => setCurrency("ASTR")}
+            />
+            <button
+              onClick={() => setCurrency("ASTR")}
+              className="w-40 h-8 bg-marimo-5 hover:opacity-75 text-black rounded-lg"
+            >
+              ASTR
+            </button>
+          </div>
+
+          <div className="w-1/2">
+            <img
+              className="mx-auto h-20 object-cover mt-6 mb-8"
               src={`/assets/img/JPYC.png`}
               onClick={() => setCurrency("JPYC")}
             />
             <button
               onClick={() => setCurrency("JPYC")}
-              className="w-40 h-8 bg-marimo-5 hover:opacity-75 text-white rounded-lg"
+              className="w-40 h-8 bg-marimo-5 hover:opacity-75 text-black rounded-lg"
             >
               JPYC
-            </button>
-          </div>
-          <div className="w-1/2">
-            <img
-              className="mx-auto h-20 object-cover mt-6 mb-8"
-              src={`/assets/img/USDC.png`}
-              onClick={() => setCurrency("USDC")}
-            />
-            <button
-              onClick={() => setCurrency("USDC")}
-              className="w-40 h-8 bg-marimo-5 hover:opacity-75 text-white rounded-lg"
-            >
-              USDC
             </button>
           </div>
         </div>
@@ -83,7 +84,7 @@ const Tip: React.FC<TipProps> = ({ artistWalletAddress }) => {
               <button
                 // @ts-ignore:
                 onClick={connectWallet}
-                className="px-4 py-1 bg-marimo-5 hover:opacity-75 text-white rounded-lg"
+                className="px-4 py-1 bg-marimo-5 hover:opacity-75 text-black rounded-lg"
               >
                 Connect Wallet
               </button>
@@ -97,7 +98,7 @@ const Tip: React.FC<TipProps> = ({ artistWalletAddress }) => {
                 placeholder={currency}
                 className="h-8 rounded-l-lg text-right border-2 border-marimo-5 pr-2"
               />
-              <button onClick={tip} className="w-24 h-8 bg-marimo-5 hover:opacity-75 text-white font-bold rounded-r-lg">
+              <button onClick={tip} className="w-24 h-8 bg-marimo-5 hover:opacity-75 text-black font-bold rounded-r-lg">
                 Tip
               </button>
             </div>

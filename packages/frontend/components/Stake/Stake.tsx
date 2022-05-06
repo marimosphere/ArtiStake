@@ -129,21 +129,21 @@ const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
   // };
 
   return (
-    <div className="w-full mx-auto text-white">
+    <div className="w-full mx-auto text-black">
       <div className="bg-marimo-2 flex text-center grid lg:grid-cols-3">
-        <p className="m-auto p-8 flex-1 text-white text-lg">
+        <p className="m-auto p-8 flex-1 text-black text-lg">
           Total Staked <br /> <span className="text-md">{artistTotalStaked} ASTR </span>&nbsp;
           <button onClick={refresh}>
             <img className="pt-1 h-4" src="/assets/img/reload.png" />
           </button>
         </p>
-        <p className="m-auto p-8 flex-1 text-white text-lg">
+        <p className="m-auto p-8 flex-1 text-black text-lg">
           APY
           <br /> {Number(apy) * 100}%
         </p>
         <div className="flex justify-center items-center">
-          <button className="text-white py-2 px-4 rounded-lg text-lg border h-12" onClick={getSupporter}>
-            See Supporter
+          <button className="text-black py-2 px-4 rounded-lg text-lg border h-12" onClick={getSupporter}>
+            Mint NFT
           </button>
         </div>
         <Modal isOpen={isModalOpen} close={() => setIsModalOpen(false)}>
@@ -206,7 +206,7 @@ const Stake: React.FC<StakeProps> = ({ artistWalletAddress }) => {
             <div>Withdraw</div>
           </div>
           <div className="flex mb-2 justify-between">
-            <p className="m-auto text-white text-md pl-4">{depositedAmount} ASTR</p>
+            <p className="m-auto text-black text-md pl-4">{depositedAmount} ASTR</p>
           </div>
           {!account ? (
             // @ts-ignore:

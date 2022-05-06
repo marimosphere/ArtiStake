@@ -1,13 +1,10 @@
 const Hero = () => {
   return (
-    <div>
+    <div className="relative">
       <div className="w-full overflow-hidden">
-        <div className="flex flex-col items-center mx-auto bg-marimo-1 p-4 pb-6">
-          <p className="text-white text-3xl sm:text-6xl marimo-tracking-hero">MetaverStake</p>
-          <div className="p-4">
-            <img className="h-80" src="/assets/img/site_header.jpg" />
-          </div>
-          <p className="text-white text-xs marimo-tracking-hero">STAKING FOR CRYPTO ARTISTS</p>
+        <div className="flex flex-col items-center mx-auto">
+          <img className="w-full" src="/assets/img/MetaverStake_top_title.png" />
+          <p className="text-black text-xs absolute bottom-10 marimo-tracking-hero">STAKING FOR SOCIAL GOOD PROJECTS IN METAVERSE</p>
         </div>
         <div className="bg-marimo-4 h-3" />
         <div className="bg-marimo-3 h-6" />
